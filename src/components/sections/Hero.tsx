@@ -1,4 +1,35 @@
+import { useEffect } from 'react'
+import { gsap } from '../../lib/gsap'
+import { initHeroParticles } from '../../lib/heroParticles'
+import HeroSVG from './HeroSVG'
+
 export default function Hero() {
+  // Init particle system — capture cleanup in outer scope so it runs on unmount
+  useEffect(() => {
+    let cleanup: (() => void) | undefined
+    const timer = setTimeout(() => {
+      cleanup = initHeroParticles()
+    }, 100)
+    return () => {
+      clearTimeout(timer)
+      cleanup?.()
+    }
+  }, [])
+
+  // Letter draw-in: fade ghost text opacity 0 → 1 (fillOpacity="0.14" provides the dim)
+  useEffect(() => {
+    gsap.fromTo(
+      '#hero-svg-wrapper svg text',
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 1.4,
+        delay: 0.25,
+        ease: 'power3.out',
+      }
+    )
+  }, [])
+
   return (
     <section
       id="hero"
@@ -11,26 +42,58 @@ export default function Hero() {
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
+        backgroundColor: 'var(--bg)',
       }}
     >
       <h1 className="sr-only">James Gardener — Developer building interactive things</h1>
 
+      {/* Background ambient particle field */}
       <canvas
         id="hero-canvas"
         aria-hidden="true"
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 0 }}
       />
 
+      {/* Dark vignette — hidden in light theme via CSS */}
       <div
-        id="hero-svg-wrapper"
+        aria-hidden="true"
+        className="hero-vignette"
         style={{
           position: 'absolute',
           inset: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          background: 'radial-gradient(ellipse at center, transparent 30%, rgba(10,10,15,0.8) 100%)',
+          zIndex: 1,
+          pointerEvents: 'none',
         }}
       />
+
+      {/* SVG wordmark + clipped letter canvas */}
+      <div id="hero-svg-wrapper" style={{ position: 'absolute', inset: 0, zIndex: 2 }}>
+        <HeroSVG />
+      </div>
+
+      {/* Top-center eyebrow pill */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '80px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 10,
+          padding: '4px 12px',
+          border: '1px solid var(--line-2)',
+          borderRadius: '999px',
+          fontFamily: 'var(--font-mono)',
+          fontSize: '11px',
+          fontWeight: 500,
+          letterSpacing: '0.08em',
+          color: 'var(--text-mute)',
+          whiteSpace: 'nowrap',
+          backgroundColor: 'var(--bg-1)',
+        }}
+      >
+        // Portfolio · 2026
+      </div>
 
       {/* Bottom-left anchor */}
       <div style={{ position: 'absolute', bottom: '40px', left: '64px', zIndex: 10 }}>
@@ -98,6 +161,7 @@ export default function Hero() {
               borderRadius: '50%',
               backgroundColor: 'var(--accent)',
               display: 'inline-block',
+              animation: 'pulse 2s ease-in-out infinite',
             }}
           />
           <span
@@ -152,28 +216,6 @@ export default function Hero() {
             LinkedIn
           </a>
         </div>
-      </div>
-
-      {/* Top-center eyebrow pill */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '80px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 10,
-          padding: '4px 12px',
-          border: '1px solid var(--line-2)',
-          borderRadius: '999px',
-          fontFamily: 'var(--font-mono)',
-          fontSize: '11px',
-          fontWeight: 500,
-          letterSpacing: '0.08em',
-          color: 'var(--text-mute)',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        // Portfolio · 2026
       </div>
     </section>
   )
