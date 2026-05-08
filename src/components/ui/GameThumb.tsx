@@ -1,49 +1,88 @@
+import { useEffect, useRef } from 'react'
+import * as PIXI from 'pixi.js'
+
 export default function GameThumb() {
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!containerRef.current) return
+    const container = containerRef.current
+
+    const app = new PIXI.Application()
+    let cancelled = false
+
+    async function init() {
+      await app.init({
+        width: 200,
+        height: 120,
+        backgroundAlpha: 0,
+        antialias: true,
+        resolution: Math.min(window.devicePixelRatio, 2),
+        autoDensity: true,
+      })
+
+      if (cancelled) {
+        app.destroy(true, { children: true })
+        return
+      }
+
+      container.appendChild(app.canvas)
+
+      const asteroids: { gfx: PIXI.Graphics; vx: number; vy: number; vr: number }[] = []
+
+      function makeAsteroid(x: number, y: number, r: number) {
+        const gfx = new PIXI.Graphics()
+        const sides = 6 + Math.floor(Math.random() * 4)
+        const points: number[] = []
+        for (let i = 0; i < sides; i++) {
+          const angle = (i / sides) * Math.PI * 2
+          const jitter = r * (0.75 + Math.random() * 0.35)
+          points.push(Math.cos(angle) * jitter, Math.sin(angle) * jitter)
+        }
+        gfx.poly(points).stroke({ color: 0x4f8cff, alpha: 0.45, width: 1 })
+        gfx.x = x
+        gfx.y = y
+        app.stage.addChild(gfx)
+        return { gfx, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4, vr: (Math.random() - 0.5) * 0.005 }
+      }
+
+      for (let i = 0; i < 5; i++) {
+        asteroids.push(makeAsteroid(Math.random() * 200, Math.random() * 120, 10 + Math.random() * 12))
+      }
+
+      app.ticker.add(() => {
+        for (const a of asteroids) {
+          a.gfx.x += a.vx
+          a.gfx.y += a.vy
+          a.gfx.rotation += a.vr
+          if (a.gfx.x < -20) a.gfx.x = 220
+          if (a.gfx.x > 220) a.gfx.x = -20
+          if (a.gfx.y < -20) a.gfx.y = 140
+          if (a.gfx.y > 140) a.gfx.y = -20
+        }
+      })
+    }
+
+    init()
+
+    return () => {
+      cancelled = true
+      if (app.canvas.parentNode) app.destroy(true, { children: true })
+    }
+  }, [])
+
   return (
     <div
+      ref={containerRef}
+      aria-hidden="true"
       style={{
         width: '200px',
         height: '120px',
-        backgroundColor: 'var(--bg-2)',
+        backgroundColor: 'var(--bg)',
         border: '1px solid var(--line)',
         borderRadius: 'var(--r-md)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
         overflow: 'hidden',
-        position: 'relative',
       }}
-      aria-hidden="true"
-    >
-      <svg
-        viewBox="0 0 200 120"
-        width="200"
-        height="120"
-        style={{ position: 'absolute', inset: 0 }}
-      >
-        <circle cx="100" cy="60" r="18" stroke="var(--accent)" strokeOpacity="0.25" strokeWidth="1" fill="none" />
-        <circle cx="100" cy="60" r="10" stroke="var(--accent)" strokeOpacity="0.45" strokeWidth="1" fill="none" />
-        <circle cx="100" cy="60" r="3" fill="var(--accent)" fillOpacity="0.7" />
-        <circle cx="60" cy="35" r="1.5" fill="var(--accent)" fillOpacity="0.35" />
-        <circle cx="148" cy="42" r="1" fill="var(--accent)" fillOpacity="0.3" />
-        <circle cx="38" cy="82" r="1" fill="var(--accent)" fillOpacity="0.4" />
-        <circle cx="162" cy="88" r="1.5" fill="var(--accent)" fillOpacity="0.3" />
-        <circle cx="128" cy="22" r="1" fill="var(--accent)" fillOpacity="0.35" />
-        <circle cx="72" cy="95" r="1.5" fill="var(--accent)" fillOpacity="0.25" />
-        <circle cx="170" cy="55" r="1" fill="var(--accent)" fillOpacity="0.3" />
-      </svg>
-      <span
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: '10px',
-          color: 'var(--text-mute)',
-          letterSpacing: '0.06em',
-          position: 'relative',
-          zIndex: 1,
-        }}
-      >
-        // playable
-      </span>
-    </div>
+    />
   )
 }

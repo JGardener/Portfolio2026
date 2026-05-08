@@ -1,7 +1,15 @@
 import { useEffect, useRef } from 'react'
+import type { ComponentType } from 'react'
 import { projects } from '../../data/projects'
 import GameThumb from '../ui/GameThumb'
+import { FigmaThumb, GameUIThumb } from '../ui/ProjectThumb'
 import { gsap, ease } from '../../lib/gsap'
+
+const thumbRegistry: Record<string, ComponentType> = {
+  'project-2': FigmaThumb,
+  'project-3': GameUIThumb,
+}
+
 
 interface WorkProps {
   onPlayGame: () => void
@@ -92,7 +100,9 @@ export default function Work({ onPlayGame }: WorkProps) {
       </div>
 
       <div ref={rowsRef} style={{ display: 'flex', flexDirection: 'column' }}>
-        {projects.map((project, i) => (
+        {projects.map((project, i) => {
+          const Thumb = thumbRegistry[project.id]
+          return (
           <div
             key={project.id}
             style={{
@@ -178,6 +188,19 @@ export default function Work({ onPlayGame }: WorkProps) {
 
             {project.hasGame ? (
               <GameThumb />
+            ) : Thumb ? (
+              <div
+                style={{
+                  width: '200px',
+                  height: '120px',
+                  backgroundColor: 'var(--bg-2)',
+                  border: '1px solid var(--line)',
+                  borderRadius: 'var(--r-md)',
+                  overflow: 'hidden',
+                }}
+              >
+                <Thumb />
+              </div>
             ) : (
               <div
                 style={{
@@ -241,7 +264,8 @@ export default function Work({ onPlayGame }: WorkProps) {
               ) : null}
             </div>
           </div>
-        ))}
+          )
+        })}
       </div>
     </section>
   )
