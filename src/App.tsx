@@ -8,9 +8,11 @@ import LensCursor from './components/layout/LensCursor'
 import Navbar from './components/layout/Navbar'
 import Loader from './components/layout/Loader'
 import type { Theme } from './types'
+import GameModal from './components/layout/GameModal'
 
 export default function App() {
   const [loaded, setLoaded] = useState(false)
+  const [gameOpen, setGameOpen] = useState(false)
   const [theme, setTheme] = useState<Theme>(() => {
     return (localStorage.getItem('theme') as Theme | null) ?? 'dark'
   })
@@ -29,11 +31,12 @@ export default function App() {
       <Navbar theme={theme} onThemeToggle={toggleTheme} />
       <main>
         <Hero />
-        <Work />
+        <Work onPlayGame={() => setGameOpen(true)} />
         <About />
         <Experience />
         <Contact />
       </main>
+      {gameOpen && <GameModal onClose={() => setGameOpen(false)} />}
     </>
   )
 }

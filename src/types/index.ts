@@ -7,6 +7,7 @@ export interface Project {
   caseStudyUrl?: string
   githubUrl?: string
   featured: boolean
+  hasGame?: boolean
 }
 
 export interface ExperienceEntry {
