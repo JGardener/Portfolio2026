@@ -124,3 +124,35 @@ body {
 [data-theme="light"] .hero-vignette {
   display: none;
 }
+
+.link-draw {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-draw::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1px;
+  background-color: currentColor;
+  transition: width 200ms var(--ease-out);
+}
+
+.link-draw:hover::after {
+  width: 100%;
+}
+
+.cta-primary {
+  transition: background-color 150ms var(--ease-out),
+              color 150ms var(--ease-out),
+              transform 150ms var(--ease-out);
+}
+
+.cta-primary:hover {
+  background-color: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+}

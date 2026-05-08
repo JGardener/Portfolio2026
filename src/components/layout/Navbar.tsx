@@ -57,6 +57,7 @@ export default function Navbar({ theme, onThemeToggle }: NavbarProps) {
           <li key={link.href}>
             <a
               href={link.href}
+              className="link-draw"
               style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '11px',

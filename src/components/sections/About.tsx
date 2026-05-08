@@ -1,3 +1,7 @@
+import { useEffect, useRef } from 'react'
+import { gsap, ease } from '../../lib/gsap'
+import { useScrollReveal } from '../../hooks/useScrollReveal'
+
 const skills = [
   'React',
   'TypeScript',
@@ -12,10 +16,34 @@ const skills = [
 ]
 
 export default function About() {
+  const ref = useScrollReveal({ y: 30, duration: 0.8 })
+  const chipsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const chips = chipsRef.current?.children
+    if (!chips) return
+    const anim = gsap.fromTo(
+      Array.from(chips),
+      { opacity: 0, scale: 0.9 },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.4,
+        stagger: 0.04,
+        ease: ease.out,
+        scrollTrigger: { trigger: chipsRef.current, start: 'top 88%' },
+      }
+    )
+    return () => {
+      anim.scrollTrigger?.kill()
+    }
+  }, [])
+
   return (
     <section
+      ref={ref}
       id="about"
-      style={{ padding: '128px 64px', maxWidth: '1280px', margin: '0 auto' }}
+      style={{ padding: '128px 64px', maxWidth: '1280px', margin: '0 auto', opacity: 0 }}
     >
       <p
         style={{
@@ -53,7 +81,7 @@ export default function About() {
           mid-level roles where that craft matters.
         </p>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+        <div ref={chipsRef} style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
           {skills.map((skill) => (
             <span
               key={skill}

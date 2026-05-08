@@ -1,6 +1,30 @@
+import { useEffect, useRef } from 'react'
+import { gsap, ease } from '../../lib/gsap'
 import { experiences } from '../../data/experience'
 
 export default function Experience() {
+  const entriesRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const entries = entriesRef.current?.children
+    if (!entries) return
+    const anim = gsap.fromTo(
+      Array.from(entries),
+      { opacity: 0, x: -20 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 0.6,
+        stagger: 0.12,
+        ease: ease.draw,
+        scrollTrigger: { trigger: entriesRef.current, start: 'top 88%' },
+      }
+    )
+    return () => {
+      anim.scrollTrigger?.kill()
+    }
+  }, [])
+
   return (
     <section
       id="experience"
@@ -33,7 +57,7 @@ export default function Experience() {
           }}
         />
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+        <div ref={entriesRef} style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
           {experiences.map((exp) => (
             <div key={exp.id}>
               <p

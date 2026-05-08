@@ -1,55 +1,97 @@
+import { useEffect, useRef } from 'react'
 import { projects } from '../../data/projects'
 import GameThumb from '../ui/GameThumb'
+import { gsap, ease } from '../../lib/gsap'
 
 interface WorkProps {
   onPlayGame: () => void
 }
 
 export default function Work({ onPlayGame }: WorkProps) {
+  const headingRef = useRef<HTMLDivElement>(null)
+  const rowsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const headingAnim = gsap.fromTo(
+      headingRef.current,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: ease.draw,
+        scrollTrigger: { trigger: headingRef.current, start: 'top 88%' },
+      }
+    )
+
+    const rows = rowsRef.current?.children
+    const rowsAnim = rows
+      ? gsap.fromTo(
+          Array.from(rows),
+          { opacity: 0, y: 24 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: ease.draw,
+            scrollTrigger: { trigger: rowsRef.current, start: 'top 85%' },
+          }
+        )
+      : null
+
+    return () => {
+      headingAnim.scrollTrigger?.kill()
+      rowsAnim?.scrollTrigger?.kill()
+    }
+  }, [])
+
   return (
     <section
       id="work"
       style={{ padding: '128px 64px', maxWidth: '1280px', margin: '0 auto' }}
     >
-      <p
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: '11px',
-          fontWeight: 500,
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-          color: 'var(--text-mute)',
-          marginBottom: '24px',
-        }}
-      >
-        // Selected work
-      </p>
+      <div ref={headingRef} style={{ opacity: 0 }}>
+        <p
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '11px',
+            fontWeight: 500,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: 'var(--text-mute)',
+            marginBottom: '24px',
+          }}
+        >
+          // Selected work
+        </p>
 
-      <h2
-        style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: '56px',
-          fontWeight: 600,
-          letterSpacing: '-0.02em',
-          lineHeight: 1.05,
-          color: 'var(--text)',
-          marginBottom: '8px',
-        }}
-      >
-        Things I've built
-      </h2>
-      <p
-        style={{
-          fontFamily: 'var(--font-sans)',
-          fontSize: '16px',
-          color: 'var(--text-dim)',
-          marginBottom: '64px',
-        }}
-      >
-        {projects.length} projects
-      </p>
+        <h2
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: '56px',
+            fontWeight: 600,
+            letterSpacing: '-0.02em',
+            lineHeight: 1.05,
+            color: 'var(--text)',
+            marginBottom: '8px',
+          }}
+        >
+          Things I've built
+        </h2>
+        <p
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: '16px',
+            color: 'var(--text-dim)',
+            marginBottom: '64px',
+          }}
+        >
+          {projects.length} projects
+        </p>
+      </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div ref={rowsRef} style={{ display: 'flex', flexDirection: 'column' }}>
         {projects.map((project, i) => (
           <div
             key={project.id}

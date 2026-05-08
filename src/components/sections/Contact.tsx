@@ -1,6 +1,11 @@
+import { useScrollReveal } from '../../hooks/useScrollReveal'
+
 export default function Contact() {
+  const ref = useScrollReveal({ y: 20, duration: 1.0, delay: 0.1 })
+
   return (
     <section
+      ref={ref}
       id="contact"
       style={{
         padding: '120px 64px',
@@ -8,6 +13,7 @@ export default function Contact() {
         margin: '0 auto',
         textAlign: 'center',
         position: 'relative',
+        opacity: 0,
       }}
     >
       <div
