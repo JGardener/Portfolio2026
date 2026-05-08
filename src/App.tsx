@@ -11,12 +11,9 @@ import type { Theme } from './types'
 
 export default function App() {
   const [loaded, setLoaded] = useState(false)
-  const [theme, setTheme] = useState<Theme>('dark')
-
-  useEffect(() => {
-    const saved = localStorage.getItem('theme') as Theme | null
-    if (saved) setTheme(saved)
-  }, [])
+  const [theme, setTheme] = useState<Theme>(() => {
+    return (localStorage.getItem('theme') as Theme | null) ?? 'dark'
+  })
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
