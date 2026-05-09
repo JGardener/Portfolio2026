@@ -52,7 +52,7 @@ export default function Experience() {
               <h3
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: '24px',
+                  fontSize: 'clamp(18px, 2.5vw, 24px)',
                   fontWeight: 600,
                   letterSpacing: '-0.01em',
                   color: 'var(--text)',

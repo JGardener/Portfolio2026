@@ -62,7 +62,7 @@ export default function Work({ onPlayGame }: WorkProps) {
         <h2
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '56px',
+            fontSize: 'clamp(32px, 4.5vw, 56px)',
             fontWeight: 600,
             letterSpacing: '-0.02em',
             lineHeight: 1.05,
@@ -90,16 +90,9 @@ export default function Work({ onPlayGame }: WorkProps) {
           return (
           <div
             key={project.id}
+            className="work-row"
             style={{
-              display: 'grid',
-              gridTemplateColumns: '64px 1fr 200px 120px',
-              gap: '24px',
-              alignItems: 'center',
-              padding: '24px 0',
-              borderTop: '1px solid var(--line)',
               borderBottom: i === projects.length - 1 ? '1px solid var(--line)' : 'none',
-              transition: 'padding-left 250ms var(--ease-out), border-color 250ms var(--ease-out)',
-              position: 'relative',
             }}
             onMouseEnter={(e) => {
               const el = e.currentTarget
@@ -112,9 +105,9 @@ export default function Work({ onPlayGame }: WorkProps) {
               el.style.borderTopColor = 'var(--line)'
             }}
           >
-            <span className="mono-label">{project.year}</span>
+            <span className="work-row__year mono-label">{project.year}</span>
 
-            <div>
+            <div className="work-row__info">
               <h3
                 style={{
                   fontFamily: 'var(--font-display)',
@@ -160,29 +153,31 @@ export default function Work({ onPlayGame }: WorkProps) {
               </div>
             </div>
 
-            {project.hasGame ? (
-              <GameThumb />
-            ) : (
-              <div
-                style={{
-                  width: '200px',
-                  height: '120px',
-                  backgroundColor: 'var(--bg-2)',
-                  border: '1px solid var(--line)',
-                  borderRadius: 'var(--r-md)',
-                  overflow: 'hidden',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                {Thumb ? <Thumb /> : (
-                  <span className="mono-label" style={{ fontSize: '10px' }}>thumb</span>
-                )}
-              </div>
-            )}
+            <div className="work-row__thumb">
+              {project.hasGame ? (
+                <GameThumb />
+              ) : (
+                <div
+                  style={{
+                    width: '200px',
+                    height: '120px',
+                    backgroundColor: 'var(--bg-2)',
+                    border: '1px solid var(--line)',
+                    borderRadius: 'var(--r-md)',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {Thumb ? <Thumb /> : (
+                    <span className="mono-label" style={{ fontSize: '10px' }}>thumb</span>
+                  )}
+                </div>
+              )}
+            </div>
 
-            <div style={{ textAlign: 'right' }}>
+            <div className="work-row__action" style={{ textAlign: 'right' }}>
               {project.hasGame ? (
                 <button
                   onClick={onPlayGame}

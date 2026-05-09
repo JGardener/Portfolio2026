@@ -93,8 +93,7 @@ export default function Hero() {
         // Portfolio · 2026
       </div>
 
-      {/* Bottom-left anchor */}
-      <div style={{ position: 'absolute', bottom: '40px', left: '64px', zIndex: 10 }}>
+      <div className="hero-anchor-l">
         <p
           style={{
             fontFamily: 'var(--font-mono)',
@@ -111,7 +110,7 @@ export default function Hero() {
         <p
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '24px',
+            fontSize: 'clamp(18px, 2.5vw, 24px)',
             fontWeight: 700,
             color: 'var(--text)',
             marginBottom: '4px',
@@ -133,16 +132,7 @@ export default function Hero() {
         </p>
       </div>
 
-      {/* Bottom-right meta block */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '40px',
-          right: '64px',
-          zIndex: 10,
-          textAlign: 'right',
-        }}
-      >
+      <div className="hero-anchor-r">
         <div
           style={{
             display: 'flex',

@@ -48,18 +48,11 @@ export default function About() {
     >
       <p className="mono-label" style={{ marginBottom: '48px' }}>// 02 — About</p>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '96px',
-          alignItems: 'start',
-        }}
-      >
+      <div className="about-grid">
         <p
           style={{
             fontFamily: 'var(--font-sans)',
-            fontSize: '20px',
+            fontSize: 'clamp(16px, 2vw, 20px)',
             lineHeight: 1.5,
             color: 'var(--text-dim)',
           }}

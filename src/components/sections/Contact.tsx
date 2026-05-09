@@ -34,7 +34,7 @@ export default function Contact() {
         <h2
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '56px',
+            fontSize: 'clamp(32px, 4.5vw, 56px)',
             fontWeight: 600,
             letterSpacing: '-0.02em',
             lineHeight: 1.05,
@@ -49,7 +49,7 @@ export default function Contact() {
           href="mailto:james@youremail.com"
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '24px',
+            fontSize: 'clamp(16px, 3vw, 24px)',
             fontWeight: 600,
             color: 'var(--text-dim)',
             textDecoration: 'none',
