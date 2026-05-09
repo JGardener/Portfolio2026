@@ -28,13 +28,15 @@ export function initHeroParticles(): () => void {
 
   // ---- Background field (sparse, ambient, linked) ----
   const bgCtx = bg.getContext('2d')!
-  let bgW = 0, bgH = 0
+  let bgW = 0, bgH = 0, bgLeft = 0, bgTop = 0
   let bgParticles: Particle[] = []
 
   function bgResize() {
     const r = bg!.getBoundingClientRect()
     bgW = r.width
     bgH = r.height
+    bgLeft = r.left
+    bgTop = r.top
     bg!.width = bgW * dpr
     bg!.height = bgH * dpr
     bgCtx.setTransform(dpr, 0, 0, dpr, 0, 0)
@@ -51,9 +53,8 @@ export function initHeroParticles(): () => void {
   }
 
   const onPointerMove = (e: PointerEvent) => {
-    const r = bg!.getBoundingClientRect()
-    mouse.x = e.clientX - r.left
-    mouse.y = e.clientY - r.top
+    mouse.x = e.clientX - bgLeft
+    mouse.y = e.clientY - bgTop
     mouse.active = true
   }
   const onPointerLeave = () => {
@@ -94,15 +95,16 @@ export function initHeroParticles(): () => void {
     w: number,
     h: number,
     particles: Particle[],
-    opts: DrawFieldOptions
+    opts: DrawFieldOptions,
+    t: number
   ) {
     if (!ctx || w === 0 || h === 0) return
     ctx.clearRect(0, 0, w, h)
 
-    const t = performance.now()
     const [r, g, b] = ACCENT
 
     if (opts.linkDist > 0) {
+      const linkDist2 = opts.linkDist * opts.linkDist
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i]
         for (let j = i + 1; j < particles.length; j++) {
@@ -110,7 +112,7 @@ export function initHeroParticles(): () => void {
           const dx = p.x - q.x
           const dy = p.y - q.y
           const d2 = dx * dx + dy * dy
-          if (d2 < opts.linkDist * opts.linkDist) {
+          if (d2 < linkDist2) {
             const alpha = (1 - Math.sqrt(d2) / opts.linkDist) * opts.linkAlpha
             ctx.strokeStyle = `rgba(${r},${g},${b},${alpha})`
             ctx.lineWidth = 0.5
@@ -165,14 +167,15 @@ export function initHeroParticles(): () => void {
 
   let rafId: number
   function loop() {
+    const t = performance.now()
     drawField(bgCtx, bgW, bgH, bgParticles, {
       linkDist: 120, linkAlpha: 0.12,
       mouseStrength: 0.5, alphaScale: 0.55, glowR: 3,
-    })
+    }, t)
     drawField(fgCtx, fgW, fgH, fgParticles, {
       linkDist: 60, linkAlpha: 0.35,
       mouseStrength: 0, alphaScale: 1.0, glowR: 5,
-    })
+    }, t)
     rafId = requestAnimationFrame(loop)
   }
 

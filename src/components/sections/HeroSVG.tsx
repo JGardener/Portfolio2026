@@ -14,11 +14,6 @@ export default function HeroSVG() {
       }}
     >
       <defs>
-        {/*
-          clipPath defines the JG letterforms.
-          The <canvas> inside foreignObject is masked to these shapes —
-          only particles inside the letters are visible.
-        */}
         <clipPath id="letter-clip">
           <text
             x="800"
@@ -34,7 +29,6 @@ export default function HeroSVG() {
         </clipPath>
       </defs>
 
-      {/* Ghost fill — subtle visible form behind the particles */}
       <text
         x="800"
         y="520"
@@ -49,11 +43,7 @@ export default function HeroSVG() {
         JG
       </text>
 
-      {/*
-        foreignObject contains the letter canvas.
-        clipPath clips its rendering to the JG shapes.
-        Size matches the full SVG viewBox so particles can be anywhere inside.
-      */}
+      {/* full-viewBox size so particles can land anywhere inside the clip */}
       <foreignObject x="0" y="0" width="1600" height="800" clipPath="url(#letter-clip)">
         <canvas
           id="hero-letter-canvas"

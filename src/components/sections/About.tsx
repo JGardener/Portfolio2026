@@ -43,21 +43,10 @@ export default function About() {
     <section
       ref={ref}
       id="about"
-      style={{ padding: '128px 64px', maxWidth: '1280px', margin: '0 auto', opacity: 0 }}
+      className="section"
+      style={{ opacity: 0 }}
     >
-      <p
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: '11px',
-          fontWeight: 500,
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-          color: 'var(--text-mute)',
-          marginBottom: '48px',
-        }}
-      >
-        // 02 — About
-      </p>
+      <p className="mono-label" style={{ marginBottom: '48px' }}>// 02 — About</p>
 
       <div
         style={{

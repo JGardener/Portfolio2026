@@ -19,7 +19,7 @@ export default function Loader({ onComplete }: LoaderProps) {
     )
       .to(labelRef.current, { opacity: 0, duration: 0.3 }, '+=0.7')
       .to(loaderRef.current, { opacity: 0, duration: 0.5, ease: ease.inOut }, '-=0.1')
-  }, [onComplete])
+  }, [])
 
   return (
     <div

@@ -10,6 +10,8 @@ export default function GameThumb() {
 
     const app = new PIXI.Application()
     let cancelled = false
+    let initialized = false
+    let io: IntersectionObserver | undefined
 
     async function init() {
       await app.init({
@@ -26,7 +28,14 @@ export default function GameThumb() {
         return
       }
 
+      initialized = true
       container.appendChild(app.canvas)
+
+      io = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) app.ticker.start()
+        else app.ticker.stop()
+      })
+      io.observe(container)
 
       const asteroids: { gfx: PIXI.Graphics; vx: number; vy: number; vr: number }[] = []
 
@@ -67,7 +76,10 @@ export default function GameThumb() {
 
     return () => {
       cancelled = true
-      if (app.canvas.parentNode) app.destroy(true, { children: true })
+      if (initialized && app.canvas.parentNode) {
+        io?.disconnect()
+        app.destroy(true, { children: true })
+      }
     }
   }, [])
 

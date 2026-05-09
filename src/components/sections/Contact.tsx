@@ -7,10 +7,8 @@ export default function Contact() {
     <section
       ref={ref}
       id="contact"
+      className="section"
       style={{
-        padding: '120px 64px',
-        maxWidth: '1280px',
-        margin: '0 auto',
         textAlign: 'center',
         position: 'relative',
         opacity: 0,
@@ -31,19 +29,7 @@ export default function Contact() {
       />
 
       <div style={{ position: 'relative', zIndex: 1 }}>
-        <p
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '11px',
-            fontWeight: 500,
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: 'var(--text-mute)',
-            marginBottom: '24px',
-          }}
-        >
-          // 05 — Let's talk
-        </p>
+        <p className="mono-label" style={{ marginBottom: '24px' }}>// 05 — Let's talk</p>
 
         <h2
           style={{

@@ -55,24 +55,9 @@ export default function Work({ onPlayGame }: WorkProps) {
   }, [])
 
   return (
-    <section
-      id="work"
-      style={{ padding: '128px 64px', maxWidth: '1280px', margin: '0 auto' }}
-    >
+    <section id="work" className="section">
       <div ref={headingRef} style={{ opacity: 0 }}>
-        <p
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '11px',
-            fontWeight: 500,
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: 'var(--text-mute)',
-            marginBottom: '24px',
-          }}
-        >
-          // Selected work
-        </p>
+        <p className="mono-label" style={{ marginBottom: '24px' }}>// Selected work</p>
 
         <h2
           style={{
@@ -127,18 +112,7 @@ export default function Work({ onPlayGame }: WorkProps) {
               el.style.borderTopColor = 'var(--line)'
             }}
           >
-            <span
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '11px',
-                fontWeight: 500,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: 'var(--text-mute)',
-              }}
-            >
-              {project.year}
-            </span>
+            <span className="mono-label">{project.year}</span>
 
             <div>
               <h3
@@ -188,19 +162,6 @@ export default function Work({ onPlayGame }: WorkProps) {
 
             {project.hasGame ? (
               <GameThumb />
-            ) : Thumb ? (
-              <div
-                style={{
-                  width: '200px',
-                  height: '120px',
-                  backgroundColor: 'var(--bg-2)',
-                  border: '1px solid var(--line)',
-                  borderRadius: 'var(--r-md)',
-                  overflow: 'hidden',
-                }}
-              >
-                <Thumb />
-              </div>
             ) : (
               <div
                 style={{
@@ -209,20 +170,15 @@ export default function Work({ onPlayGame }: WorkProps) {
                   backgroundColor: 'var(--bg-2)',
                   border: '1px solid var(--line)',
                   borderRadius: 'var(--r-md)',
+                  overflow: 'hidden',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '10px',
-                    color: 'var(--text-mute)',
-                  }}
-                >
-                  thumb
-                </span>
+                {Thumb ? <Thumb /> : (
+                  <span className="mono-label" style={{ fontSize: '10px' }}>thumb</span>
+                )}
               </div>
             )}
 

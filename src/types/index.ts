@@ -20,9 +20,3 @@ export interface ExperienceEntry {
 }
 
 export type Theme = 'dark' | 'light'
-
-export interface AppState {
-  theme: Theme
-  particleDensity: number
-  motionScale: number
-}

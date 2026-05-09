@@ -11,46 +11,49 @@ export default function LensCursor() {
     let currentY = -200
     let targetX = -200
     let targetY = -200
-    let rafId: number
+    let rafId = 0
     const LERP = 0.22
+    const EPS = 0.1
 
     function tick() {
       currentX += (targetX - currentX) * LERP
       currentY += (targetY - currentY) * LERP
       lens!.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`
-      rafId = requestAnimationFrame(tick)
+      if (Math.abs(targetX - currentX) > EPS || Math.abs(targetY - currentY) > EPS) {
+        rafId = requestAnimationFrame(tick)
+      } else {
+        rafId = 0
+      }
     }
-    rafId = requestAnimationFrame(tick)
 
     const onMove = (e: PointerEvent) => {
       targetX = e.clientX
       targetY = e.clientY
+      if (!rafId) rafId = requestAnimationFrame(tick)
     }
 
-    const onEnter = () => {
-      lens!.style.width = '140px'
-      lens!.style.height = '140px'
+    const onEnter = (e: MouseEvent) => {
+      if ((e.target as Element).closest('a, button')) {
+        lens!.style.width = '140px'
+        lens!.style.height = '140px'
+      }
     }
-    const onLeave = () => {
-      lens!.style.width = '80px'
-      lens!.style.height = '80px'
+    const onLeave = (e: MouseEvent) => {
+      if ((e.target as Element).closest('a, button')) {
+        lens!.style.width = '80px'
+        lens!.style.height = '80px'
+      }
     }
 
     window.addEventListener('pointermove', onMove)
-
-    const hoverEls = document.querySelectorAll('a, button')
-    hoverEls.forEach((el) => {
-      el.addEventListener('mouseenter', onEnter)
-      el.addEventListener('mouseleave', onLeave)
-    })
+    document.addEventListener('mouseover', onEnter, true)
+    document.addEventListener('mouseout', onLeave, true)
 
     return () => {
-      cancelAnimationFrame(rafId)
+      if (rafId) cancelAnimationFrame(rafId)
       window.removeEventListener('pointermove', onMove)
-      hoverEls.forEach((el) => {
-        el.removeEventListener('mouseenter', onEnter)
-        el.removeEventListener('mouseleave', onLeave)
-      })
+      document.removeEventListener('mouseover', onEnter, true)
+      document.removeEventListener('mouseout', onLeave, true)
     }
   }, [])
 

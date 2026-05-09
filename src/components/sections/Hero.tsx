@@ -4,7 +4,6 @@ import { initHeroParticles } from '../../lib/heroParticles'
 import HeroSVG from './HeroSVG'
 
 export default function Hero() {
-  // Init particle system — capture cleanup in outer scope so it runs on unmount
   useEffect(() => {
     let cleanup: (() => void) | undefined
     const timer = setTimeout(() => {
@@ -16,7 +15,6 @@ export default function Hero() {
     }
   }, [])
 
-  // Letter draw-in: fade ghost text opacity 0 → 1 (fillOpacity="0.14" provides the dim)
   useEffect(() => {
     gsap.fromTo(
       '#hero-svg-wrapper svg text',

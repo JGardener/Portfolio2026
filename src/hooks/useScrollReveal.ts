@@ -35,6 +35,7 @@ export function useScrollReveal(options: ScrollRevealOptions = {}) {
     )
 
     return () => {
+      anim.kill()
       anim.scrollTrigger?.kill()
     }
   }, [])

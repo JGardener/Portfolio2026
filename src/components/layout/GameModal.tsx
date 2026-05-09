@@ -10,7 +10,6 @@ export default function GameModal({ onClose }: GameModalProps) {
   const backdropRef = useRef<HTMLDivElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
 
-  // Open animation — runs on mount
   useEffect(() => {
     const tl = gsap.timeline()
     tl.fromTo(
@@ -23,9 +22,9 @@ export default function GameModal({ onClose }: GameModalProps) {
       { opacity: 1, y: 0, duration: 0.4, ease: ease.draw },
       '-=0.1'
     )
+    return () => { tl.kill() }
   }, [])
 
-  // Close animation — reverses open, then fires onClose to unmount
   const handleClose = useCallback(() => {
     const tl = gsap.timeline({ onComplete: onClose })
     tl.to(panelRef.current, { opacity: 0, y: 24, duration: 0.25, ease: ease.inOut }).to(
@@ -35,7 +34,6 @@ export default function GameModal({ onClose }: GameModalProps) {
     )
   }, [onClose])
 
-  // Esc key
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') handleClose()
@@ -79,7 +77,6 @@ export default function GameModal({ onClose }: GameModalProps) {
           opacity: 0,
         }}
       >
-        {/* Modal header bar */}
         <div
           style={{
             display: 'flex',
@@ -90,47 +87,17 @@ export default function GameModal({ onClose }: GameModalProps) {
             flexShrink: 0,
           }}
         >
-          <span
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '11px',
-              fontWeight: 500,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              color: 'var(--text-mute)',
-            }}
-          >
-            // Asteroid Blaster
-          </span>
+          <span className="mono-label">// Asteroid Blaster</span>
           <button
             onClick={handleClose}
             aria-label="Close game"
-            style={{
-              background: 'none',
-              border: '1px solid var(--line-2)',
-              borderRadius: 'var(--r-sm)',
-              padding: '4px 10px',
-              color: 'var(--text-mute)',
-              fontFamily: 'var(--font-mono)',
-              fontSize: '10px',
-              letterSpacing: '0.06em',
-              textTransform: 'uppercase',
-              transition: 'border-color 150ms, color 150ms',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'var(--accent)'
-              e.currentTarget.style.color = 'var(--text)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'var(--line-2)'
-              e.currentTarget.style.color = 'var(--text-mute)'
-            }}
+            className="mono-btn"
+            style={{ padding: '4px 10px' }}
           >
             Esc ×
           </button>
         </div>
 
-        {/* Game canvas area — PixiCanvas mounts here in the game build phases */}
         <div
           style={{
             flex: 1,

@@ -28,21 +28,9 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      style={{ padding: '128px 64px', maxWidth: '1280px', margin: '0 auto' }}
+      className="section"
     >
-      <p
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: '11px',
-          fontWeight: 500,
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-          color: 'var(--text-mute)',
-          marginBottom: '64px',
-        }}
-      >
-        // 03 — Experience
-      </p>
+      <p className="mono-label" style={{ marginBottom: '64px' }}>// 03 — Experience</p>
 
       <div style={{ position: 'relative', paddingLeft: '48px' }}>
         <div
@@ -60,19 +48,7 @@ export default function Experience() {
         <div ref={entriesRef} style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
           {experiences.map((exp) => (
             <div key={exp.id}>
-              <p
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '11px',
-                  fontWeight: 500,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  color: 'var(--text-mute)',
-                  marginBottom: '4px',
-                }}
-              >
-                {exp.period}
-              </p>
+              <p className="mono-label" style={{ marginBottom: '4px' }}>{exp.period}</p>
               <h3
                 style={{
                   fontFamily: 'var(--font-display)',
