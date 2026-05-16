@@ -1,73 +1,49 @@
-# React + TypeScript + Vite
+# Portfolio 2026 — James Gardener
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio site. React 19 + TypeScript + Vite, with GSAP animations, a canvas particle system, and a playable PixiJS arcade game embedded as a modal.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 19** + **TypeScript** — Vite 8, `moduleResolution: bundler`
+- **GSAP 3** + ScrollTrigger — all scroll-driven and timeline animations
+- **PixiJS v8** — live asteroid thumbnail and the full Asteroid Blaster game
+- **Tailwind CSS v4** — utility layer on top of a CSS custom-property design system
+- **Fonts** — Inter (body), Syne (display), JetBrains Mono (labels/mono)
 
-## React Compiler
+## Local development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # type-check + production build
+npm run lint     # ESLint
+npm run preview  # serve the production build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Asteroid Blaster dependency
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The game component lives in a sibling repo at `../AsteroidBlaster` and is referenced as a local package (`file:../AsteroidBlaster`). Before running `npm install` for the first time on a new machine, clone that repo alongside this one and build it:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# from C:\code (or wherever both repos live side by side)
+git clone https://github.com/JGardener/asteroid-blaster AsteroidBlaster
+cd AsteroidBlaster
+npm install
+npm run build
+cd ../Portfolio2026
+npm install
 ```
+
+## Sections
+
+| Section | ID |
+|---|---|
+| Hero — particle field + SVG wordmark | `#hero` |
+| Work — project list with live PixiJS thumbnails | `#work` |
+| About — skills grid | `#about` |
+| Experience — timeline | `#experience` |
+| Contact — email + social links | `#contact` |
+
+## Project
+
+[github.com/JGardener](https://github.com/JGardener) · [linkedin.com/in/jamesgardener92](https://www.linkedin.com/in/jamesgardener92)
