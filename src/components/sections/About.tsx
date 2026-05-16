@@ -43,6 +43,7 @@ export default function About() {
       <p className="mono-label" style={{ marginBottom: '48px' }}>
         // 02 — About
       </p>
+      <h2 className="sr-only">About</h2>
 
       <div className="about-grid">
         <p

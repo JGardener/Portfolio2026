@@ -94,6 +94,7 @@ export default function LensCursor() {
           boxShadow: '0 0 12px var(--accent-glow)',
           transition: 'opacity 180ms var(--ease-out)',
           transform: 'translate(-200px, -200px) translate(-50%, -50%)',
+          willChange: 'transform',
         }}
       />
       <div
@@ -114,6 +115,7 @@ export default function LensCursor() {
           opacity: '0',
           transition: 'opacity 180ms var(--ease-out)',
           transform: 'translate(-200px, -200px) translate(-50%, -50%)',
+          willChange: 'transform',
         }}
       />
     </>

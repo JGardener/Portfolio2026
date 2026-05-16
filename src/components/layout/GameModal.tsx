@@ -10,6 +10,7 @@ interface GameModalProps {
 export default function GameModal({ onClose }: GameModalProps) {
   const backdropRef = useRef<HTMLDivElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     const tl = gsap.timeline()
@@ -35,6 +36,40 @@ export default function GameModal({ onClose }: GameModalProps) {
     )
   }, [onClose])
 
+  useEffect(() => {
+    closeButtonRef.current?.focus()
+
+    const onKeyDown = (e: globalThis.KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        handleClose()
+        return
+      }
+      if (e.key !== 'Tab' || !panelRef.current) return
+
+      const focusable = Array.from(
+        panelRef.current.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), a[href], input, [tabindex]:not([tabindex="-1"])'
+        )
+      )
+      if (focusable.length === 0) return
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [handleClose])
+
 
   return createPortal(
     <div
@@ -46,7 +81,7 @@ export default function GameModal({ onClose }: GameModalProps) {
         position: 'fixed',
         inset: 0,
         zIndex: 1000,
-        backgroundColor: 'rgba(0,0,0,0.85)',
+        backgroundColor: 'var(--backdrop-overlay)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -83,10 +118,10 @@ export default function GameModal({ onClose }: GameModalProps) {
         >
           <span className="mono-label">// Asteroid Blaster</span>
           <button
+            ref={closeButtonRef}
             onClick={handleClose}
             aria-label="Close game"
             className="mono-btn"
-            style={{ padding: '4px 10px' }}
           >
             Esc ×
           </button>

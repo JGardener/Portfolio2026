@@ -23,7 +23,7 @@
   /* Text */
   --text:          #e8e8f0;
   --text-dim:      #a0a0b0;
-  --text-mute:     #6a6a7a;
+  --text-mute:     #7e7e8e;
   --muted:         #4a4a5a;
 
   /* Accent */
@@ -55,6 +55,10 @@
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-draw:   cubic-bezier(0.16, 1, 0.3, 1);
   --ease-soft:   cubic-bezier(0.4, 0, 0.6, 1);
+
+  /* Overlay tokens */
+  --bg-glass:         rgba(10, 10, 15, 0.80);
+  --backdrop-overlay: rgba(0, 0, 0, 0.85);
 }
 
 [data-theme="light"] {
@@ -66,8 +70,11 @@
   --line-2:    #cfc7b0;
   --text:      #1a1a1f;
   --text-dim:  #4a4a5a;
-  --text-mute: #7a7a85;
+  --text-mute: #5e5e6e;
   --accent:    #3a6fd0;
+  --accent-faint:  rgba(58, 111, 208, 0.10);
+  --accent-glow:   rgba(58, 111, 208, 0.35);
+  --bg-glass:      rgba(251, 249, 244, 0.85);
 }
 
 *, *::before, *::after {
@@ -152,7 +159,7 @@ body {
   padding: 24px 0;
   border-top: 1px solid var(--line);
   position: relative;
-  transition: padding-left 250ms var(--ease-out), border-color 250ms var(--ease-out);
+  transition: transform 250ms var(--ease-out), border-color 250ms var(--ease-out);
 }
 
 @media (max-width: 1024px) {
@@ -178,7 +185,8 @@ body {
   background: transparent;
   border: 1px solid var(--btn-clr);
   border-radius: 10%;
-  padding: 5px;
+  padding: 0 12px;
+  min-height: 44px;
   color: var(--btn-clr);
   text-decoration: none;
   font-family: var(--font-mono);
@@ -187,9 +195,13 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: background 150ms var(--ease-out), color 150ms var(--ease-out);
 }
-.work-btn:hover {
+.work-btn:hover,
+.work-btn:focus-visible {
   background: var(--btn-clr);
   color: var(--bg);
 }
@@ -230,8 +242,11 @@ body {
   background: none;
   border: none;
   color: var(--text-dim);
-  padding: 4px;
+  padding: 12px;
+  min-width: 44px;
+  min-height: 44px;
   line-height: 1;
+  justify-content: center;
 }
 @media (max-width: 640px) { .hamburger { display: flex; align-items: center; } }
 
@@ -270,10 +285,16 @@ body {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-mute);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding-inline: 12px;
   transition: border-color 150ms var(--ease-out), color 150ms var(--ease-out);
 }
 
-.mono-btn:hover {
+.mono-btn:hover,
+.mono-btn:focus-visible {
   border-color: var(--accent);
   color: var(--text);
 }

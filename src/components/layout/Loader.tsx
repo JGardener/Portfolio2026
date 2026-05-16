@@ -24,6 +24,8 @@ export default function Loader({ onComplete }: LoaderProps) {
   return (
     <div
       ref={loaderRef}
+      aria-live="polite"
+      aria-label="Loading"
       style={{
         position: 'fixed',
         inset: 0,

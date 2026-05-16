@@ -97,12 +97,12 @@ export default function Work({ onPlayGame }: WorkProps) {
             }}
             onMouseEnter={(e) => {
               const el = e.currentTarget
-              if (window.innerWidth > 640) el.style.paddingLeft = '24px'
+              if (window.innerWidth > 640) el.style.transform = 'translateX(24px)'
               el.style.borderTopColor = 'var(--accent)'
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget
-              el.style.paddingLeft = '0'
+              el.style.transform = ''
               el.style.borderTopColor = 'var(--line)'
             }}
           >
@@ -112,7 +112,7 @@ export default function Work({ onPlayGame }: WorkProps) {
               <h3
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: '32px',
+                  fontSize: 'clamp(22px, 3.5vw, 32px)',
                   fontWeight: 600,
                   letterSpacing: '-0.01em',
                   color: 'var(--text)',
@@ -145,7 +145,7 @@ export default function Work({ onPlayGame }: WorkProps) {
                       color: 'var(--text-mute)',
                       border: '1px solid var(--line-2)',
                       borderRadius: 'var(--r-sm)',
-                      padding: '4px 8px',
+                      padding: '8px 12px',
                     }}
                   >
                     {tag}
@@ -193,6 +193,7 @@ export default function Work({ onPlayGame }: WorkProps) {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`${project.title} source code on GitHub (opens in new tab)`}
                       className="work-btn"
                       style={{ '--btn-clr': 'var(--text-mute)' } as React.CSSProperties}
                     >
@@ -207,6 +208,7 @@ export default function Work({ onPlayGame }: WorkProps) {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`${project.title} live site (opens in new tab)`}
                       className="work-btn"
                       style={{ '--btn-clr': 'var(--accent)' } as React.CSSProperties}
                     >
@@ -218,6 +220,7 @@ export default function Work({ onPlayGame }: WorkProps) {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`${project.title} source code on GitHub (opens in new tab)`}
                       className="work-btn"
                       style={{ '--btn-clr': 'var(--text-mute)' } as React.CSSProperties}
                     >

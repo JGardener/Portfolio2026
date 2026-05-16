@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-16T00:00:00Z",
+  "title": "Design System: James Gardener — Portfolio 2026",
+  "extensions": {
+    "colorMeta": {
+      "bg-void":       { "role": "neutral", "displayName": "Void",          "canonical": "oklch(6% 0.008 265)",  "tonalRamp": ["#050508","#0a0a0f","#0e0e15","#14141d","#1a1a26","#22223a","#2e2e4a","#3d3d60"] },
+      "bg-surface":    { "role": "neutral", "displayName": "Surface",        "canonical": "oklch(9% 0.008 265)",  "tonalRamp": ["#050508","#0a0a0f","#0e0e15","#14141d","#1a1a26","#22223a","#2e2e4a","#3d3d60"] },
+      "bg-raised":     { "role": "neutral", "displayName": "Raised",         "canonical": "oklch(11% 0.009 265)", "tonalRamp": ["#050508","#0a0a0f","#0e0e15","#14141d","#1a1a26","#22223a","#2e2e4a","#3d3d60"] },
+      "bg-elevated":   { "role": "neutral", "displayName": "Elevated",       "canonical": "oklch(14% 0.01 265)",  "tonalRamp": ["#050508","#0a0a0f","#0e0e15","#14141d","#1a1a26","#22223a","#2e2e4a","#3d3d60"] },
+      "line-subtle":   { "role": "neutral", "displayName": "Line Subtle",    "canonical": "oklch(17% 0.01 265)",  "tonalRamp": ["#0a0a0f","#14141d","#1a1a26","#20202c","#2a2a3a","#383850","#484868","#585880"] },
+      "line-visible":  { "role": "neutral", "displayName": "Line Visible",   "canonical": "oklch(21% 0.012 265)", "tonalRamp": ["#0a0a0f","#14141d","#1a1a26","#20202c","#2a2a3a","#383850","#484868","#585880"] },
+      "text-primary":  { "role": "neutral", "displayName": "Text Primary",   "canonical": "oklch(93% 0.007 265)", "tonalRamp": ["#4a4a5a","#6a6a7a","#a0a0b0","#c0c0cc","#d4d4e0","#e8e8f0","#f2f2f8","#fafafe"] },
+      "text-secondary":{ "role": "neutral", "displayName": "Text Secondary", "canonical": "oklch(68% 0.008 265)", "tonalRamp": ["#4a4a5a","#6a6a7a","#a0a0b0","#c0c0cc","#d4d4e0","#e8e8f0","#f2f2f8","#fafafe"] },
+      "text-tertiary": { "role": "neutral", "displayName": "Text Tertiary",  "canonical": "oklch(48% 0.008 265)", "tonalRamp": ["#4a4a5a","#6a6a7a","#a0a0b0","#c0c0cc","#d4d4e0","#e8e8f0","#f2f2f8","#fafafe"] },
+      "text-silent":   { "role": "neutral", "displayName": "Text Silent",    "canonical": "oklch(36% 0.009 265)", "tonalRamp": ["#4a4a5a","#6a6a7a","#a0a0b0","#c0c0cc","#d4d4e0","#e8e8f0","#f2f2f8","#fafafe"] },
+      "pulse-blue":    { "role": "primary", "displayName": "Pulse Blue",     "canonical": "oklch(65% 0.18 260)",  "tonalRamp": ["#1a2a50","#233578","#2d45a0","#3a6fd0","#4f8cff","#6fa0ff","#90bcff","#c0d8ff"] },
+      "pulse-blue-hover":  { "role": "primary", "displayName": "Pulse Blue Hover",  "canonical": "oklch(72% 0.16 260)", "tonalRamp": ["#1a2a50","#233578","#2d45a0","#3a6fd0","#4f8cff","#6fa0ff","#90bcff","#c0d8ff"] },
+      "pulse-blue-active": { "role": "primary", "displayName": "Pulse Blue Active", "canonical": "oklch(58% 0.19 260)", "tonalRamp": ["#1a2a50","#233578","#2d45a0","#3a6fd0","#4f8cff","#6fa0ff","#90bcff","#c0d8ff"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "Section headings. One per section. Syne 600, tight leading." },
+      "headline": { "displayName": "Headline", "purpose": "Name callout, sub-section emphasis. Syne 700." },
+      "body":     { "displayName": "Body",     "purpose": "All descriptive and reading copy. Inter 400. Max 72ch." },
+      "label":    { "displayName": "Label",    "purpose": "Section markers, nav links, metadata, chip text, buttons. JetBrains Mono 500 uppercase." }
+    },
+    "shadows": [
+      { "name": "ambient-low",    "value": "0 2px 8px rgba(0,0,0,0.3)",   "purpose": "Subtle depth for small lifted elements. --sh-sm." },
+      { "name": "ambient-medium", "value": "0 8px 24px rgba(0,0,0,0.4)",  "purpose": "Cards, dropdowns, modal panels. --sh-md." },
+      { "name": "ambient-deep",   "value": "0 16px 60px rgba(0,0,0,0.5)", "purpose": "Full modal backdrops. --sh-lg." },
+      { "name": "pulse-glow",     "value": "0 0 24px rgba(79,140,255,0.35), 0 0 40px rgba(79,140,255,0.35)", "purpose": "Interactive state indicator on cursor and focus elements. Never decorative. --sh-glow." }
+    ],
+    "motion": [
+      { "name": "ease-out",    "value": "cubic-bezier(0.2, 0.8, 0.2, 1)",   "purpose": "Standard state transitions (hover, color changes). 150-250ms." },
+      { "name": "ease-in-out", "value": "cubic-bezier(0.65, 0, 0.35, 1)",   "purpose": "Panel/modal open/close choreography." },
+      { "name": "ease-draw",   "value": "cubic-bezier(0.16, 1, 0.3, 1)",    "purpose": "Scroll-reveal entrances and element introductions. Expo-out feel." },
+      { "name": "ease-soft",   "value": "cubic-bezier(0.4, 0, 0.6, 1)",     "purpose": "Gentle transitions where draw would feel abrupt." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px",  "purpose": "Mobile — single column, hamburger menu visible, thumbnail hidden." },
+      { "name": "md", "value": "1024px", "purpose": "Tablet — two-column about grid, work row collapses year column." },
+      { "name": "lg", "value": "1280px", "purpose": "Desktop — full .section max-width." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Navbar CTA",
+      "kind": "nav",
+      "refersTo": "nav-cta",
+      "description": "Primary nav call-to-action. Pulse Blue, mono font, no border or background.",
+      "html": "<a href=\"#contact\" class=\"ds-nav-cta\">Get in touch</a>",
+      "css": ".ds-nav-cta { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #4f8cff; text-decoration: none; transition: color 150ms cubic-bezier(0.2, 0.8, 0.2, 1); } .ds-nav-cta:hover { color: #6fa0ff; }"
+    },
+    {
+      "name": "Ghost Button (Mono)",
+      "kind": "button",
+      "refersTo": "mono-btn",
+      "description": "Theme toggle and secondary actions. Transparent with subtle border; accent border on hover.",
+      "html": "<button class=\"ds-mono-btn\">Light</button>",
+      "css": ".ds-mono-btn { background: none; border: 1px solid #2a2a3a; border-radius: 8px; padding: 6px 10px; color: #6a6a7a; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; cursor: none; transition: border-color 150ms cubic-bezier(0.2, 0.8, 0.2, 1), color 150ms cubic-bezier(0.2, 0.8, 0.2, 1); } .ds-mono-btn:hover { border-color: #4f8cff; color: #e8e8f0; } .ds-mono-btn:focus-visible { outline: 2px solid #4f8cff; outline-offset: 3px; }"
+    },
+    {
+      "name": "Work Button",
+      "kind": "button",
+      "refersTo": "work-btn",
+      "description": "Inline action buttons on project rows. Fills with border color on hover; nearly square.",
+      "html": "<a href=\"#\" class=\"ds-work-btn\">GitHub</a>",
+      "css": ".ds-work-btn { background: transparent; border: 1px solid #a0a0b0; border-radius: 10%; padding: 5px 10px; color: #a0a0b0; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: none; transition: background 150ms cubic-bezier(0.2, 0.8, 0.2, 1), color 150ms cubic-bezier(0.2, 0.8, 0.2, 1); } .ds-work-btn:hover { background: #a0a0b0; color: #0a0a0f; } .ds-work-btn:focus-visible { outline: 2px solid #4f8cff; outline-offset: 3px; }"
+    },
+    {
+      "name": "Skill Chip",
+      "kind": "chip",
+      "refersTo": "skill-chip",
+      "description": "Read-only technology taxonomy tags in the About section. No interactive state.",
+      "html": "<span class=\"ds-skill-chip\">TypeScript</span>",
+      "css": ".ds-skill-chip { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #a0a0b0; border: 1px solid #2a2a3a; border-radius: 2px; padding: 8px 12px; background: transparent; display: inline-block; }"
+    },
+    {
+      "name": "Section Label",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Technical annotation marking the start of each section. Comment syntax in mono. Non-interactive.",
+      "html": "<p class=\"ds-section-label\">// 02 — About</p>",
+      "css": ".ds-section-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6a6a7a; margin-bottom: 48px; }"
+    },
+    {
+      "name": "Hero Eyebrow Pill",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Metadata badge above the hero wordmark. Pill-shaped with surface fill and visible border.",
+      "html": "<div class=\"ds-eyebrow-pill\">// Portfolio · 2026</div>",
+      "css": ".ds-eyebrow-pill { display: inline-block; padding: 4px 12px; border: 1px solid #2a2a3a; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: #6a6a7a; background: #0e0e15; white-space: nowrap; }"
+    },
+    {
+      "name": "Link Draw",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Inline text link with underline that draws from left on hover.",
+      "html": "<a href=\"#\" class=\"ds-link-draw\">View on GitHub</a>",
+      "css": ".ds-link-draw { position: relative; text-decoration: none; color: #a0a0b0; transition: color 150ms cubic-bezier(0.2, 0.8, 0.2, 1); } .ds-link-draw::after { content: ''; position: absolute; left: 0; bottom: -1px; width: 0; height: 1px; background-color: currentColor; transition: width 200ms cubic-bezier(0.2, 0.8, 0.2, 1); } .ds-link-draw:hover { color: #e8e8f0; } .ds-link-draw:hover::after { width: 100%; } .ds-link-draw:focus-visible { outline: 2px solid #4f8cff; outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Engineer's Canvas",
+    "overview": "This is a portfolio where the interface is the argument. Every visual decision must carry weight as evidence: evidence that James Gardener thinks carefully about systems, builds production-grade interactions, and knows when to stop. The dark surface is not atmosphere — it is a context where motion and light have maximum impact. Precision is the aesthetic.\n\nThe palette is near-black with blue-tinted neutrals and a single electric accent. Typography pairs Syne's sharp geometric display cuts with Inter's neutral body and JetBrains Mono's terminal precision. Transitions are short and exponential. Everything either earns its animation or stays still.\n\nWhat this system explicitly rejects: the over-designed agency aesthetic (scroll-jacking, neon glassmorphism, WebGL for its own sake), generic developer portfolio templates (hero photo, skill bars, timeline), and the bland SaaS cream-and-blue category reflex.",
+    "keyCharacteristics": [
+      "Dark-first, with a warm-cream light theme available via [data-theme='light']",
+      "Single electric accent (Pulse Blue) applied at ≤10% of any surface",
+      "Three distinct font roles: display (Syne), body (Inter), technical label (JetBrains Mono)",
+      "Motion on scroll reveals and state transitions; none decorative",
+      "Custom circular lens cursor that inverts content beneath it; swaps to a glowing accent dot on interactive elements"
+    ],
+    "rules": [
+      { "name": "The One Pulse Rule",       "body": "Pulse Blue appears on one element per visual cluster. Two blue items in the same view compete; one commands.",                        "section": "colors" },
+      { "name": "The Indigo Tint Rule",     "body": "Every neutral is tinted toward hue 255–265 (indigo). Pure grays are forbidden.",                                                    "section": "colors" },
+      { "name": "The Comment Syntax Rule",  "body": "Section labels use the pattern '// {n} — {Label}' in JetBrains Mono. Never write section labels in Syne or Inter.",               "section": "typography" },
+      { "name": "The Mono Discipline Rule", "body": "JetBrains Mono appears at 10–11px in standard usage. Larger mono is a deliberate departure, used once per context for drama.",     "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "No surface has a shadow until it needs to communicate depth or state.",                                                              "section": "elevation" },
+      { "name": "The Glow-Is-Interactive Rule", "body": "The blue glow (--sh-glow) appears only on interactive elements receiving focus or being hovered. Using it decoratively breaks the signal.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use var(--font-mono) for all section labels, nav links, metadata, and button text.",
+      "Do apply Pulse Blue to at most one interactive element per visual cluster.",
+      "Do use CSS custom properties for every color, spacing, and radius value.",
+      "Do animate only opacity, transform, and filter — never layout properties.",
+      "Do apply ease-draw for entrance animations and scroll reveals.",
+      "Do keep section label copy in the comment-syntax pattern: // 02 — About.",
+      "Do support prefers-reduced-motion — all transition durations must collapse to 0ms.",
+      "Do tint every neutral toward indigo (hue 255–265)."
+    ],
+    "donts": [
+      "Don't add scroll-jacking, parallax that moves content, or WebGL effects for visual drama alone.",
+      "Don't use glassmorphism decoratively. The navbar's frosted-glass pill state is structural.",
+      "Don't use background-clip: text with a gradient. No gradient text anywhere.",
+      "Don't use border-left greater than 1px as a colored accent stripe.",
+      "Don't build identical card grids. Use rows, lists, or asymmetric layouts first.",
+      "Don't use pure black (#000) or pure white (#fff) as text or surface colors.",
+      "Don't use skill bars, timeline diagrams, or hero profile photos.",
+      "Don't reach for a modal first. The game is the only justified modal in this project."
+    ]
+  }
+}

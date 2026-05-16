@@ -145,10 +145,10 @@ export default function Navbar({ theme, onThemeToggle }: NavbarProps) {
           justifyContent: 'space-between',
           alignItems: 'center',
           borderRadius: scrolled ? '12px' : '0',
-          backgroundColor: scrolled ? 'rgba(10,10,15,0.7)' : 'transparent',
+          backgroundColor: scrolled ? 'var(--bg-glass)' : 'transparent',
           backdropFilter: scrolled ? 'blur(18px)' : 'none',
           border: scrolled ? '1px solid var(--line)' : 'none',
-          transition: 'all 250ms var(--ease-out)',
+          transition: 'top 250ms var(--ease-out), left 250ms var(--ease-out), right 250ms var(--ease-out), border-radius 250ms var(--ease-out), background-color 250ms var(--ease-out), backdrop-filter 250ms var(--ease-out), border-color 250ms var(--ease-out)',
         }}
       >
         <span
@@ -181,6 +181,8 @@ export default function Navbar({ theme, onThemeToggle }: NavbarProps) {
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text)')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-dim)')}
+                onFocus={(e) => (e.currentTarget.style.color = 'var(--text)')}
+                onBlur={(e) => (e.currentTarget.style.color = 'var(--text-dim)')}
               >
                 {link.label}
               </a>

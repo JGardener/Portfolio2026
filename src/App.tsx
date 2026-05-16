@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import Hero from './components/sections/Hero'
 import Work from './components/sections/Work'
 import About from './components/sections/About'
@@ -8,7 +8,8 @@ import LensCursor from './components/layout/LensCursor'
 import Navbar from './components/layout/Navbar'
 import Loader from './components/layout/Loader'
 import type { Theme } from './types'
-import GameModal from './components/layout/GameModal'
+
+const GameModal = lazy(() => import('./components/layout/GameModal'))
 
 export default function App() {
   const [loaded, setLoaded] = useState(false)
@@ -36,7 +37,11 @@ export default function App() {
         <Experience />
         <Contact />
       </main>
-      {gameOpen && <GameModal onClose={() => setGameOpen(false)} />}
+      {gameOpen && (
+        <Suspense fallback={null}>
+          <GameModal onClose={() => setGameOpen(false)} />
+        </Suspense>
+      )}
     </>
   )
 }

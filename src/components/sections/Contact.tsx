@@ -20,8 +20,8 @@ export default function Contact() {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: '600px',
-          height: '400px',
+          width: 'min(600px, 100%)',
+          height: 'min(400px, 60vw)',
           background: 'radial-gradient(ellipse, var(--accent-faint) 0%, transparent 70%)',
           pointerEvents: 'none',
           zIndex: 0,
@@ -67,6 +67,14 @@ export default function Contact() {
             e.currentTarget.style.color = 'var(--text-dim)'
             e.currentTarget.style.borderColor = 'var(--line-2)'
           }}
+          onFocus={(e) => {
+            e.currentTarget.style.color = 'var(--accent)'
+            e.currentTarget.style.borderColor = 'var(--accent)'
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.color = 'var(--text-dim)'
+            e.currentTarget.style.borderColor = 'var(--line-2)'
+          }}
         >
           jamesgardener92@gmail.com
         </a>
@@ -83,6 +91,7 @@ export default function Contact() {
             href="https://github.com/JGardener"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="GitHub (opens in new tab)"
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '11px',
@@ -90,6 +99,10 @@ export default function Contact() {
               textTransform: 'uppercase',
               color: 'var(--text-mute)',
               textDecoration: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              minHeight: '44px',
+              padding: '0 4px',
             }}
           >
             GitHub
@@ -98,6 +111,7 @@ export default function Contact() {
             href="https://www.linkedin.com/in/jamesgardener92"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="LinkedIn (opens in new tab)"
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '11px',
@@ -105,6 +119,10 @@ export default function Contact() {
               textTransform: 'uppercase',
               color: 'var(--text-mute)',
               textDecoration: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              minHeight: '44px',
+              padding: '0 4px',
             }}
           >
             LinkedIn
@@ -112,6 +130,7 @@ export default function Contact() {
           <a
             href="/cv.pdf"
             download
+            aria-label="Download CV (PDF)"
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '11px',
@@ -119,6 +138,10 @@ export default function Contact() {
               textTransform: 'uppercase',
               color: 'var(--text-mute)',
               textDecoration: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              minHeight: '44px',
+              padding: '0 4px',
             }}
           >
             Download CV

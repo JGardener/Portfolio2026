@@ -182,6 +182,7 @@ export default function Hero() {
             href="https://github.com/JGardener"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="GitHub (opens in new tab)"
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '10px',
@@ -195,6 +196,7 @@ export default function Hero() {
             href="https://www.linkedin.com/in/jamesgardener92"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="LinkedIn (opens in new tab)"
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '10px',
