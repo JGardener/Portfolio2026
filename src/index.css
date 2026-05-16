@@ -169,7 +169,29 @@ body {
 @media (max-width: 640px) {
   .work-row { grid-template-columns: 1fr; }
   .work-row__thumb  { display: none; }
-  .work-row__action { grid-column: 1; text-align: left; align-items: flex-start; }
+  .work-row__info   { grid-column: 1; grid-row: auto; }
+  .work-row__action { grid-column: 1; grid-row: auto; text-align: left; align-items: flex-start; gap: 12px; }
+}
+
+/* ── Work buttons ──────────────────────────────────────────── */
+.work-btn {
+  background: transparent;
+  border: 1px solid var(--btn-clr);
+  border-radius: 10%;
+  padding: 5px;
+  color: var(--btn-clr);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: background 150ms var(--ease-out), color 150ms var(--ease-out);
+}
+.work-btn:hover {
+  background: var(--btn-clr);
+  color: var(--bg);
 }
 
 /* ── About grid ────────────────────────────────────────────── */

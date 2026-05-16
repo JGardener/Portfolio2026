@@ -9,7 +9,6 @@ const skills = [
   'WebGL',
   'Node',
   'Figma',
-  'Framer Motion',
   'GSAP',
   'Texture Packer',
   'Tailwind',
@@ -40,13 +39,10 @@ export default function About() {
   }, [])
 
   return (
-    <section
-      ref={ref}
-      id="about"
-      className="section"
-      style={{ opacity: 0 }}
-    >
-      <p className="mono-label" style={{ marginBottom: '48px' }}>// 02 — About</p>
+    <section ref={ref} id="about" className="section" style={{ opacity: 0 }}>
+      <p className="mono-label" style={{ marginBottom: '48px' }}>
+        // 02 — About
+      </p>
 
       <div className="about-grid">
         <p
@@ -57,10 +53,10 @@ export default function About() {
             color: 'var(--text-dim)',
           }}
         >
-          I'm a creative frontend developer based in Kent, building interactive web experiences
-          that sit at the intersection of design and engineering. Three years in iGaming taught
-          me how to ship production-grade canvas work under pressure. Now I'm looking for
-          mid-level roles where that craft matters.
+          I'm a creative frontend developer based in Kent, building interactive web experiences that
+          sit at the intersection of design and engineering. Three years in iGaming taught me how to
+          ship production-grade canvas work under pressure. Now I'm looking for mid-level roles
+          where that craft matters.
         </p>
 
         <div ref={chipsRef} style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>

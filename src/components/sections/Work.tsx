@@ -1,12 +1,13 @@
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import type { ComponentType } from 'react'
 import { projects } from '../../data/projects'
 import GameThumb from '../ui/GameThumb'
-import { FigmaThumb, GameUIThumb } from '../ui/ProjectThumb'
+import VISIOThumb from '../ui/VISIOThumb'
+import { GameUIThumb } from '../ui/ProjectThumb'
 import { gsap, ease } from '../../lib/gsap'
 
 const thumbRegistry: Record<string, ComponentType> = {
-  'project-2': FigmaThumb,
+  'project-2': VISIOThumb,
   'project-3': GameUIThumb,
 }
 
@@ -96,7 +97,7 @@ export default function Work({ onPlayGame }: WorkProps) {
             }}
             onMouseEnter={(e) => {
               const el = e.currentTarget
-              el.style.paddingLeft = '24px'
+              if (window.innerWidth > 640) el.style.paddingLeft = '24px'
               el.style.borderTopColor = 'var(--accent)'
             }}
             onMouseLeave={(e) => {
@@ -177,41 +178,25 @@ export default function Work({ onPlayGame }: WorkProps) {
               )}
             </div>
 
-            <div className="work-row__action" style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
+            <div className="work-row__action" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
               {project.hasGame ? (
                 <>
                   <button
                     onClick={onPlayGame}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '11px',
-                      fontWeight: 500,
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      color: 'var(--accent)',
-                      cursor: 'none',
-                    }}
+                    className="work-btn"
+                    style={{ '--btn-clr': 'var(--accent)' } as React.CSSProperties}
                   >
-                    Play →
+                    Play
                   </button>
                   {project.githubUrl && (
                     <a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '11px',
-                        fontWeight: 500,
-                        letterSpacing: '0.08em',
-                        textTransform: 'uppercase',
-                        color: 'var(--text-mute)',
-                        textDecoration: 'none',
-                      }}
+                      className="work-btn"
+                      style={{ '--btn-clr': 'var(--text-mute)' } as React.CSSProperties}
                     >
-                      Code →
+                      Code
                     </a>
                   )}
                 </>
@@ -222,17 +207,10 @@ export default function Work({ onPlayGame }: WorkProps) {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '11px',
-                        fontWeight: 500,
-                        letterSpacing: '0.08em',
-                        textTransform: 'uppercase',
-                        color: 'var(--accent)',
-                        textDecoration: 'none',
-                      }}
+                      className="work-btn"
+                      style={{ '--btn-clr': 'var(--accent)' } as React.CSSProperties}
                     >
-                      Live →
+                      Live
                     </a>
                   )}
                   {project.githubUrl && (
@@ -240,17 +218,10 @@ export default function Work({ onPlayGame }: WorkProps) {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '11px',
-                        fontWeight: 500,
-                        letterSpacing: '0.08em',
-                        textTransform: 'uppercase',
-                        color: 'var(--text-mute)',
-                        textDecoration: 'none',
-                      }}
+                      className="work-btn"
+                      style={{ '--btn-clr': 'var(--text-mute)' } as React.CSSProperties}
                     >
-                      Code →
+                      Code
                     </a>
                   )}
                 </>

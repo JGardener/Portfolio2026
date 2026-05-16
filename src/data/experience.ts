@@ -5,7 +5,7 @@ export const experiences: ExperienceEntry[] = [
     id: 'exp-1',
     role: 'Junior Frontend Developer',
     company: 'Incentive Games Ltd',
-    period: 'Jan 2023 — present',
+    period: 'Jan 2023 — May 2026',
     description:
       'I worked within a team of developers, product managers and quality assurance testers to build production React Typescript and PixiJS UIs for live iGaming titles used by international clients such as Bet365, Lottomatica and Kaizen.',
     tags: [
