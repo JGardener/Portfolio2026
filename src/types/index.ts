@@ -6,6 +6,7 @@ export interface Project {
   tags: string[]
   caseStudyUrl?: string
   githubUrl?: string
+  liveUrl?: string
   featured: boolean
   hasGame?: boolean
 }

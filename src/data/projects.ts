@@ -20,6 +20,7 @@ export const projects: Project[] = [
       "An AI and PixiJS application; create scenes rendered by PIXI using your own or preconfigured prompts! Once you've created some scenes, remix them together!",
     tags: ['React', 'Typescript', 'PixiJS', 'Claude AI'],
     githubUrl: 'https://github.com/JGardener/VISIO',
+    liveUrl: 'https://jgardener-visio.vercel.app/',
     featured: true,
   },
 ]
