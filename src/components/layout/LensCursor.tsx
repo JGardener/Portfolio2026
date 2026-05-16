@@ -53,7 +53,9 @@ export default function LensCursor() {
     }
 
     const onLeave = (e: MouseEvent) => {
-      if ((e.target as Element).closest('a, button')) {
+      const from = e.target as Element
+      const to = e.relatedTarget as Element | null
+      if (from.closest('a, button') && !to?.closest('a, button')) {
         lens!.style.opacity = '1'
         dot!.style.opacity = '0'
       }
@@ -90,12 +92,13 @@ export default function LensCursor() {
           WebkitBackdropFilter: 'invert(1) hue-rotate(180deg) saturate(1.4) brightness(1.1)',
           border: '1px solid var(--accent)',
           boxShadow: '0 0 12px var(--accent-glow)',
-          transition: 'opacity 180ms ease-out',
+          transition: 'opacity 180ms var(--ease-out)',
           transform: 'translate(-200px, -200px) translate(-50%, -50%)',
         }}
       />
       <div
         ref={dotRef}
+        data-cursor-lens
         aria-hidden="true"
         style={{
           position: 'fixed',
@@ -108,8 +111,8 @@ export default function LensCursor() {
           zIndex: 99999,
           backgroundColor: 'var(--accent)',
           boxShadow: '0 0 8px var(--accent), 0 0 20px var(--accent-glow)',
-          opacity: 0,
-          transition: 'opacity 180ms ease-out',
+          opacity: '0',
+          transition: 'opacity 180ms var(--ease-out)',
           transform: 'translate(-200px, -200px) translate(-50%, -50%)',
         }}
       />
