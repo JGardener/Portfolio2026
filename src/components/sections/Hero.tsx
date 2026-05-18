@@ -128,8 +128,7 @@ export default function Hero() {
             maxWidth: '320px',
           }}
         >
-          Creative frontend developer. React, TypeScript, PixiJS — building interfaces that feel
-          alive.
+          Frontend developer. React, TypeScript, PixiJS — I build the parts that move.
         </p>
       </div>
 

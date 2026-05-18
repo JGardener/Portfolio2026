@@ -64,3 +64,17 @@ Every `useEffect` that creates a GSAP animation must return a cleanup that calls
 All colours, spacing radii, shadows, and easing curves are CSS custom properties defined in `index.css` under `:root` (dark theme defaults) and overridden under `[data-theme="light"]`. Always use these tokens (`var(--bg)`, `var(--accent)`, `var(--font-mono)`, etc.) rather than hardcoded values. Tailwind is available for utility classes but the design system is token-first.
 
 Reusable CSS classes defined in `index.css`: `.section` (page section padding/max-width), `.mono-label` (uppercase mono label style), `.work-row` (project list grid), `.mono-btn`, `.link-draw`, `.cta-primary`.
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues for this repo. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default canonical label strings are used as-is. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context repo: one `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.

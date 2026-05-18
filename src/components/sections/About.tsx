@@ -54,10 +54,9 @@ export default function About() {
             color: 'var(--text-dim)',
           }}
         >
-          I'm a creative frontend developer based in Kent, building interactive web experiences that
-          sit at the intersection of design and engineering. Three years in iGaming taught me how to
-          ship production-grade canvas work under pressure. Now I'm looking for mid-level roles
-          where that craft matters.
+          Three years in iGaming taught me to ship production canvas work under pressure — PixiJS
+          UIs for live products, international clients, real deadlines. I'm based in Kent, available
+          now, and looking for a team that still cares how it's built.
         </p>
 
         <div ref={chipsRef} style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>

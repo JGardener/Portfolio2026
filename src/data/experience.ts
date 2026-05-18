@@ -7,7 +7,7 @@ export const experiences: ExperienceEntry[] = [
     company: 'Incentive Games Ltd',
     period: 'Jan 2023 — May 2026',
     description:
-      'I worked within a team of developers, product managers and quality assurance testers to build production React Typescript and PixiJS UIs for live iGaming titles used by international clients such as Bet365, Lottomatica and Kaizen.',
+      'Shipped React TypeScript and PixiJS UIs for live iGaming products — work that reached audiences through Bet365, Lottomatica, Kaizen and more. Built within a cross-functional team of developers, QA, and product, delivering production canvas work at pace.',
     tags: [
       'React',
       'TypeScript',
@@ -32,7 +32,7 @@ export const experiences: ExperienceEntry[] = [
     company: 'Wonderful',
     period: 'Apr 2022 - Jun 2022',
     description:
-      'I worked within an Agile environment, attending Scrum meetings each morning with the rest of the production team, alongside UI/UX designers, account managers and senior developers. Using HTML5, CSS & Tailwind, JS and multiple JS libraries, I built a feature-rich, fully responsive landing page for a collaboration between a high-profile household name and a top BBC television show. Alongside this, I also built smaller projects such as email signatures and quote templates.',
+      "Built the landing page for Wahl's collaboration with BBC's Peaky Blinders — working within an agency team alongside designers, account managers, and senior developers.",
     tags: [
       'HTML',
       'CSS',
