@@ -128,7 +128,7 @@ export default function Contact() {
             LinkedIn
           </a>
           <a
-            href="/cv.pdf"
+            href="https://drive.google.com/file/d/1X2KfiL4Hp0XXyXDK2qjnbuOmN7j71oxR/view?usp=sharing"
             download
             aria-label="Download CV (PDF)"
             style={{
