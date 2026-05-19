@@ -49,7 +49,7 @@ export default function About() {
         <p
           style={{
             fontFamily: 'var(--font-sans)',
-            fontSize: 'clamp(16px, 2vw, 20px)',
+            fontSize: 'clamp(16px, 1.5vw, 22px)',
             lineHeight: 1.5,
             color: 'var(--text-dim)',
           }}
@@ -65,7 +65,7 @@ export default function About() {
               key={skill}
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '11px',
+                fontSize: 'var(--fs-label)',
                 fontWeight: 500,
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',

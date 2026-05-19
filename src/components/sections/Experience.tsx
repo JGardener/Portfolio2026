@@ -52,7 +52,7 @@ export default function Experience() {
               <h3
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(18px, 2.5vw, 24px)',
+                  fontSize: 'clamp(18px, 2vw, 32px)',
                   fontWeight: 600,
                   letterSpacing: '-0.01em',
                   color: 'var(--text)',
@@ -64,7 +64,7 @@ export default function Experience() {
               <p
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '11px',
+                  fontSize: 'var(--fs-label)',
                   letterSpacing: '0.06em',
                   color: 'var(--accent)',
                   marginBottom: '8px',
@@ -76,7 +76,7 @@ export default function Experience() {
               <p
                 style={{
                   fontFamily: 'var(--font-sans)',
-                  fontSize: '14px',
+                  fontSize: 'clamp(14px, 0.85vw, 17px)',
                   lineHeight: 1.55,
                   color: 'var(--text-dim)',
                 }}
@@ -89,7 +89,7 @@ export default function Experience() {
               key={tag}
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '11px',
+                fontSize: 'var(--fs-label)',
                 fontWeight: 500,
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',

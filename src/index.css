@@ -38,6 +38,11 @@
   --font-display:  'Syne', sans-serif;
   --font-mono:     'JetBrains Mono', monospace;
 
+  /* Fluid type scale — unchanged ≤1570px, scales to max above */
+  --fs-body:  clamp(16px, 1vw, 20px);
+  --fs-label: clamp(11px, 0.7vw, 14px);
+  --fs-xs:    clamp(10px, 0.625vw, 13px);
+
   /* Radii */
   --r-sm: 2px;
   --r-md: 8px;
@@ -90,7 +95,7 @@ body {
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
-  font-size: 16px;
+  font-size: var(--fs-body);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -134,7 +139,7 @@ body {
 
 .mono-label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-label);
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -143,7 +148,7 @@ body {
 
 .section {
   padding: 128px 64px;
-  max-width: 1280px;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
@@ -190,7 +195,7 @@ body {
   color: var(--btn-clr);
   text-decoration: none;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-label);
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -280,7 +285,7 @@ body {
   border: 1px solid var(--line-2);
   border-radius: var(--r-sm);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--fs-label);
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;

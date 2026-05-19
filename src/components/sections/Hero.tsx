@@ -35,7 +35,7 @@ export default function Hero() {
       style={{
         position: 'relative',
         width: '100%',
-        minHeight: 'min(100vh, 920px)',
+        minHeight: 'min(100vh, 1080px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -83,7 +83,7 @@ export default function Hero() {
           border: '1px solid var(--line-2)',
           borderRadius: '999px',
           fontFamily: 'var(--font-mono)',
-          fontSize: '11px',
+          fontSize: 'var(--fs-label)',
           fontWeight: 500,
           letterSpacing: '0.08em',
           color: 'var(--text-mute)',
@@ -98,7 +98,7 @@ export default function Hero() {
         <p
           style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '11px',
+            fontSize: 'var(--fs-label)',
             fontWeight: 500,
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
@@ -111,7 +111,7 @@ export default function Hero() {
         <p
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(18px, 2.5vw, 24px)',
+            fontSize: 'clamp(18px, 2vw, 32px)',
             fontWeight: 700,
             color: 'var(--text)',
             marginBottom: '4px',
@@ -122,10 +122,10 @@ export default function Hero() {
         <p
           style={{
             fontFamily: 'var(--font-sans)',
-            fontSize: '16px',
+            fontSize: 'var(--fs-body)',
             lineHeight: 1.6,
             color: 'var(--text-dim)',
-            maxWidth: '320px',
+            maxWidth: '380px',
           }}
         >
           Frontend developer. React, TypeScript, PixiJS — I build the parts that move.
@@ -155,7 +155,7 @@ export default function Hero() {
           <span
             style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '11px',
+              fontSize: 'var(--fs-label)',
               fontWeight: 500,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
@@ -168,7 +168,7 @@ export default function Hero() {
         <p
           style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '10px',
+            fontSize: 'var(--fs-xs)',
             color: 'var(--text-mute)',
             letterSpacing: '0.06em',
             marginBottom: '8px',
@@ -184,7 +184,7 @@ export default function Hero() {
             aria-label="GitHub (opens in new tab)"
             style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '10px',
+              fontSize: 'var(--fs-xs)',
               color: 'var(--text-mute)',
               textDecoration: 'none',
             }}
@@ -198,7 +198,7 @@ export default function Hero() {
             aria-label="LinkedIn (opens in new tab)"
             style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '10px',
+              fontSize: 'var(--fs-xs)',
               color: 'var(--text-mute)',
               textDecoration: 'none',
             }}

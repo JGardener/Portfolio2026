@@ -36,7 +36,7 @@ export default function Contact() {
         <h2
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(32px, 4.5vw, 56px)',
+            fontSize: 'clamp(32px, 4vw, 80px)',
             fontWeight: 600,
             letterSpacing: '-0.02em',
             lineHeight: 1.05,
@@ -51,7 +51,7 @@ export default function Contact() {
           href="mailto:jamesgardener92@gmail.com"
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(16px, 3vw, 24px)',
+            fontSize: 'clamp(18px, 2vw, 36px)',
             fontWeight: 600,
             color: 'var(--text-dim)',
             textDecoration: 'none',
@@ -94,7 +94,7 @@ export default function Contact() {
             aria-label="GitHub (opens in new tab)"
             style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '11px',
+              fontSize: 'var(--fs-label)',
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
               color: 'var(--text-mute)',
@@ -114,7 +114,7 @@ export default function Contact() {
             aria-label="LinkedIn (opens in new tab)"
             style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '11px',
+              fontSize: 'var(--fs-label)',
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
               color: 'var(--text-mute)',
@@ -133,7 +133,7 @@ export default function Contact() {
             aria-label="Download CV (PDF)"
             style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '11px',
+              fontSize: 'var(--fs-label)',
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
               color: 'var(--text-mute)',

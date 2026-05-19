@@ -63,7 +63,7 @@ export default function Work({ onPlayGame }: WorkProps) {
         <h2
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(32px, 4.5vw, 56px)',
+            fontSize: 'clamp(32px, 4vw, 80px)',
             fontWeight: 600,
             letterSpacing: '-0.02em',
             lineHeight: 1.05,
@@ -76,7 +76,7 @@ export default function Work({ onPlayGame }: WorkProps) {
         <p
           style={{
             fontFamily: 'var(--font-sans)',
-            fontSize: '16px',
+            fontSize: 'var(--fs-body)',
             color: 'var(--text-dim)',
             marginBottom: '64px',
           }}
@@ -112,7 +112,7 @@ export default function Work({ onPlayGame }: WorkProps) {
               <h3
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(22px, 3.5vw, 32px)',
+                  fontSize: 'clamp(22px, 3vw, 48px)',
                   fontWeight: 600,
                   letterSpacing: '-0.01em',
                   color: 'var(--text)',
@@ -124,7 +124,7 @@ export default function Work({ onPlayGame }: WorkProps) {
               <p
                 style={{
                   fontFamily: 'var(--font-sans)',
-                  fontSize: '14px',
+                  fontSize: 'clamp(14px, 0.85vw, 17px)',
                   lineHeight: 1.55,
                   color: 'var(--text-dim)',
                   marginBottom: '12px',

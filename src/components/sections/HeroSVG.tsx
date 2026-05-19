@@ -4,7 +4,7 @@ export default function HeroSVG() {
       viewBox="0 0 1600 800"
       aria-hidden="true"
       style={{
-        width: 'min(96vw, 1640px)',
+        width: 'min(96vw, 2400px)',
         position: 'absolute',
         top: '50%',
         left: '50%',
