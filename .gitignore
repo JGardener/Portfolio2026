@@ -10,6 +10,13 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+
+# Vendored packages (dist must be committed for Vercel, node_modules stays ignored)
+!packages/
+!packages/asteroid-blaster/
+!packages/asteroid-blaster/package.json
+!packages/asteroid-blaster/dist
+!packages/asteroid-blaster/dist/**
 *.local
 
 # Editor directories and files
