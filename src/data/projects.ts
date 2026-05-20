@@ -23,4 +23,24 @@ export const projects: Project[] = [
     liveUrl: 'https://jgardener-visio.vercel.app/',
     featured: true,
   },
+  {
+    id: 'project-3',
+    title: 'GithubDashboard',
+    year: '2026',
+    description:
+      'A Github profile comparison app; input two Github profiles and compare follows, followers, repo counts and languages used.',
+    tags: ['React', 'Typescript', 'API'],
+    githubUrl: 'https://github.com/JGardener/GithubDashboard',
+    liveUrl: 'https://jgardener-githubdashboard.vercel.app',
+    featured: true,
+  },
+  {
+    id: 'project-4',
+    title: 'Perks',
+    year: '2026',
+    description:
+      "A WIP full-stack application that allows users to peruse and rate both Survivor and Killer perks from the acclaimed video game 'Dead By Daylight'. Log in to store your builds and ratings.",
+    tags: ['React', 'Typescript', 'Supabase', 'API'],
+    featured: true,
+  },
 ]
