@@ -40,11 +40,6 @@ export default function GameModal({ onClose }: GameModalProps) {
     closeButtonRef.current?.focus()
 
     const onKeyDown = (e: globalThis.KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.preventDefault()
-        handleClose()
-        return
-      }
       if (e.key !== 'Tab' || !panelRef.current) return
 
       const focusable = Array.from(
@@ -123,7 +118,7 @@ export default function GameModal({ onClose }: GameModalProps) {
             aria-label="Close game"
             className="mono-btn"
           >
-            Esc ×
+            ×
           </button>
         </div>
 
