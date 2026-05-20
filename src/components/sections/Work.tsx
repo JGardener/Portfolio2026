@@ -3,12 +3,14 @@ import type { ComponentType } from 'react'
 import { projects } from '../../data/projects'
 import GameThumb from '../ui/GameThumb'
 import VISIOThumb from '../ui/VISIOThumb'
-import { GameUIThumb } from '../ui/ProjectThumb'
+import GithubHeatmapThumb from '../ui/GithubHeatmapThumb'
+import BloodwebThumb from '../ui/BloodwebThumb'
 import { gsap, ease } from '../../lib/gsap'
 
 const thumbRegistry: Record<string, ComponentType> = {
   'project-2': VISIOThumb,
-  'project-3': GameUIThumb,
+  'project-3': GithubHeatmapThumb,
+  'project-4': BloodwebThumb,
 }
 
 

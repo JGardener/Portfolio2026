@@ -36,10 +36,10 @@ export const projects: Project[] = [
   },
   {
     id: 'project-4',
-    title: 'Perks',
+    title: 'The Bloodweb',
     year: '2026',
     description:
-      "A WIP full-stack application that allows users to peruse and rate both Survivor and Killer perks from the acclaimed video game 'Dead By Daylight'. Log in to store your builds and ratings.",
+      "'The Bloodweb' is a WIP full-stack application that allows users to peruse and rate both Survivor and Killer perks from the acclaimed video game 'Dead By Daylight'. Log in to store your builds and ratings.",
     tags: ['React', 'Typescript', 'Supabase', 'API'],
     featured: true,
   },
