@@ -12,8 +12,8 @@ import type { Theme } from './types'
 
 const GameModal = lazy(() => import('./components/layout/GameModal'))
 
-// Silently resets gameOpen when the GameModal chunk fails to load,
-// so the user can try again without refreshing.
+// Dismisses the modal on chunk load failure — prevents a white-screen
+// and lets the user re-open without a full page refresh.
 function ChunkErrorFallback({ onClose }: { onClose: () => void }) {
   useEffect(() => { onClose() }, [onClose])
   return null
