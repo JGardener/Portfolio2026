@@ -1,4 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
 import Hero from './components/sections/Hero'
 import Work from './components/sections/Work'
 import About from './components/sections/About'
@@ -10,6 +11,13 @@ import Loader from './components/layout/Loader'
 import type { Theme } from './types'
 
 const GameModal = lazy(() => import('./components/layout/GameModal'))
+
+// Silently resets gameOpen when the GameModal chunk fails to load,
+// so the user can try again without refreshing.
+function ChunkErrorFallback({ onClose }: { onClose: () => void }) {
+  useEffect(() => { onClose() }, [onClose])
+  return null
+}
 
 export default function App() {
   const [loaded, setLoaded] = useState(false)
@@ -24,6 +32,7 @@ export default function App() {
   }, [theme])
 
   const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
+  const handleCloseGame = () => setGameOpen(false)
 
   return (
     <>
@@ -38,9 +47,11 @@ export default function App() {
         <Contact />
       </main>
       {gameOpen && (
-        <Suspense fallback={null}>
-          <GameModal onClose={() => setGameOpen(false)} />
-        </Suspense>
+        <ErrorBoundary fallback={<ChunkErrorFallback onClose={handleCloseGame} />}>
+          <Suspense fallback={null}>
+            <GameModal onClose={handleCloseGame} />
+          </Suspense>
+        </ErrorBoundary>
       )}
     </>
   )

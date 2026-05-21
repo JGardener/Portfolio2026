@@ -1,10 +1,33 @@
 import { useCallback, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
+import { ErrorBoundary, type FallbackProps } from 'react-error-boundary'
 import { gsap, ease } from '../../lib/gsap'
 import AsteroidBlaster from 'asteroid-blaster'
 
 interface GameModalProps {
   onClose: () => void
+}
+
+function GameErrorFallback({ resetErrorBoundary }: FallbackProps) {
+  return (
+    <div
+      style={{
+        display:        'flex',
+        flexDirection:  'column',
+        alignItems:     'center',
+        justifyContent: 'center',
+        height:         '100%',
+        gap:            '12px',
+      }}
+    >
+      <p style={{ color: 'var(--text-2)', fontSize: '13px', margin: 0 }}>
+        Game failed to load
+      </p>
+      <button onClick={resetErrorBoundary} className="mono-btn">
+        Close
+      </button>
+    </div>
+  )
 }
 
 export default function GameModal({ onClose }: GameModalProps) {
@@ -65,7 +88,6 @@ export default function GameModal({ onClose }: GameModalProps) {
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [handleClose])
 
-
   return createPortal(
     <div
       ref={backdropRef}
@@ -73,14 +95,14 @@ export default function GameModal({ onClose }: GameModalProps) {
       aria-modal="true"
       aria-label="Asteroid Blaster"
       style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 1000,
+        position:        'fixed',
+        inset:           0,
+        zIndex:          1000,
         backgroundColor: 'var(--backdrop-overlay)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        opacity: 0,
+        display:         'flex',
+        alignItems:      'center',
+        justifyContent:  'center',
+        opacity:         0,
       }}
       onClick={(e) => {
         if (e.target === e.currentTarget) handleClose()
@@ -90,25 +112,25 @@ export default function GameModal({ onClose }: GameModalProps) {
         ref={panelRef}
         style={{
           backgroundColor: 'var(--bg-1)',
-          border: '1px solid var(--line)',
-          borderRadius: 'var(--r-lg)',
-          width: 'min(960px, 90vw)',
-          height: 'min(640px, 85vh)',
-          position: 'relative',
-          display: 'flex',
-          flexDirection: 'column',
-          overflow: 'hidden',
-          opacity: 0,
+          border:          '1px solid var(--line)',
+          borderRadius:    'var(--r-lg)',
+          width:           'min(960px, 90vw)',
+          height:          'min(640px, 85vh)',
+          position:        'relative',
+          display:         'flex',
+          flexDirection:   'column',
+          overflow:        'hidden',
+          opacity:         0,
         }}
       >
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
+            display:        'flex',
+            alignItems:     'center',
             justifyContent: 'space-between',
-            padding: '16px 24px',
-            borderBottom: '1px solid var(--line)',
-            flexShrink: 0,
+            padding:        '16px 24px',
+            borderBottom:   '1px solid var(--line)',
+            flexShrink:     0,
           }}
         >
           <span className="mono-label">// Asteroid Blaster</span>
@@ -123,7 +145,13 @@ export default function GameModal({ onClose }: GameModalProps) {
         </div>
 
         <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
-          <AsteroidBlaster onClose={handleClose} />
+          <ErrorBoundary
+            FallbackComponent={GameErrorFallback}
+            onReset={handleClose}
+          >
+            {/* onError prop available for future Sentry integration */}
+            <AsteroidBlaster onClose={handleClose} />
+          </ErrorBoundary>
         </div>
       </div>
     </div>,
