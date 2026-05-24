@@ -6,7 +6,7 @@ export const projects: Project[] = [
     title: 'Asteroid Blaster',
     year: '2026',
     description:
-      'Browser arcade game built with PixiJS v8. Object pooling, typed state machine, particle explosions — playable inline.',
+      'Browser arcade game built with PixiJS v8, distributed as a standalone npm package. Zustand manages game phase (menu → playing → paused → game over), score, lives, and a localStorage-persisted high score. Entities — asteroids, bullets, particles — extend a typed base interface; a generic ObjectPool<T extends { active: boolean }> reuses instances to avoid GC pressure. Alpha-decaying particle explosions, screen shake, and thruster visuals throughout.',
     tags: ['React', 'Typescript', 'PixiJS', 'Zustand'],
     githubUrl: 'https://github.com/JGardener/asteroid-blaster',
     featured: true,
@@ -17,7 +17,7 @@ export const projects: Project[] = [
     title: 'VISIO',
     year: '2026',
     description:
-      "An AI and PixiJS application; create scenes rendered by PIXI using your own or preconfigured prompts! Once you've created some scenes, remix them together!",
+      'AI-powered PixiJS scene generator. Describe a scene in natural language and Claude returns a structured JSON definition rendered live — elements typed as a discriminated union (particles, circles, orbits, lines, text), each handled by a dedicated renderer. Session history stores up to 8 generated scenes; select two and a remix concatenates their prompts to produce a new composition.',
     tags: ['React', 'Typescript', 'PixiJS', 'Claude AI'],
     githubUrl: 'https://github.com/JGardener/VISIO',
     liveUrl: 'https://jgardener-visio.vercel.app/',
@@ -28,7 +28,7 @@ export const projects: Project[] = [
     title: 'GithubDashboard',
     year: '2026',
     description:
-      'A Github profile comparison app; input two Github profiles and compare follows, followers, repo counts and languages used.',
+      'Side-by-side GitHub profile comparison. Queries the REST API in parallel for two users — bio, follower counts, top-starred repos, and language breakdown. Rate-limit responses are intercepted and the X-RateLimit-Reset header parsed into a typed RateLimitError surfaced to the UI. Column state is a discriminated union (empty → loading → loaded | notFound | error) with conditional narrowing throughout.',
     tags: ['React', 'Typescript', 'API'],
     githubUrl: 'https://github.com/JGardener/GithubDashboard',
     liveUrl: 'https://jgardener-githubdashboard.vercel.app',
