@@ -2,27 +2,27 @@ import { useEffect, useRef } from 'react'
 import { gsap, ease } from '../../lib/gsap'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 
-const skills = [
-  'React',
-  'TypeScript',
-  'PixiJS',
-  'WebGL',
-  'Canvas API',
-  'GSAP',
-  'Zustand',
-  'Tailwind',
-  'SCSS',
-  'Node',
-  'Deno',
-  'Supabase',
-  'PostgreSQL',
-  'Google OAuth',
-  'Claude AI',
-  'REST API',
-  'Vitest',
-  'Sentry',
-  'Figma',
-  'Texture Packer',
+const skillGroups = [
+  {
+    label: 'Frontend',
+    skills: ['React', 'TypeScript', 'PixiJS', 'WebGL', 'Canvas API', 'GSAP', 'Zustand', 'Tailwind', 'SCSS'],
+  },
+  {
+    label: 'Backend',
+    skills: ['Node', 'Deno', 'Supabase', 'PostgreSQL', 'Google OAuth'],
+  },
+  {
+    label: 'AI & APIs',
+    skills: ['Claude AI', 'REST API'],
+  },
+  {
+    label: 'Testing & Observability',
+    skills: ['Vitest', 'Sentry'],
+  },
+  {
+    label: 'Tooling',
+    skills: ['Figma', 'Texture Packer'],
+  },
 ]
 
 export default function About() {
@@ -30,8 +30,8 @@ export default function About() {
   const chipsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const chips = chipsRef.current?.children
-    if (!chips) return
+    const chips = chipsRef.current?.querySelectorAll('.skill-chip')
+    if (!chips?.length) return
     const anim = gsap.fromTo(
       Array.from(chips),
       { opacity: 0, scale: 0.9 },
@@ -87,26 +87,45 @@ export default function About() {
           standards I'd apply on a team.
         </p>
 
-        <div ref={chipsRef} style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-          {skills.map((skill) => (
-            <span
-              key={skill}
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 'var(--fs-label)',
-                fontWeight: 500,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: 'var(--text-dim)',
-                border: '1px solid var(--line-2)',
-                borderRadius: 'var(--r-sm)',
-                padding: '8px 12px',
-                backgroundColor: 'transparent',
-                transition: 'border-color 150ms, color 150ms',
-              }}
-            >
-              {skill}
-            </span>
+        <div ref={chipsRef} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {skillGroups.map((group) => (
+            <div key={group.label}>
+              <p
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 'var(--fs-xs)',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  color: 'var(--text-mute)',
+                  marginBottom: '8px',
+                }}
+              >
+                {group.label}
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {group.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="skill-chip"
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 'var(--fs-label)',
+                      fontWeight: 500,
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                      color: 'var(--text-dim)',
+                      border: '1px solid var(--line-2)',
+                      borderRadius: 'var(--r-sm)',
+                      padding: '8px 12px',
+                      backgroundColor: 'transparent',
+                      transition: 'border-color 150ms, color 150ms',
+                    }}
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>
