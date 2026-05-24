@@ -133,6 +133,11 @@ body {
   50% { opacity: 0.4; transform: scale(0.8); }
 }
 
+@keyframes scroll-bob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
 [data-theme="light"] .hero-vignette {
   display: none;
 }

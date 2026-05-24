@@ -28,6 +28,28 @@ export default function Hero() {
     )
   }, [])
 
+  useEffect(() => {
+    gsap.fromTo(
+      '#hero-scroll-cue',
+      { opacity: 0 },
+      { opacity: 1, duration: 0.8, delay: 1.6, ease: 'power2.out' }
+    )
+
+    const hero = document.getElementById('hero')
+    if (!hero) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          gsap.to('#hero-scroll-cue', { opacity: 0, duration: 0.4 })
+        }
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(hero)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section
       id="hero"
@@ -130,6 +152,47 @@ export default function Hero() {
         >
           Frontend developer. React, TypeScript, PixiJS — I build the parts that move.
         </p>
+      </div>
+
+      {/* Scroll cue — fades in after entrance, fades out when hero leaves viewport */}
+      <div
+        id="hero-scroll-cue"
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          bottom: '36px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 10,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '4px',
+          opacity: 0,
+          pointerEvents: 'none',
+        }}
+      >
+        <span
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--fs-xs)',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            color: 'var(--text-mute)',
+          }}
+        >
+          Scroll
+        </span>
+        <svg
+          width="16"
+          height="10"
+          viewBox="0 0 16 10"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ animation: 'scroll-bob 2s ease-in-out infinite', color: 'var(--text-mute)' }}
+        >
+          <path d="M1 1L8 8L15 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </div>
 
       <div className="hero-anchor-r">
