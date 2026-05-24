@@ -59,6 +59,21 @@ export default function About() {
           now, and looking for a team that still cares how it's built.
         </p>
 
+        <p
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 'clamp(16px, 1.5vw, 22px)',
+            lineHeight: 1.5,
+            color: 'var(--text-dim)',
+          }}
+        >
+          Outside that, I build to learn. The Bloodweb is a full-stack Dead by Daylight companion —
+          Supabase for auth and Postgres with row-level security, Deno edge functions for
+          server-side validation, Canvas API for build image export, and Vitest for test coverage I
+          can actually trust. Sentry in a personal project isn't something you reach for unless you
+          care about the craft.
+        </p>
+
         <div ref={chipsRef} style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
           {skills.map((skill) => (
             <span
