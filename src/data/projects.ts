@@ -41,6 +41,8 @@ export const projects: Project[] = [
     description:
       "'The Bloodweb' is a WIP full-stack application that allows users to peruse and rate both Survivor and Killer perks from the acclaimed video game 'Dead By Daylight'. Log in to store your builds and ratings.",
     tags: ['React', 'Typescript', 'Supabase', 'API'],
+    githubUrl: 'https://github.com/JGardener/Perks',
+    liveUrl: 'https://jgardener-the-bloodweb.vercel.app',
     featured: true,
   },
 ]
