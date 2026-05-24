@@ -67,11 +67,13 @@ export default function About() {
             color: 'var(--text-dim)',
           }}
         >
-          Outside that, I build to learn. The Bloodweb is a full-stack Dead by Daylight companion —
-          Supabase for auth and Postgres with row-level security, Deno edge functions for
-          server-side validation, Canvas API for build image export, and Vitest for test coverage I
-          can actually trust. Sentry in a personal project isn't something you reach for unless you
-          care about the craft.
+          Outside work, I build to learn. Across personal projects I've pushed into full-stack
+          territory — Supabase auth with Google OAuth, PostgreSQL with row-level security, and Deno
+          edge functions for server-side validation. I've integrated the Claude API to generate live
+          PixiJS scenes from natural language, consumed REST APIs with typed error handling and
+          rate-limit recovery, and shipped a generic object-pooled game engine as a standalone npm
+          package. Vitest for real test coverage, Sentry for production observability — the same
+          standards I'd apply on a team.
         </p>
 
         <div ref={chipsRef} style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
