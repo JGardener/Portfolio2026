@@ -39,7 +39,7 @@ export const projects: Project[] = [
     title: 'The Bloodweb',
     year: '2026',
     description:
-      'Dead by Daylight perk rater, build maker, and community tier-list. React and TypeScript frontend with SCSS component styling; Supabase for email and Google OAuth auth backed by PostgreSQL with row-level security. A Deno edge function handles server-side build validation. Ratings are offline-first — localStorage for guests, auto-migrated to Supabase on sign-in. Builds share via URL and export as Canvas-rendered PNG. Tested with Vitest and React Testing Library; Sentry tracks errors and session replays in production.',
+      'Dead by Daylight perk rater, constraint-driven randomiser, and community tier-list. React and TypeScript with SCSS; Supabase handles email and Google OAuth backed by PostgreSQL with row-level security. A Deno edge function validates builds server-side before saving. Perk data is fetched live from the DBD API. The constraint engine lets players pin slots, blacklist perks, and filter by category or character before randomising — all persisted to localStorage. Both build cards and full tier lists render and export as Canvas PNG. A stats view shows personal A–F grade distributions alongside community aggregates via Supabase RPC (auth-gated). Tested with Vitest and React Testing Library; Sentry tracks errors and session replays.',
     tags: ['React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Deno', 'Sentry', 'Vitest', 'Canvas API', 'SCSS', 'Google OAuth'],
     githubUrl: 'https://github.com/JGardener/Perks',
     liveUrl: 'https://jgardener-the-bloodweb.vercel.app',
