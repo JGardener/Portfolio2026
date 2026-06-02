@@ -6,8 +6,8 @@ export const projects: Project[] = [
     title: 'Asteroid Blaster',
     year: '2026',
     description:
-      'Browser arcade game built with PixiJS v8, distributed as a standalone npm package. Zustand manages game phase (menu → playing → paused → game over), score, lives, and a localStorage-persisted high score. Entities — asteroids, bullets, particles — extend a typed base interface; a generic ObjectPool<T extends { active: boolean }> reuses instances to avoid GC pressure. Alpha-decaying particle explosions, screen shake, and thruster visuals throughout.',
-    tags: ['React', 'Typescript', 'PixiJS', 'Zustand'],
+      'Browser arcade game built with PixiJS v8, distributed as a standalone npm package. Zustand manages five game phases (menu, playing, transitioning, paused, gameover), score, lives, level, and a localStorage-persisted high score. All entities — asteroids (three sizes), UFOs, bullets, pickups, and particles — extend a typed base interface; a generic ObjectPool<T extends { active: boolean }> reuses every pool to avoid GC pressure. Level progression scales asteroid count, movement speed (capped at 2×), and UFO spawn frequency and targeting accuracy (30% → 85%). Three timed power-ups drop on kills: SpreadShot (3-way ±15° spread), RapidFire (halved cooldown), and Shield. A Web Audio API engine synthesises procedural SFX — pitch-scaled explosions by asteroid size, distinct UFO and pickup cues — plus a scheduled music loop whose tempo tightens each level.',
+    tags: ['React', 'Typescript', 'PixiJS', 'Zustand', 'Web Audio API'],
     githubUrl: 'https://github.com/JGardener/asteroid-blaster',
     featured: true,
     hasGame: true,
@@ -17,7 +17,7 @@ export const projects: Project[] = [
     title: 'VISIO',
     year: '2026',
     description:
-      'AI-powered PixiJS scene generator. Describe a scene in natural language and Claude returns a structured JSON definition rendered live — elements typed as a discriminated union (particles, circles, orbits, lines, text), each handled by a dedicated renderer. Session history stores up to 8 generated scenes; select two and a remix concatenates their prompts to produce a new composition.',
+      'AI-powered PixiJS scene generator. Describe a scene in natural language and Claude streams a structured JSON definition back via a serverless API route — seven element types (particles, circles, orbits, lines, text, waves, and trails) form a discriminated union dispatched to dedicated renderers, with the raw JSON visible as it builds. Four named colour palettes (Neon, Ember, Ocean, Galaxy) override scene colours at runtime; a speed multiplier adjusts animation tempo. History stores up to 8 generated scenes in localStorage; select two and a remix concatenates their prompts for a new composition. Completed scenes export as PNG.',
     tags: ['React', 'Typescript', 'PixiJS', 'Claude AI'],
     githubUrl: 'https://github.com/JGardener/VISIO',
     liveUrl: 'https://jgardener-visio.vercel.app/',

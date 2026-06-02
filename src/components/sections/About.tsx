@@ -5,7 +5,7 @@ import { useScrollReveal } from '../../hooks/useScrollReveal'
 const skillGroups = [
   {
     label: 'Frontend',
-    skills: ['React', 'TypeScript', 'PixiJS', 'WebGL', 'Canvas API', 'GSAP', 'Zustand', 'Tailwind', 'SCSS'],
+    skills: ['React', 'TypeScript', 'PixiJS', 'WebGL', 'Canvas API', 'Web Audio API', 'GSAP', 'Zustand', 'Tailwind', 'SCSS'],
   },
   {
     label: 'Backend',
