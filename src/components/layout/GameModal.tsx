@@ -110,12 +110,11 @@ export default function GameModal({ onClose }: GameModalProps) {
     >
       <div
         ref={panelRef}
+        className="w-[95vw] h-[90vh] sm:w-[85vw] sm:h-[80vh] lg:w-[75vw] lg:h-[75vh]"
         style={{
           backgroundColor: 'var(--bg-1)',
           border:          '1px solid var(--line)',
           borderRadius:    'var(--r-lg)',
-          width:           'min(960px, 90vw)',
-          height:          'min(640px, 85vh)',
           position:        'relative',
           display:         'flex',
           flexDirection:   'column',
