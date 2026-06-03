@@ -211,7 +211,7 @@ const Us = (s) => {
   },
   test: () => !0,
   load: async () => {
-    await import("./browserAll-COeiqZI2.js");
+    await import("./browserAll-BD2m93fT.js");
   }
 }, Oo = {
   extension: {
@@ -221,7 +221,7 @@ const Us = (s) => {
   },
   test: () => typeof self < "u" && self.WorkerGlobalScope !== void 0,
   load: async () => {
-    await import("./webworkerAll-knWOhCY9.js");
+    await import("./webworkerAll-DFEbEKxK.js");
   }
 };
 class Z {
@@ -9476,17 +9476,17 @@ async function Eh(s) {
   for (let n = 0; n < t.length; n++) {
     const o = t[n];
     if (o === "webgpu" && await kh()) {
-      const { WebGPURenderer: a } = await import("./WebGPURenderer-BrG6xbRL.js");
+      const { WebGPURenderer: a } = await import("./WebGPURenderer-DjGe3RYs.js");
       e = a, i = { ...s, ...s.webgpu };
       break;
     } else if (o === "webgl" && Ph(
       s.failIfMajorPerformanceCaveat ?? so.defaultOptions.failIfMajorPerformanceCaveat
     )) {
-      const { WebGLRenderer: a } = await import("./WebGLRenderer-DKijbuPv.js");
+      const { WebGLRenderer: a } = await import("./WebGLRenderer-Ct3LXu0Y.js");
       e = a, i = { ...s, ...s.webgl };
       break;
     } else if (o === "canvas") {
-      const { CanvasRenderer: a } = await import("./CanvasRenderer-CzJCpejf.js");
+      const { CanvasRenderer: a } = await import("./CanvasRenderer-6qdn59Y0.js");
       e = a, i = { ...s, ...s.canvasOptions };
       break;
     }
@@ -17179,7 +17179,7 @@ function td() {
 function rd({ onClose: s, onError: t }) {
   const [e, i] = ue(null), [r, n] = ue(null), [o, a] = ue(!1);
   ge(() => {
-    a(navigator.maxTouchPoints > 0);
+    a(window.matchMedia("(pointer: coarse)").matches);
   }, []), ge(() => {
     const l = document.createElement("style");
     return l.textContent = Do, document.head.appendChild(l), () => {
