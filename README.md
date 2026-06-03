@@ -22,16 +22,15 @@ npm run preview  # serve the production build
 
 ### Asteroid Blaster dependency
 
-The game component lives in a sibling repo at `../AsteroidBlaster` and is referenced as a local package (`file:../AsteroidBlaster`). Before running `npm install` for the first time on a new machine, clone that repo alongside this one and build it:
+The game component is vendored as a local package at `packages/asteroid-blaster/` (`file:./packages/asteroid-blaster` in `package.json`). The pre-built `dist/` is committed to this repo, so a plain `npm install` is all that's needed — no separate clone or build step.
 
+**Updating to a new version:** a `post-commit` hook in the [AsteroidBlaster repo](https://github.com/JGardener/asteroid-blaster) handles this automatically. After every commit there it builds the package, copies the fresh `dist/` into `packages/asteroid-blaster/dist/`, and commits and pushes the result here.
+
+To update manually:
 ```bash
-# from C:\code (or wherever both repos live side by side)
-git clone https://github.com/JGardener/asteroid-blaster AsteroidBlaster
-cd AsteroidBlaster
-npm install
+# inside C:\Code\AsteroidBlaster
 npm run build
-cd ../Portfolio2026
-npm install
+# then copy dist/* into packages\asteroid-blaster\dist\ and commit
 ```
 
 ## Sections

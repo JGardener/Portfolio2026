@@ -59,6 +59,18 @@ Every `useEffect` that creates a GSAP animation must return a cleanup that calls
 
 `GameModal` renders the `AsteroidBlaster` component (from the `asteroid-blaster` npm package) inside a GSAP-animated portal. It receives an `onClose` callback that triggers the exit animation before unmounting.
 
+### Updating asteroid-blaster
+
+The package lives as a vendored local dependency at `packages/asteroid-blaster/` (referenced via `file:` in `package.json`). The source of truth is the separate repo at `C:\Code\AsteroidBlaster`.
+
+A `post-commit` hook in that repo handles the full update automatically: after every commit it runs `npm run build`, wipes `packages/asteroid-blaster/dist/`, copies the fresh build output in, then commits and pushes the portfolio repo with the message `chore: update asteroid-blaster dist to <version>`.
+
+To update manually (e.g. if the hook didn't run):
+1. Build inside `C:\Code\AsteroidBlaster` — `npm run build`
+2. Copy `C:\Code\AsteroidBlaster\dist\*` into `packages\asteroid-blaster\dist\`, replacing all existing files
+3. Also update the `version` field in `packages\asteroid-blaster\package.json` to match
+4. Commit and push
+
 ## CSS design tokens
 
 All colours, spacing radii, shadows, and easing curves are CSS custom properties defined in `index.css` under `:root` (dark theme defaults) and overridden under `[data-theme="light"]`. Always use these tokens (`var(--bg)`, `var(--accent)`, `var(--font-mono)`, etc.) rather than hardcoded values. Tailwind is available for utility classes but the design system is token-first.
