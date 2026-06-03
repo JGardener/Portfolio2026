@@ -1,4 +1,4 @@
-import { w as U, d as g, e as c, u as S, B as _, f as m, E as I, h as p } from "./index-5e2N_StJ.js";
+import { w as U, d as g, e as c, u as S, B as _, f as m, E as I, h as p } from "./index-DSUTNz5_.js";
 const x = {
   name: "local-uniform-bit",
   vertex: {
