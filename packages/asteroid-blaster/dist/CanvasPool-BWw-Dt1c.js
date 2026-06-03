@@ -1,4 +1,4 @@
-import { D as n, n as c, G as r } from "./index-DSUTNz5_.js";
+import { D as n, n as c, G as r } from "./index-C6quhPp3.js";
 class l {
   constructor(a) {
     this._canvasPool = /* @__PURE__ */ Object.create(null), this.canvasOptions = a || {}, this.enableFullScreen = !1;
