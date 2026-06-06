@@ -28,8 +28,8 @@ export const projects: Project[] = [
     title: 'GithubDashboard',
     year: '2026',
     description:
-      'Side-by-side GitHub profile comparison. Queries the REST API in parallel for two users — bio, follower counts, top-starred repos, and language breakdown. Rate-limit responses are intercepted and the X-RateLimit-Reset header parsed into a typed RateLimitError surfaced to the UI. Column state is a discriminated union (empty → loading → loaded | notFound | error) with conditional narrowing throughout.',
-    tags: ['React', 'Typescript', 'API'],
+      'Side-by-side GitHub profile comparison. Queries the REST API in parallel for two users — bio, follower counts, top-starred repos, and language breakdown. Rate-limit responses are intercepted and the X-RateLimit-Reset header parsed into a typed RateLimitError surfaced to the UI. Column state is a discriminated union (empty → loading → loaded | notFound | error) with conditional narrowing throughout. A profile page drills into a single user with their full repo catalogue, sortable by stars, forks, or recency, and filterable by language.',
+    tags: ['React', 'Typescript', 'TanStack Query', 'React Router', 'Tailwind CSS', 'API'],
     githubUrl: 'https://github.com/JGardener/GithubDashboard',
     liveUrl: 'https://jgardener-githubdashboard.vercel.app',
     featured: true,
