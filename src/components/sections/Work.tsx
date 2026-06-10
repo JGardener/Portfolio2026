@@ -5,7 +5,8 @@ import GameThumb from '../ui/GameThumb'
 import VISIOThumb from '../ui/VISIOThumb'
 import GithubHeatmapThumb from '../ui/GithubHeatmapThumb'
 import BloodwebThumb from '../ui/BloodwebThumb'
-import { gsap, ease } from '../../lib/gsap'
+import SectionHeading from '../ui/SectionHeading'
+import { gsap, ease, prefersReducedMotion } from '../../lib/gsap'
 
 const thumbRegistry: Record<string, ComponentType> = {
   'project-2': VISIOThumb,
@@ -13,198 +14,113 @@ const thumbRegistry: Record<string, ComponentType> = {
   'project-4': BloodwebThumb,
 }
 
-
 interface WorkProps {
   onPlayGame: () => void
 }
 
 export default function Work({ onPlayGame }: WorkProps) {
-  const headingRef = useRef<HTMLDivElement>(null)
-  const rowsRef = useRef<HTMLDivElement>(null)
+  const listRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const headingAnim = gsap.fromTo(
-      headingRef.current,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: ease.draw,
-        scrollTrigger: { trigger: headingRef.current, start: 'top 88%' },
-      }
-    )
+    const list = listRef.current
+    if (!list) return
+    const cards = gsap.utils.toArray<HTMLElement>('.showcase', list)
 
-    const rows = rowsRef.current?.children
-    const rowsAnim = rows
-      ? gsap.fromTo(
-          Array.from(rows),
-          { opacity: 0, y: 24 },
+    if (prefersReducedMotion()) {
+      gsap.set(cards, { opacity: 1, y: 0 })
+      return
+    }
+
+    const anims: gsap.core.Tween[] = []
+    for (const card of cards) {
+      anims.push(
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 70 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.6,
-            stagger: 0.1,
+            duration: 0.9,
             ease: ease.draw,
-            scrollTrigger: { trigger: rowsRef.current, start: 'top 85%' },
+            scrollTrigger: { trigger: card, start: 'top 85%' },
           }
         )
-      : null
+      )
+      const thumb = card.querySelector<HTMLElement>('.showcase__thumb')
+      if (thumb) {
+        anims.push(
+          gsap.fromTo(
+            thumb,
+            { yPercent: 8 },
+            {
+              yPercent: -8,
+              ease: 'none',
+              scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true },
+            }
+          )
+        )
+      }
+    }
 
     return () => {
-      headingAnim.scrollTrigger?.kill()
-      rowsAnim?.scrollTrigger?.kill()
+      for (const anim of anims) {
+        anim.scrollTrigger?.kill()
+        anim.kill()
+      }
     }
   }, [])
 
   return (
     <section id="work" className="section">
-      <div ref={headingRef} style={{ opacity: 0 }}>
-        <p className="mono-label" style={{ marginBottom: '24px' }}>// Selected work</p>
+      <SectionHeading
+        index="01"
+        label="Selected work"
+        title="Things I've built"
+        sub={`${projects.length} projects — built to learn, shipped to last`}
+      />
 
-        <h2
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(32px, 4vw, 80px)',
-            fontWeight: 600,
-            letterSpacing: '-0.02em',
-            lineHeight: 1.05,
-            color: 'var(--text)',
-            marginBottom: '8px',
-          }}
-        >
-          Things I've built
-        </h2>
-        <p
-          style={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: 'var(--fs-body)',
-            color: 'var(--text-dim)',
-            marginBottom: '64px',
-          }}
-        >
-          {projects.length} projects
-        </p>
-      </div>
-
-      <div ref={rowsRef} style={{ display: 'flex', flexDirection: 'column' }}>
+      <div ref={listRef} className="showcase-list">
         {projects.map((project, i) => {
           const Thumb = thumbRegistry[project.id]
           return (
-          <div
-            key={project.id}
-            className="work-row"
-            style={{
-              borderBottom: i === projects.length - 1 ? '1px solid var(--line)' : 'none',
-            }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget
-              if (window.innerWidth > 640) el.style.transform = 'translateX(24px)'
-              el.style.borderTopColor = 'var(--accent)'
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget
-              el.style.transform = ''
-              el.style.borderTopColor = 'var(--line)'
-            }}
-          >
-            <span className="work-row__year mono-label">{project.year}</span>
-
-            <div className="work-row__info">
-              <h3
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(22px, 3vw, 48px)',
-                  fontWeight: 600,
-                  letterSpacing: '-0.01em',
-                  color: 'var(--text)',
-                  marginBottom: '4px',
-                }}
-              >
-                {project.title}
-              </h3>
-              <p
-                style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: 'clamp(14px, 0.85vw, 17px)',
-                  lineHeight: 1.55,
-                  color: 'var(--text-dim)',
-                  marginBottom: '12px',
-                }}
-              >
-                {project.description}
-              </p>
-              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '11px',
-                      fontWeight: 500,
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      color: 'var(--text-mute)',
-                      border: '1px solid var(--line-2)',
-                      borderRadius: 'var(--r-sm)',
-                      padding: '8px 12px',
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="work-row__thumb">
-              {project.hasGame ? (
-                <GameThumb />
-              ) : (
-                <div
-                  style={{
-                    width: '200px',
-                    height: '120px',
-                    backgroundColor: 'var(--bg-2)',
-                    border: '1px solid var(--line)',
-                    borderRadius: 'var(--r-md)',
-                    overflow: 'hidden',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {Thumb ? <Thumb /> : (
-                    <span className="mono-label" style={{ fontSize: '10px' }}>thumb</span>
-                  )}
+            <article key={project.id} className="showcase" style={{ opacity: 0 }}>
+              <div className="showcase__panel">
+                <span className="showcase__index" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div className="showcase__thumb">
+                  <div className="showcase__thumb-inner">
+                    {project.hasGame ? <GameThumb /> : Thumb ? <Thumb /> : null}
+                  </div>
                 </div>
-              )}
-            </div>
+              </div>
 
-            <div className="work-row__action" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
-              {project.hasGame ? (
-                <>
-                  <button
-                    onClick={onPlayGame}
-                    className="work-btn"
-                    style={{ '--btn-clr': 'var(--accent)' } as React.CSSProperties}
-                  >
-                    Play
-                  </button>
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${project.title} source code on GitHub (opens in new tab)`}
-                      className="work-btn"
-                      style={{ '--btn-clr': 'var(--text-mute)' } as React.CSSProperties}
-                    >
-                      Code
-                    </a>
+              <div className="showcase__info">
+                <p className="mono-label" style={{ marginBottom: '12px' }}>
+                  {project.year}
+                  {project.hasGame && (
+                    <span style={{ color: 'var(--accent)', marginLeft: '12px' }}>· Playable</span>
                   )}
-                </>
-              ) : (
-                <>
+                </p>
+                <h3 className="showcase__title">{project.title}</h3>
+                <p className="showcase__desc">{project.description}</p>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '28px' }}>
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="tag-chip">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                  {project.hasGame && (
+                    <button
+                      onClick={onPlayGame}
+                      className="work-btn"
+                      style={{ '--btn-clr': 'var(--accent)' } as React.CSSProperties}
+                    >
+                      ▶ Play it
+                    </button>
+                  )}
                   {project.liveUrl && (
                     <a
                       href={project.liveUrl}
@@ -214,7 +130,7 @@ export default function Work({ onPlayGame }: WorkProps) {
                       className="work-btn"
                       style={{ '--btn-clr': 'var(--accent)' } as React.CSSProperties}
                     >
-                      Live
+                      Live ↗
                     </a>
                   )}
                   {project.githubUrl && (
@@ -226,13 +142,12 @@ export default function Work({ onPlayGame }: WorkProps) {
                       className="work-btn"
                       style={{ '--btn-clr': 'var(--text-mute)' } as React.CSSProperties}
                     >
-                      Code
+                      Code ↗
                     </a>
                   )}
-                </>
-              )}
-            </div>
-          </div>
+                </div>
+              </div>
+            </article>
           )
         })}
       </div>

@@ -1,77 +1,108 @@
-import { useEffect } from 'react'
-import { gsap } from '../../lib/gsap'
-import { initHeroParticles } from '../../lib/heroParticles'
-import HeroSVG from './HeroSVG'
+import { useEffect, useRef } from 'react'
+import { gsap, ScrollTrigger, SplitText, prefersReducedMotion } from '../../lib/gsap'
+import { initPixiHero } from '../../lib/pixiHero'
 
-export default function Hero() {
+interface HeroProps {
+  loaded: boolean
+}
+
+export default function Hero({ loaded }: HeroProps) {
+  const sectionRef = useRef<HTMLElement>(null)
+  const canvasHostRef = useRef<HTMLDivElement>(null)
+  const nameRef = useRef<HTMLHeadingElement>(null)
+  const introRef = useRef<HTMLDivElement>(null)
+
+  // WebGL particle field + scroll-scrubbed dispersal.
   useEffect(() => {
-    let cleanup: (() => void) | undefined
-    const timer = setTimeout(() => {
-      cleanup = initHeroParticles()
-    }, 100)
+    const host = canvasHostRef.current
+    const section = sectionRef.current
+    if (!host || !section) return
+
+    const hero = initPixiHero(host)
+    const trigger = ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true,
+      onUpdate: (self) => hero.setScatter(self.progress),
+    })
+
     return () => {
-      clearTimeout(timer)
-      cleanup?.()
+      trigger.kill()
+      hero.destroy()
     }
   }, [])
 
+  // Entrance — fires once the loader finishes.
   useEffect(() => {
-    gsap.fromTo(
-      '#hero-svg-wrapper svg text',
-      { opacity: 0 },
-      {
-        opacity: 1,
-        duration: 1.4,
-        delay: 0.25,
-        ease: 'power3.out',
-      }
-    )
-  }, [])
+    if (!loaded) return
+    const intro = introRef.current
+    const name = nameRef.current
+    if (!intro || !name) return
 
-  useEffect(() => {
-    gsap.fromTo(
-      '#hero-scroll-cue',
-      { opacity: 0 },
-      { opacity: 1, duration: 0.8, delay: 1.6, ease: 'power2.out' }
-    )
+    const fadeEls = Array.from(intro.querySelectorAll<HTMLElement>('[data-hero-fade]'))
 
-    const hero = document.getElementById('hero')
-    if (!hero) return
+    if (prefersReducedMotion()) {
+      gsap.set([name, ...fadeEls], { opacity: 1, y: 0 })
+      return
+    }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) {
-          gsap.to('#hero-scroll-cue', { opacity: 0, duration: 0.4 })
-        }
-      },
-      { threshold: 0.1 }
-    )
-    observer.observe(hero)
-    return () => observer.disconnect()
-  }, [])
+    let cancelled = false
+    let split: SplitText | null = null
+    let tl: gsap.core.Timeline | null = null
+
+    document.fonts.ready.then(() => {
+      if (cancelled) return
+      // 'words,chars' keeps whole words as wrap units so the name never
+      // breaks mid-word on narrow viewports.
+      split = new SplitText(name, { type: 'words,chars', mask: 'chars' })
+      tl = gsap.timeline()
+      tl.set(name, { opacity: 1 })
+        .fromTo(
+          split.chars,
+          { yPercent: 115 },
+          { yPercent: 0, duration: 0.9, stagger: 0.035, ease: 'power4.out' }
+        )
+        .fromTo(
+          fadeEls,
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.7, stagger: 0.09, ease: 'power3.out' },
+          '-=0.5'
+        )
+    })
+
+    return () => {
+      cancelled = true
+      tl?.kill()
+      split?.revert()
+    }
+  }, [loaded])
 
   return (
     <section
+      ref={sectionRef}
       id="hero"
       aria-label="Hero"
       style={{
         position: 'relative',
         width: '100%',
-        minHeight: 'min(100vh, 1080px)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        minHeight: '100svh',
         overflow: 'hidden',
         backgroundColor: 'var(--bg)',
       }}
     >
-      <h1 className="sr-only">James Gardener — Developer building interactive things</h1>
+      <h1 className="sr-only">James Gardener — Creative frontend developer</h1>
 
-      {/* Background ambient particle field */}
-      <canvas
-        id="hero-canvas"
+      {/* WebGL particle field — words morph in the centre */}
+      <div
+        ref={canvasHostRef}
         aria-hidden="true"
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 0 }}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
       />
 
       {/* Dark vignette — hidden in light theme via CSS */}
@@ -88,186 +119,148 @@ export default function Hero() {
         }}
       />
 
-      {/* SVG wordmark + clipped letter canvas */}
-      <div id="hero-svg-wrapper" style={{ position: 'absolute', inset: 0, zIndex: 2 }}>
-        <HeroSVG />
-      </div>
-
-      {/* Top-center eyebrow pill */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '80px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 10,
-          padding: '4px 12px',
-          border: '1px solid var(--line-2)',
-          borderRadius: '999px',
-          fontFamily: 'var(--font-mono)',
-          fontSize: 'var(--fs-label)',
-          fontWeight: 500,
-          letterSpacing: '0.08em',
-          color: 'var(--text-mute)',
-          whiteSpace: 'nowrap',
-          backgroundColor: 'var(--bg-1)',
-        }}
-      >
-        // Portfolio · 2026
-      </div>
-
-      <div className="hero-anchor-l">
-        <p
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: 'var(--fs-label)',
-            fontWeight: 500,
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: 'var(--text-mute)',
-            marginBottom: '8px',
-          }}
-        >
-          ↳ 01 · Hello
-        </p>
-        <p
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(18px, 2vw, 32px)',
-            fontWeight: 700,
-            color: 'var(--text)',
-            marginBottom: '4px',
-          }}
-        >
-          James Gardener
-        </p>
-        <p
-          style={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: 'var(--fs-body)',
-            lineHeight: 1.6,
-            color: 'var(--text-dim)',
-            maxWidth: '380px',
-          }}
-        >
-          Frontend developer. React, TypeScript, PixiJS — I build the parts that move.
-        </p>
-      </div>
-
-      {/* Scroll cue — fades in after entrance, fades out when hero leaves viewport */}
-      <div
-        id="hero-scroll-cue"
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          bottom: '36px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 10,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '4px',
-          opacity: 0,
-          pointerEvents: 'none',
-        }}
-      >
-        <span
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: 'var(--fs-xs)',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: 'var(--text-mute)',
-          }}
-        >
-          Scroll
-        </span>
-        <svg
-          width="16"
-          height="10"
-          viewBox="0 0 16 10"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          style={{ animation: 'scroll-bob 2s ease-in-out infinite', color: 'var(--text-mute)' }}
-        >
-          <path d="M1 1L8 8L15 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </div>
-
-      <div className="hero-anchor-r">
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            gap: '6px',
-            marginBottom: '4px',
-          }}
-        >
-          <span
-            style={{
-              width: '6px',
-              height: '6px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--accent)',
-              display: 'inline-block',
-              animation: 'pulse 2s ease-in-out infinite',
-            }}
-          />
-          <span
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'var(--fs-label)',
-              fontWeight: 500,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              color: 'var(--text-dim)',
-            }}
-          >
-            Available · 2026
-          </span>
+      <div ref={introRef} style={{ position: 'absolute', inset: 0, zIndex: 10, pointerEvents: 'none' }}>
+        {/* Top-center eyebrow pill */}
+        <div data-hero-fade className="hero-pill" style={{ opacity: 0 }}>
+          // Portfolio · 2026
         </div>
-        <p
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: 'var(--fs-xs)',
-            color: 'var(--text-mute)',
-            letterSpacing: '0.06em',
-            marginBottom: '8px',
-          }}
-        >
-          Kent, UK · Remote
-        </p>
-        <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
-          <a
-            href="https://github.com/JGardener"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub (opens in new tab)"
+
+        <div className="hero-anchor-l" style={{ pointerEvents: 'auto' }}>
+          <p data-hero-fade className="mono-label" style={{ marginBottom: '12px', opacity: 0 }}>
+            ↳ 01 · Hello, I'm
+          </p>
+          <h2
+            ref={nameRef}
+            aria-hidden="true"
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(34px, 5.5vw, 84px)',
+              fontWeight: 800,
+              letterSpacing: '-0.03em',
+              lineHeight: 1.02,
+              color: 'var(--text)',
+              marginBottom: '14px',
+              opacity: 0,
+            }}
+          >
+            James Gardener
+          </h2>
+          <p
+            data-hero-fade
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: 'clamp(15px, 1.1vw, 20px)',
+              lineHeight: 1.6,
+              color: 'var(--text-dim)',
+              maxWidth: '460px',
+              opacity: 0,
+            }}
+          >
+            Creative frontend developer — React, TypeScript, PixiJS &amp; GSAP.
+            <br />
+            I build the parts that move.
+          </p>
+        </div>
+
+        {/* Scroll cue */}
+        <div data-hero-fade id="hero-scroll-cue" aria-hidden="true" className="hero-scroll-cue" style={{ opacity: 0 }}>
+          <span
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'var(--fs-xs)',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: 'var(--text-mute)',
+            }}
+          >
+            Scroll
+          </span>
+          <svg
+            width="16"
+            height="10"
+            viewBox="0 0 16 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ animation: 'scroll-bob 2s ease-in-out infinite', color: 'var(--text-mute)' }}
+          >
+            <path d="M1 1L8 8L15 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+
+        <div data-hero-fade className="hero-anchor-r" style={{ pointerEvents: 'auto', opacity: 0 }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              gap: '6px',
+              marginBottom: '4px',
+            }}
+          >
+            <span
+              style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                backgroundColor: 'var(--accent)',
+                display: 'inline-block',
+                animation: 'pulse 2s ease-in-out infinite',
+              }}
+            />
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--fs-label)',
+                fontWeight: 500,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: 'var(--text-dim)',
+              }}
+            >
+              Available · 2026
+            </span>
+          </div>
+          <p
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: 'var(--fs-xs)',
               color: 'var(--text-mute)',
-              textDecoration: 'none',
+              letterSpacing: '0.06em',
+              marginBottom: '8px',
             }}
           >
-            GitHub
-          </a>
-          <a
-            href="https://www.linkedin.com/in/jamesgardener92"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn (opens in new tab)"
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'var(--fs-xs)',
-              color: 'var(--text-mute)',
-              textDecoration: 'none',
-            }}
-          >
-            LinkedIn
-          </a>
+            Kent, UK · Remote
+          </p>
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+            <a
+              href="https://github.com/JGardener"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub (opens in new tab)"
+              className="link-draw"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--fs-xs)',
+                color: 'var(--text-mute)',
+              }}
+            >
+              GitHub
+            </a>
+            <a
+              href="https://www.linkedin.com/in/jamesgardener92"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn (opens in new tab)"
+              className="link-draw"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--fs-xs)',
+                color: 'var(--text-mute)',
+              }}
+            >
+              LinkedIn
+            </a>
+          </div>
         </div>
       </div>
     </section>

@@ -35,21 +35,27 @@ Shared types are in `src/types/index.ts` (`Project`, `ExperienceEntry`, `Theme`)
 
 ### Animation conventions
 
-All GSAP usage must import from `src/lib/gsap.ts`, never directly from `gsap`. That module registers `ScrollTrigger` once and exports named easing constants (`ease.out`, `ease.inOut`, `ease.draw`, `ease.soft`) that should be used throughout instead of inline cubic-bezier strings.
+All GSAP usage must import from `src/lib/gsap.ts`, never directly from `gsap`. That module registers `ScrollTrigger` and `SplitText` once, exports named easing constants (`ease.out`, `ease.inOut`, `ease.draw`, `ease.soft`), and exports `prefersReducedMotion()`. Every component that animates checks `prefersReducedMotion()` first and `gsap.set`s the final state instead when it returns true.
 
 Every `useEffect` that creates a GSAP animation must return a cleanup that calls `.kill()` on the animation and `.kill()` on its `scrollTrigger`. The `useScrollReveal` hook (`src/hooks/useScrollReveal.ts`) handles the common fade-up pattern — use it before reaching for a raw GSAP call.
 
+SplitText reveals (hero name, contact headline) must wait on `document.fonts.ready` before splitting, and call `split.revert()` in cleanup.
+
 ### Hero particle system
 
-`src/lib/heroParticles.ts` manages two `<canvas>` elements rendered inside `HeroSVG.tsx`:
-- `#hero-canvas` — sparse ambient background field with linked particles and mouse repulsion
-- `#hero-letter-canvas` — dense bright field clipped by an SVG `<clipPath>` to the "JG" letterforms
+`src/lib/pixiHero.ts` runs a PixiJS v8 `Application` with a single `ParticleContainer` (`dynamicProperties: { position, color }`) inside the hero. ~450–2400 particles (scaled by viewport area) spring toward letterform targets sampled from an offscreen 2D canvas, cycling through the words JG → REACT → TYPESCRIPT → PIXIJS → GSAP → WEBGL every 3 s, with pointer repulsion and an ambient parallax starfield behind. Tints follow the `--accent` token and re-resolve on `data-theme` mutation.
 
-`initHeroParticles()` returns a cleanup function that must be called on unmount. It is invoked from `Hero.tsx` with a 100 ms delay to let the DOM settle.
+`initPixiHero(host)` returns a handle: `setScatter(0..1)` (wired to a scrubbed ScrollTrigger in `Hero.tsx` so the field disperses as the hero scrolls out) and `destroy()` which must be called on unmount. The ticker pauses via IntersectionObserver when the hero is offscreen. Under `prefers-reduced-motion` the field renders statically on "JG" with no morphing or repulsion.
+
+### Shared section pieces
+
+- `SectionHeading` (`src/components/ui/SectionHeading.tsx`) — mono eyebrow + clip-path-wiped display title; use it for every section header so numbering/treatment stays consistent (01 Work, 02 About, 03 Experience, 04 Contact).
+- `Marquee` (`src/components/ui/Marquee.tsx`) — infinite skills ticker (two duplicated groups slid −50%), scroll-velocity boosts its `timeScale`. Rendered twice in `App.tsx` (`reverse` flips direction).
+- `Loader` counts 000→100 with a progress bar, then slides up; `App` passes `loaded` into `Hero` to gate the SplitText entrance.
 
 ### Work section thumbnails
 
-`Work.tsx` uses a `thumbRegistry` (a `Record<string, ComponentType>`) that maps project IDs to inline SVG thumbnail components from `src/components/ui/ProjectThumb.tsx`. When adding a new project with a custom thumbnail, add the component there and register it by `project.id` in `thumbRegistry`. Projects with `hasGame: true` render `GameThumb` instead and wire up the `onPlayGame` callback.
+`Work.tsx` renders each project as a `.showcase` row (alternating panel/info sides via `:nth-child(even)`, stacking on mobile) with a ghost index numeral and a scroll-scrubbed parallax on the thumb. It uses a `thumbRegistry` (a `Record<string, ComponentType>`) that maps project IDs to thumbnail components (live Pixi mini-scenes in `src/components/ui/`). When adding a new project with a custom thumbnail, add the component there and register it by `project.id` in `thumbRegistry`. Projects with `hasGame: true` render `GameThumb` instead and wire up the `onPlayGame` callback. Thumbs render at their native 200×120 and are scaled up by `--tscale` on `.showcase__thumb-inner`.
 
 ### Custom cursor
 

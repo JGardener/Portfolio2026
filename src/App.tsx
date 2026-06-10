@@ -8,6 +8,7 @@ import Contact from './components/sections/Contact'
 import LensCursor from './components/layout/LensCursor'
 import Navbar from './components/layout/Navbar'
 import Loader from './components/layout/Loader'
+import Marquee from './components/ui/Marquee'
 import type { Theme } from './types'
 
 const GameModal = lazy(() => import('./components/layout/GameModal'))
@@ -40,10 +41,12 @@ export default function App() {
       <LensCursor />
       <Navbar theme={theme} onThemeToggle={toggleTheme} />
       <main>
-        <Hero />
+        <Hero loaded={loaded} />
+        <Marquee />
         <Work onPlayGame={() => setGameOpen(true)} />
         <About />
         <Experience />
+        <Marquee reverse />
         <Contact />
       </main>
       {gameOpen && (

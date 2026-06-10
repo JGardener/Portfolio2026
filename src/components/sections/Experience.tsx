@@ -1,59 +1,77 @@
 import { useEffect, useRef } from 'react'
-import { gsap, ease } from '../../lib/gsap'
+import { gsap, ease, prefersReducedMotion } from '../../lib/gsap'
 import { experiences } from '../../data/experience'
+import SectionHeading from '../ui/SectionHeading'
 
 export default function Experience() {
+  const timelineRef = useRef<HTMLDivElement>(null)
+  const progressRef = useRef<HTMLDivElement>(null)
   const entriesRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const entries = entriesRef.current?.children
     if (!entries) return
-    const anim = gsap.fromTo(
+
+    if (prefersReducedMotion()) {
+      gsap.set(Array.from(entries), { opacity: 1, x: 0 })
+      gsap.set(progressRef.current, { scaleY: 1 })
+      return
+    }
+
+    const reveal = gsap.fromTo(
       Array.from(entries),
-      { opacity: 0, x: -20 },
+      { opacity: 0, x: -24 },
       {
         opacity: 1,
         x: 0,
-        duration: 0.6,
-        stagger: 0.12,
+        duration: 0.7,
+        stagger: 0.15,
         ease: ease.draw,
-        scrollTrigger: { trigger: entriesRef.current, start: 'top 88%' },
+        scrollTrigger: { trigger: entriesRef.current, start: 'top 85%' },
       }
     )
+
+    // Accent rail draws down as the timeline scrolls through the viewport.
+    const draw = gsap.fromTo(
+      progressRef.current,
+      { scaleY: 0 },
+      {
+        scaleY: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: timelineRef.current,
+          start: 'top 75%',
+          end: 'bottom 45%',
+          scrub: 0.4,
+        },
+      }
+    )
+
     return () => {
-      anim.scrollTrigger?.kill()
+      reveal.scrollTrigger?.kill()
+      reveal.kill()
+      draw.scrollTrigger?.kill()
+      draw.kill()
     }
   }, [])
 
   return (
-    <section
-      id="experience"
-      className="section"
-    >
-      <p className="mono-label" style={{ marginBottom: '64px' }}>// 03 — Experience</p>
+    <section id="experience" className="section">
+      <SectionHeading index="03" label="Experience" title="Where I've shipped" />
 
-      <div style={{ position: 'relative', paddingLeft: '48px' }}>
-        <div
-          style={{
-            position: 'absolute',
-            left: '32px',
-            top: 0,
-            bottom: 0,
-            width: '1px',
-            backgroundColor: 'var(--accent)',
-            opacity: 0.4,
-          }}
-        />
+      <div ref={timelineRef} className="timeline">
+        <div className="timeline__rail" aria-hidden="true" />
+        <div ref={progressRef} className="timeline__progress" aria-hidden="true" />
 
-        <div ref={entriesRef} style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+        <div ref={entriesRef} style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
           {experiences.map((exp) => (
-            <div key={exp.id}>
-              <p className="mono-label" style={{ marginBottom: '4px' }}>{exp.period}</p>
+            <div key={exp.id} className="timeline-entry" style={{ opacity: 0 }}>
+              <p className="mono-label" style={{ marginBottom: '6px' }}>{exp.period}</p>
               <h3
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(18px, 2vw, 32px)',
-                  fontWeight: 600,
+                  fontSize: 'clamp(20px, 2.4vw, 36px)',
+                  fontWeight: 700,
                   letterSpacing: '-0.01em',
                   color: 'var(--text)',
                   marginBottom: '2px',
@@ -67,7 +85,7 @@ export default function Experience() {
                   fontSize: 'var(--fs-label)',
                   letterSpacing: '0.06em',
                   color: 'var(--accent)',
-                  marginBottom: '8px',
+                  marginBottom: '12px',
                   textTransform: 'uppercase',
                 }}
               >
@@ -76,35 +94,21 @@ export default function Experience() {
               <p
                 style={{
                   fontFamily: 'var(--font-sans)',
-                  fontSize: 'clamp(14px, 0.85vw, 17px)',
-                  lineHeight: 1.55,
+                  fontSize: 'clamp(14px, 0.95vw, 18px)',
+                  lineHeight: 1.6,
                   color: 'var(--text-dim)',
+                  maxWidth: '720px',
                 }}
               >
                 {exp.description}
               </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '16px' }}>
-            {exp.tags.map((tag) => (
-            <span
-              key={tag}
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 'var(--fs-label)',
-                fontWeight: 500,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: 'var(--text-dim)',
-                border: '1px solid var(--line-2)',
-                borderRadius: 'var(--r-sm)',
-                padding: '8px 12px',
-                backgroundColor: 'transparent',
-                transition: 'border-color 150ms, color 150ms',
-              }}
-            >
-              {tag}
-            </span>
-            ))}
-            </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '20px' }}>
+                {exp.tags.map((tag) => (
+                  <span key={tag} className="tag-chip">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
           ))}
         </div>
