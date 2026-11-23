@@ -19,7 +19,8 @@ export default function GameThumb() {
         height: 120,
         backgroundAlpha: 0,
         antialias: true,
-        resolution: Math.min(window.devicePixelRatio, 2),
+        // Rendered at 2x the device density: the box frames scale these up.
+        resolution: Math.min(window.devicePixelRatio, 2) * 2,
         autoDensity: true,
       })
 
@@ -48,7 +49,7 @@ export default function GameThumb() {
           const jitter = r * (0.75 + Math.random() * 0.35)
           points.push(Math.cos(angle) * jitter, Math.sin(angle) * jitter)
         }
-        gfx.poly(points).stroke({ color: 0x4f8cff, alpha: 0.45, width: 1 })
+        gfx.poly(points).stroke({ color: 0xffc400, alpha: 0.85, width: 1.25 })
         gfx.x = x
         gfx.y = y
         app.stage.addChild(gfx)
@@ -87,14 +88,7 @@ export default function GameThumb() {
     <div
       ref={containerRef}
       aria-hidden="true"
-      style={{
-        width: '200px',
-        height: '120px',
-        backgroundColor: 'var(--bg)',
-        border: '1px solid var(--line)',
-        borderRadius: 'var(--r-md)',
-        overflow: 'hidden',
-      }}
+      className="shot__canvas"
     />
   )
 }

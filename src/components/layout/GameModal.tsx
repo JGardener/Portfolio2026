@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary'
-import { gsap, ease } from '../../lib/gsap'
+import { gsap, ease, prefersReducedMotion } from '../../lib/gsap'
 import AsteroidBlaster from 'asteroid-blaster'
+import { CloseIcon } from '../ui/Icons'
 
 interface GameModalProps {
   onClose: () => void
@@ -10,20 +11,9 @@ interface GameModalProps {
 
 function GameErrorFallback({ resetErrorBoundary }: FallbackProps) {
   return (
-    <div
-      style={{
-        display:        'flex',
-        flexDirection:  'column',
-        alignItems:     'center',
-        justifyContent: 'center',
-        height:         '100%',
-        gap:            '12px',
-      }}
-    >
-      <p style={{ color: 'var(--text-2)', fontSize: '13px', margin: 0 }}>
-        Game failed to load
-      </p>
-      <button onClick={resetErrorBoundary} className="mono-btn">
+    <div className="game-modal__error">
+      <p>The game didn’t load. Close this and try again.</p>
+      <button type="button" onClick={resetErrorBoundary} className="btn btn--primary">
         Close
       </button>
     </div>
@@ -36,6 +26,10 @@ export default function GameModal({ onClose }: GameModalProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
+    if (prefersReducedMotion()) {
+      gsap.set([backdropRef.current, panelRef.current], { opacity: 1, y: 0 })
+      return
+    }
     const tl = gsap.timeline()
     tl.fromTo(
       backdropRef.current,
@@ -51,6 +45,10 @@ export default function GameModal({ onClose }: GameModalProps) {
   }, [])
 
   const handleClose = useCallback(() => {
+    if (prefersReducedMotion()) {
+      onClose()
+      return
+    }
     const tl = gsap.timeline({ onComplete: onClose })
     tl.to(panelRef.current, { opacity: 0, y: 24, duration: 0.25, ease: ease.inOut }).to(
       backdropRef.current,
@@ -93,61 +91,30 @@ export default function GameModal({ onClose }: GameModalProps) {
       ref={backdropRef}
       role="dialog"
       aria-modal="true"
-      aria-label="Asteroid Blaster"
-      style={{
-        position:        'fixed',
-        inset:           0,
-        zIndex:          1000,
-        backgroundColor: 'var(--backdrop-overlay)',
-        display:         'flex',
-        alignItems:      'center',
-        justifyContent:  'center',
-        opacity:         0,
-      }}
+      aria-labelledby="game-modal-title"
+      className="game-modal"
       onClick={(e) => {
         if (e.target === e.currentTarget) handleClose()
       }}
     >
-      <div
-        ref={panelRef}
-        className="w-[95vw] h-[90vh] sm:w-[85vw] sm:h-[80vh] lg:w-[75vw] lg:h-[75vh]"
-        style={{
-          backgroundColor: 'var(--bg-1)',
-          border:          '1px solid var(--line)',
-          borderRadius:    'var(--r-lg)',
-          position:        'relative',
-          display:         'flex',
-          flexDirection:   'column',
-          overflow:        'hidden',
-          opacity:         0,
-        }}
-      >
-        <div
-          style={{
-            display:        'flex',
-            alignItems:     'center',
-            justifyContent: 'space-between',
-            padding:        '16px 24px',
-            borderBottom:   '1px solid var(--line)',
-            flexShrink:     0,
-          }}
-        >
-          <span className="mono-label">// Asteroid Blaster</span>
+      <div ref={panelRef} className="game-modal__panel">
+        <div className="game-modal__bar">
+          <p id="game-modal-title" className="game-modal__title">
+            Asteroid Blaster
+          </p>
           <button
             ref={closeButtonRef}
+            type="button"
             onClick={handleClose}
-            aria-label="Close game"
-            className="mono-btn"
+            aria-label="Close the game"
+            className="game-modal__close"
           >
-            ×
+            <CloseIcon />
           </button>
         </div>
 
-        <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
-          <ErrorBoundary
-            FallbackComponent={GameErrorFallback}
-            onReset={handleClose}
-          >
+        <div className="game-modal__screen">
+          <ErrorBoundary FallbackComponent={GameErrorFallback} onReset={handleClose}>
             {/* onError prop available for future Sentry integration */}
             <AsteroidBlaster onClose={handleClose} />
           </ErrorBoundary>

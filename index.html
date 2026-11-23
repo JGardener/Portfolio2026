@@ -4,16 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>James Gardener — Creative Frontend Developer</title>
+    <title>James Gardener — Frontend Developer</title>
     <meta
       name="description"
-      content="Creative frontend developer specialising in React, TypeScript and PixiJS. Based in Kent, available remotely for mid-level roles and freelance."
+      content="Frontend developer working in React, TypeScript and PixiJS. Based in Kent, UK."
     />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://yourname.dev" />
-    <meta property="og:title" content="James Gardener — Creative Frontend Developer" />
+    <meta property="og:title" content="James Gardener — Frontend Developer" />
     <meta
       property="og:description"
       content="React · TypeScript · PixiJS · Figma. Available for mid-level roles and freelance."
@@ -22,9 +22,19 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="James Gardener — Creative Frontend Developer" />
+    <meta name="twitter:title" content="James Gardener — Frontend Developer" />
     <meta name="twitter:image" content="https://yourname.dev/og-image.png" />
 
+    <script>
+      // Apply the saved edition before first paint (no theme flash).
+      try {
+        var q = /[?&]edition=(light|dark)/.exec(location.search)
+        var t = q ? q[1] : localStorage.getItem('theme')
+        document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark')
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark')
+      }
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
