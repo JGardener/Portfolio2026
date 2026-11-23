@@ -18,7 +18,7 @@ function mortonCode(x: number, y: number): number {
 }
 
 async function sampleLetterTargets(count: number): Promise<Array<{ x: number; y: number }>> {
-  await document.fonts.load('700 92px "Syne"')
+  await document.fonts.load('400 72px "Bowlby One"')
 
   const scale = 2
   const cw = W * scale
@@ -29,7 +29,10 @@ async function sampleLetterTargets(count: number): Promise<Array<{ x: number; y:
   const ctx = offscreen.getContext('2d')!
 
   ctx.fillStyle = '#fff'
-  ctx.font = 'bold 92px Syne'
+  // Fit the word to ~86% of the canvas width in the box-art display face.
+  ctx.font = '400 72px "Bowlby One", sans-serif'
+  const fit = Math.min(96, (72 * cw * 0.86) / Math.max(1, ctx.measureText('VISIO').width))
+  ctx.font = `400 ${Math.round(fit)}px "Bowlby One", sans-serif`
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
   ctx.fillText('VISIO', cw / 2, ch / 2)
@@ -84,7 +87,8 @@ export default function VISIOThumb() {
         height: H,
         backgroundAlpha: 0,
         antialias: true,
-        resolution: Math.min(window.devicePixelRatio, 2),
+        // Rendered at 2x the device density: the box frames scale these up.
+        resolution: Math.min(window.devicePixelRatio, 2) * 2,
         autoDensity: true,
       })
 
@@ -193,14 +197,7 @@ export default function VISIOThumb() {
     <div
       ref={containerRef}
       aria-hidden="true"
-      style={{
-        width: '200px',
-        height: '120px',
-        backgroundColor: 'var(--bg)',
-        border: '1px solid var(--line)',
-        borderRadius: 'var(--r-md)',
-        overflow: 'hidden',
-      }}
+      className="shot__canvas"
     />
   )
 }

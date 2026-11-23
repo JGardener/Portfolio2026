@@ -3,11 +3,11 @@ import type { ExperienceEntry } from '../types'
 export const experiences: ExperienceEntry[] = [
   {
     id: 'exp-1',
-    role: 'Junior Frontend Developer',
+    role: 'Frontend Developer',
     company: 'Incentive Games Ltd',
     period: 'Jan 2023 — May 2026',
     description:
-      'Shipped React TypeScript and PixiJS UIs for live iGaming products — work that reached audiences through Bet365, Lottomatica, Kaizen and more. Built within a cross-functional team of developers, QA, and product, delivering production canvas work at pace.',
+      'Built React, TypeScript and PixiJS interfaces for live iGaming products that reached players through Bet365, FanDuel, Lottomatica, Kaizen and others. Worked day to day with developers, QA and product.',
     tags: [
       'React',
       'TypeScript',
@@ -30,9 +30,9 @@ export const experiences: ExperienceEntry[] = [
     id: 'exp-2',
     role: 'Intern Frontend Web Developer',
     company: 'Wonderful',
-    period: 'Apr 2022 - Jun 2022',
+    period: 'Apr 2022 — Jun 2022',
     description:
-      "Built the landing page for Wahl's collaboration with BBC's Peaky Blinders — working within an agency team alongside designers, account managers, and senior developers.",
+      "Built the landing page for Wahl's collaboration with BBC's Peaky Blinders, in an agency team alongside designers, account managers and senior developers.",
     tags: [
       'HTML',
       'CSS',
