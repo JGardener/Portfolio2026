@@ -100,7 +100,7 @@ export default function BoxTurn({ onPlayGame }: BoxTurnProps) {
           </h2>
           <div className="backcover__copy">
             <p>
-              For three years at Incentive Games I shipped React, TypeScript and PixiJS front ends
+              For 3+ years at Incentive Games I shipped React, TypeScript and PixiJS front ends
               for live iGaming products. On my own time I build full-stack apps: Supabase auth,
               Postgres with row-level security, Deno edge functions, the Claude API and typed REST
               clients, with Vitest and Sentry behind them.

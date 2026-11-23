@@ -44,11 +44,6 @@ function BackPanel({ project, tone, onPlayGame }: { project: Project; tone: stri
 
         <figure className="back__shot">
           <div className="shot">{Thumb ? <Thumb /> : null}</div>
-          <figcaption className="back__caption">
-            {project.hasGame
-              ? 'Live PixiJS render. The full game is one click away.'
-              : 'Live PixiJS sketch of the project, drawn for this box.'}
-          </figcaption>
         </figure>
 
         <ul className="back__features">
