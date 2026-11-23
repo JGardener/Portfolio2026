@@ -2,6 +2,15 @@ import type { ExperienceEntry } from '../types'
 
 export const experiences: ExperienceEntry[] = [
   {
+    id: 'exp-independent',
+    role: 'Independent projects',
+    company: 'Self-directed',
+    period: 'May 2026 — present',
+    description:
+      'Rebuilt this portfolio around a playable Asteroid Blaster, and started three larger projects: DuoEndo, a React 19 PWA, and two Unreal Engine games, Sixfold and The Giant’s Keeper. On the larger ones I design the system, write the specs, and direct and verify Claude Code agents: custom agent roles, hooks that enforce builds and tests, and measured token costs.',
+    tags: ['React', 'TypeScript', 'PixiJS', 'GSAP', 'Unreal Engine 5', 'C++', 'Claude Code', 'GitHub Actions', 'Playwright'],
+  },
+  {
     id: 'exp-1',
     role: 'Frontend Developer',
     company: 'Incentive Games Ltd',
