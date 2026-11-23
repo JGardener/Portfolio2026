@@ -18,6 +18,10 @@
   --black:      #111111;
   --white:      #f7f4ec;
   --screen:     #0b0b0c;
+  --oxblood:    #5a0d0a;
+
+  /* The printed System Requirements box: dimmed on the black box */
+  --sysreq-bg:  #ebe6da;
 
   /* Edition (theme): dark = the black box */
   --paper:        var(--black);
@@ -70,6 +74,7 @@
   --rule:          #cfcabd;
   --title-fill:    var(--red);
   --title-extrude: var(--black);
+  --sysreq-bg:     #ffffff;
   color-scheme: light;
 }
 
@@ -160,6 +165,11 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   padding: 20px 0;
   background: var(--red);
   color: var(--white);
+  /* The fold where spine meets box: keeps the spine distinct from red panels */
+  box-shadow: inset -3px 0 0 var(--black);
+}
+@media (max-width: 767px) {
+  .spine { box-shadow: inset 0 -3px 0 var(--black); }
 }
 
 .spine__mark {
@@ -348,18 +358,72 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   vertical-align: 0.1em;
 }
 
+/* Turn it over: a chunky printed button, the one call to act on the front */
 .front__turn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4em;
-  min-height: 44px;
-  font-weight: 800;
+  gap: 0.7em;
+  min-height: 52px;
+  padding: 0.55em 0.75em 0.55em 1.2em;
+  border: 3px solid var(--black);
+  background: var(--yellow);
+  color: var(--black);
+  font: inherit;
+  cursor: pointer;
+  box-shadow: 0 6px 14px -6px rgb(0 0 0 / 0.55);
+  transition: translate 160ms var(--ease-out), box-shadow 160ms var(--ease-out), background-color 160ms var(--ease-out);
+}
+.front__turn-label {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.front__turn-hint {
+  font-weight: 700;
   font-stretch: var(--stretch-print);
+  font-size: var(--fs-small);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  font-size: 0.9375rem;
+  color: #4a3a00;
 }
-.front__turn svg { font-size: 1.15em; }
+.front__turn-arrow {
+  display: block;
+  width: 36px;
+  height: 36px;
+  padding: 7px;
+  background: var(--black);
+  color: var(--yellow);
+  border-radius: 50%;
+  stroke-width: 3;
+}
+.front__turn:hover { background: #ffd23d; translate: 0 -2px; box-shadow: 0 10px 18px -6px rgb(0 0 0 / 0.55); }
+.front__turn:active { translate: 0 1px; box-shadow: 0 3px 8px -4px rgb(0 0 0 / 0.55); }
+.front__turn:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* The arrow keeps nudging downward: this box scrolls */
+  .front__turn-arrow { animation: turn-nudge 1.8s var(--ease-in-out) infinite; }
+  .front__turn:hover .front__turn-arrow { animation-duration: 0.9s; }
+
+  /* Idle at the top: the front lifts on its hinge twice, then rests */
+  .turn--live.turn--hint .front { animation: box-peek 1.5s var(--ease-in-out) 2; }
+}
+
+@keyframes turn-nudge {
+  0%, 55%, 100% { translate: 0 0; }
+  25% { translate: 0 5px; }
+}
+@keyframes box-peek {
+  0%, 100% { rotate: y 0deg; }
+  40% { rotate: y 11deg; }
+  70% { rotate: y 3deg; }
+}
+
+@media (max-width: 767px) {
+  .front__turn-hint { display: none; }
+}
 
 .front__shade {
   position: absolute;
@@ -522,17 +586,40 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   --btn-bg: var(--yellow);
   --btn-fg: var(--black);
   --sysreq-head: var(--red);
+  --status-bg: var(--yellow);
+  --status-fg: var(--black);
   background: var(--tone-bg);
   color: var(--tone-ink);
   border-top: 3px solid var(--black);
 }
-.back--blue {
+/* Four ink slots per edition, cycled down the page. The black box keeps
+   its fields dark; the white box prints on paper, yellow, blue and red. */
+.back--t2 {
   --tone-bg: var(--blue);
   --tone-ink: #ffffff;
   --tone-ink-2: #dfe6f7;
   --tone-frame: var(--black);
 }
-.back--paper {
+.back--t3 {
+  --tone-bg: var(--oxblood);
+  --tone-ink: #ffffff;
+  --tone-ink-2: #f1d6d3;
+  --tone-frame: var(--white);
+}
+.back--t4 {
+  --tone-bg: var(--red);
+  --tone-ink: #ffffff;
+  --tone-ink-2: #ffffff;
+  --tone-mark: var(--black);
+  --tone-frame: var(--black);
+  --btn-bg: var(--black);
+  --btn-fg: #ffffff;
+  --sysreq-head: var(--black);
+  --status-bg: var(--black);
+  --status-fg: var(--yellow);
+}
+
+[data-theme="light"] .back--t1 {
   --tone-bg: var(--white);
   --tone-ink: var(--black);
   --tone-ink-2: #45423b;
@@ -542,15 +629,24 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   --btn-bg: var(--red);
   --btn-fg: #ffffff;
 }
-.back--red {
-  --tone-bg: var(--red);
-  --tone-ink: #ffffff;
-  --tone-ink-2: #fde3e0;
+[data-theme="light"] .back--t2 {
+  --tone-bg: var(--yellow);
+  --tone-ink: var(--black);
+  --tone-ink-2: #3d3000;
+  --tone-title: var(--black);
   --tone-mark: var(--black);
   --tone-frame: var(--black);
   --btn-bg: var(--black);
-  --btn-fg: #ffffff;
-  --sysreq-head: var(--black);
+  --btn-fg: var(--yellow);
+  --status-bg: var(--black);
+  --status-fg: var(--yellow);
+}
+[data-theme="light"] .back--t3 {
+  --tone-bg: var(--blue);
+  --tone-ink: #ffffff;
+  --tone-ink-2: #dfe6f7;
+  --tone-title: var(--yellow);
+  --tone-frame: var(--black);
 }
 
 .back__inner {
@@ -597,7 +693,53 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   text-wrap: pretty;
 }
 
-.back__shot { grid-area: shot; display: grid; gap: 10px; align-content: start; }
+.back__shot { grid-area: shot; position: relative; display: grid; align-content: start; }
+
+/* Status sticker slapped on the screenshot, as on a pre-release box */
+.back__status {
+  position: absolute;
+  top: -14px;
+  left: -10px;
+  z-index: 1;
+  padding: 0.35em 0.8em;
+  background: var(--status-bg);
+  color: var(--status-fg);
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  rotate: -4deg;
+  box-shadow: var(--sh-lift);
+}
+
+/* Developer's note: how the thing was actually made */
+.back__built {
+  display: grid;
+  gap: 8px;
+  max-width: 56ch;
+  padding-top: 18px;
+  border-top: 3px solid var(--tone-mark);
+  color: var(--tone-ink-2);
+  line-height: 1.5;
+}
+.back__built-label {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--tone-ink);
+}
+
+.back__private {
+  align-self: center;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  font-stretch: var(--stretch-print);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--tone-ink-2);
+}
 
 .shot {
   aspect-ratio: 5 / 3;
@@ -614,8 +756,14 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   height: 100% !important;
 }
 
-.back__features {
+.back__body {
   grid-area: feat;
+  display: grid;
+  gap: clamp(24px, 2.6vw, 36px);
+  align-content: start;
+}
+
+.back__features {
   display: grid;
   gap: 14px;
   max-width: 56ch;
@@ -641,7 +789,7 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
 .sysreq {
   grid-area: req;
   align-self: start;
-  background: #ffffff;
+  background: var(--sysreq-bg);
   color: var(--black);
   border: 3px solid var(--black);
 }

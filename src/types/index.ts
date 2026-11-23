@@ -14,6 +14,12 @@ export interface Project {
   /** System Requirements panel: the real stack, grouped. */
   requires: Requirement[]
   tags: string[]
+  /** Box sticker for unreleased work, e.g. "In development". */
+  status?: string
+  /** How it was built: the honest line on agent-directed work. */
+  howBuilt?: string
+  /** Source exists but is private: no repo link to show. */
+  privateRepo?: boolean
   caseStudyUrl?: string
   githubUrl?: string
   liveUrl?: string

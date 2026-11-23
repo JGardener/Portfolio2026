@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { gsap, prefersReducedMotion } from '../../lib/gsap'
+import { gsap, ScrollTrigger, prefersReducedMotion } from '../../lib/gsap'
 import { projects } from '../../data/projects'
 import CoverArt from '../ui/CoverArt'
 import PlaySticker from '../ui/Sticker'
@@ -26,6 +26,7 @@ export default function BoxTurn({ onPlayGame }: BoxTurnProps) {
   const frontRef = useRef<HTMLElement>(null)
   const shadeRef = useRef<HTMLDivElement>(null)
   const backRef = useRef<HTMLElement>(null)
+  const triggerRef = useRef<ScrollTrigger | null>(null)
 
   useEffect(() => {
     const turn = turnRef.current
@@ -52,8 +53,20 @@ export default function BoxTurn({ onPlayGame }: BoxTurnProps) {
         .fromTo(shade, { opacity: 0 }, { opacity: 0.75, ease: 'power1.in', duration: 1 }, 0)
         .fromTo(back, { scale: 0.95 }, { scale: 1, ease: 'power2.out', duration: 1 }, 0)
         .set(front, { visibility: 'hidden' }, 1)
+      triggerRef.current = tl.scrollTrigger ?? null
+
+      // Idle at the top: the front lifts on its hinge, twice, to show it opens.
+      const hint = window.setTimeout(() => {
+        if (window.scrollY < 8) turn.classList.add('turn--hint')
+      }, 2200)
+      const stopHint = () => turn.classList.remove('turn--hint')
+      window.addEventListener('scroll', stopHint, { once: true, passive: true })
 
       return () => {
+        window.clearTimeout(hint)
+        window.removeEventListener('scroll', stopHint)
+        turn.classList.remove('turn--hint')
+        triggerRef.current = null
         tl.scrollTrigger?.kill()
         tl.kill()
         gsap.set([front, shade, back], { clearProps: 'all' })
@@ -63,6 +76,17 @@ export default function BoxTurn({ onPlayGame }: BoxTurnProps) {
 
     return () => mm.revert()
   }, [])
+
+  // Turn it over: glide to the end of the turn (or straight to the back
+  // cover when there is no pinned turn), then hand focus to the back cover.
+  const turnOver = () => {
+    const back = backRef.current
+    if (!back) return
+    const st = triggerRef.current
+    const top = st ? st.end : back.getBoundingClientRect().top + window.scrollY - spineTopOffset()
+    window.scrollTo({ top, behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
+    back.querySelector<HTMLElement>('#inside-title')?.focus({ preventScroll: true })
+  }
 
   return (
     <div ref={turnRef} className="turn">
@@ -85,17 +109,18 @@ export default function BoxTurn({ onPlayGame }: BoxTurnProps) {
             <span className="front__inside-label">Inside</span>
             {projects.map((p) => p.title).join(' · ')}
           </p>
-          <a href="#inside" className="front__turn">
-            Turn it over
-            <ArrowDownIcon />
-          </a>
+          <button type="button" className="front__turn" onClick={turnOver}>
+            <span className="front__turn-label">Turn it over</span>
+            <span className="front__turn-hint">or scroll</span>
+            <ArrowDownIcon className="front__turn-arrow" />
+          </button>
         </div>
         <div ref={shadeRef} className="front__shade" aria-hidden="true" />
       </header>
 
       <section ref={backRef} id="inside" className="backcover" aria-labelledby="inside-title">
         <div className="backcover__inner">
-          <h2 id="inside-title" className="backcover__title">
+          <h2 id="inside-title" className="backcover__title" tabIndex={-1}>
             I build interfaces for games and for products.
           </h2>
           <div className="backcover__copy">

@@ -5,6 +5,9 @@ import GameThumb from '../ui/GameThumb'
 import VISIOThumb from '../ui/VISIOThumb'
 import GithubHeatmapThumb from '../ui/GithubHeatmapThumb'
 import BloodwebThumb from '../ui/BloodwebThumb'
+import DuoEndoThumb from '../ui/DuoEndoThumb'
+import SixfoldThumb from '../ui/SixfoldThumb'
+import GiantsKeeperThumb from '../ui/GiantsKeeperThumb'
 import { ArrowOutIcon, PlayIcon } from '../ui/Icons'
 
 // Let one-word camel-case names ("GithubDashboard") break between their parts
@@ -20,10 +23,14 @@ const thumbRegistry: Record<string, ComponentType> = {
   'project-2': VISIOThumb,
   'project-3': GithubHeatmapThumb,
   'project-4': BloodwebThumb,
+  duoendo: DuoEndoThumb,
+  sixfold: SixfoldThumb,
+  'giants-keeper': GiantsKeeperThumb,
 }
 
-// Each back panel is printed in its own colour field.
-const tones = ['black', 'blue', 'paper', 'red'] as const
+// Each back panel is printed in its own colour field. The four slots are
+// inked per edition in index.css: the black box and the white box differ.
+const tones = ['t1', 't2', 't3', 't4'] as const
 
 interface WorkProps {
   onPlayGame: () => void
@@ -43,14 +50,24 @@ function BackPanel({ project, tone, onPlayGame }: { project: Project; tone: stri
         </header>
 
         <figure className="back__shot">
+          {project.status && <figcaption className="back__status">{project.status}</figcaption>}
           <div className="shot">{Thumb ? <Thumb /> : null}</div>
         </figure>
 
-        <ul className="back__features">
-          {project.features.map((f) => (
-            <li key={f}>{f}</li>
-          ))}
-        </ul>
+        <div className="back__body">
+          <ul className="back__features">
+            {project.features.map((f) => (
+              <li key={f}>{f}</li>
+            ))}
+          </ul>
+
+          {project.howBuilt && (
+            <div className="back__built">
+              <p className="back__built-label">How it was built</p>
+              <p>{project.howBuilt}</p>
+            </div>
+          )}
+        </div>
 
         <aside className="sysreq" aria-label={`${project.title} system requirements`}>
           <p className="sysreq__head">System requirements</p>
@@ -84,6 +101,9 @@ function BackPanel({ project, tone, onPlayGame }: { project: Project; tone: stri
               <ArrowOutIcon />
               <span className="sr-only">(opens in a new tab)</span>
             </a>
+          )}
+          {project.privateRepo && !project.githubUrl && (
+            <p className="back__private">Source is private · not yet released</p>
           )}
         </div>
       </div>
