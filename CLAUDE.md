@@ -8,10 +8,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 npm run dev        # start Vite dev server with HMR
 npm run build      # tsc type-check then Vite production build
 npm run lint       # ESLint across all files
+npm run typecheck  # tsc -b --noEmit across the project references
+npm test           # Vitest run (jsdom); npm run test:watch for watch mode
 npm run preview    # serve the production build locally
 ```
 
-There is no test runner configured.
+Tests are Vitest + Testing Library in jsdom, colocated as `*.test.ts(x)` under `src/` (setup in `src/test/`). PixiJS thumbnails are mocked in component tests — jsdom has no WebGL. Use `mockMatchMedia` from `src/test/matchMedia.ts` to exercise the reduced-motion path. CI (`.github/workflows/ci.yml`) runs typecheck, lint, test and build on Node 22.
 
 ## Stack
 

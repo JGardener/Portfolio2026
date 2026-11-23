@@ -1,5 +1,9 @@
 # Portfolio 2026 — James Gardener
 
+[![CI](https://github.com/JGardener/Portfolio2026/actions/workflows/ci.yml/badge.svg)](https://github.com/JGardener/Portfolio2026/actions/workflows/ci.yml)
+
+**Live site: [jgardener-portfolio.vercel.app](https://jgardener-portfolio.vercel.app)**
+
 Personal portfolio site. React 19 + TypeScript + Vite, with GSAP animations, a canvas particle system, and a playable PixiJS arcade game embedded as a modal.
 
 ## Stack
@@ -17,6 +21,8 @@ npm install
 npm run dev      # http://localhost:5173
 npm run build    # type-check + production build
 npm run lint     # ESLint
+npm run typecheck # tsc -b --noEmit
+npm test         # Vitest (jsdom)
 npm run preview  # serve the production build
 ```
 
