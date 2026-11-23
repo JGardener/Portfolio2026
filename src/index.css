@@ -673,12 +673,14 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
     "req  links";
 }
 
-.back__head { grid-area: head; display: grid; gap: 14px; }
+.back__head { grid-area: head; display: grid; gap: 14px; container-type: inline-size; min-width: 0; }
 
 .back__title {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(2.4rem, 5.6vw, 5.5rem);
+  /* Sized to its own column, so the longest word (DASHBOARD) never runs
+     into the screenshot beside it */
+  font-size: clamp(2rem, 13cqi, 5.5rem);
   line-height: 0.95;
   text-transform: uppercase;
   color: var(--tone-title);

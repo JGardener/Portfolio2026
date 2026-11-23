@@ -161,7 +161,7 @@ export const projects: Project[] = [
       { label: 'Testing', value: '841 automated tests, headless and GPU' },
     ],
     tags: ['Unreal Engine 5', 'C++', 'HLSL', 'Compute shaders'],
-    status: 'Playable first zone',
+    status: 'In development',
     privateRepo: true,
     featured: true,
   },
