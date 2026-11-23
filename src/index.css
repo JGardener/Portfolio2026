@@ -205,7 +205,7 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   text-decoration: none;
   transition: color 150ms var(--ease-out);
 }
-.spine__link:hover { color: var(--yellow); }
+.spine__link:hover { text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 3px; text-underline-offset: 0.3em; }
 
 .spine__theme {
   display: grid;
