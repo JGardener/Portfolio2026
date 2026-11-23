@@ -102,7 +102,6 @@ export default function BoxTurn({ onPlayGame }: BoxTurnProps) {
         <div className="front__art">
           <CoverArt />
           <PlaySticker onClick={onPlayGame} className="front__sticker" />
-          <p className="front__credit">Cover art: Asteroid Blaster, running live</p>
         </div>
 
         <div className="front__foot">

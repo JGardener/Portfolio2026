@@ -327,16 +327,6 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   translate: 0 -50%;
 }
 
-.front__credit {
-  position: absolute;
-  left: var(--gutter);
-  bottom: 14px;
-  font-size: var(--fs-small);
-  font-stretch: var(--stretch-print);
-  font-weight: 600;
-  color: #c9c5ba;
-}
-
 .front__foot {
   display: flex;
   flex-wrap: wrap;
@@ -428,10 +418,6 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   70% { rotate: y 3deg; }
 }
 
-@media (max-width: 767px) {
-  .front__turn-hint { display: none; }
-}
-
 .front__shade {
   position: absolute;
   inset: 0;
@@ -497,7 +483,6 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   .front { height: max(calc(100svh - var(--spine-top)), 34rem); }
   .sticker { width: 8.75rem; }
   .front__art .front__sticker { top: auto; bottom: 36px; translate: none; right: 16px; }
-  .front__credit { bottom: 10px; left: 16px; right: 16px; }
   .front__inside { font-size: 0.875rem; }
 }
 
@@ -547,12 +532,12 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
 .backcover__contents { grid-area: contents; align-self: center; }
 
 .backcover__contents-title {
-  margin-bottom: 12px;
-  font-weight: 800;
-  font-stretch: var(--stretch-print);
+  margin-bottom: 16px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.875rem, 2.8vw, 2.5rem);
+  line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: var(--fs-small);
 }
 
 .contents { border-bottom: 3px solid var(--black); }
@@ -595,6 +580,7 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   --sysreq-head: var(--red);
   --status-bg: var(--yellow);
   --status-fg: var(--black);
+  --tone-extrude: var(--red);
   background: var(--tone-bg);
   color: var(--tone-ink);
   border-top: 3px solid var(--black);
@@ -602,6 +588,7 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
 /* Four ink slots per edition, cycled down the page. The black box keeps
    its fields dark; the white box prints on paper, yellow, blue and red. */
 .back--t2 {
+  --tone-extrude: var(--black);
   --tone-bg: var(--blue);
   --tone-ink: #ffffff;
   --tone-ink-2: #dfe6f7;
@@ -614,6 +601,7 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   --tone-frame: var(--white);
 }
 .back--t4 {
+  --tone-extrude: var(--black);
   --tone-bg: var(--red);
   --tone-ink: #ffffff;
   --tone-ink-2: #ffffff;
@@ -627,6 +615,7 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
 }
 
 [data-theme="light"] .back--t1 {
+  --tone-extrude: var(--black);
   --tone-bg: var(--white);
   --tone-ink: var(--black);
   --tone-ink-2: #45423b;
@@ -637,6 +626,7 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   --btn-fg: #ffffff;
 }
 [data-theme="light"] .back--t2 {
+  --tone-extrude: var(--red);
   --tone-bg: var(--yellow);
   --tone-ink: var(--black);
   --tone-ink-2: #3d3000;
@@ -649,6 +639,7 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   --status-fg: var(--yellow);
 }
 [data-theme="light"] .back--t3 {
+  --tone-extrude: var(--black);
   --tone-bg: var(--blue);
   --tone-ink: #ffffff;
   --tone-ink-2: #dfe6f7;
@@ -692,6 +683,12 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   text-transform: uppercase;
   color: var(--tone-title);
   overflow-wrap: break-word;
+  /* The cover's printed extrusion, carried onto every box-back title */
+  text-shadow:
+    1px 1px 0 var(--tone-extrude),
+    2px 2px 0 var(--tone-extrude),
+    3px 3px 0 var(--tone-extrude),
+    4px 4px 0 var(--tone-extrude);
 }
 
 .back__tagline {
@@ -898,6 +895,11 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   text-transform: uppercase;
   color: var(--title-fill);
   margin-bottom: clamp(32px, 4vw, 56px);
+  text-shadow:
+    1px 1px 0 var(--title-extrude),
+    2px 2px 0 var(--title-extrude),
+    3px 3px 0 var(--title-extrude),
+    4px 4px 0 var(--title-extrude);
 }
 .credits__list { display: grid; gap: clamp(40px, 5vw, 64px); }
 .credit { display: grid; gap: 10px; }
@@ -981,6 +983,10 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   line-height: 1;
   text-transform: uppercase;
+  text-shadow:
+    1px 1px 0 var(--red),
+    2px 2px 0 var(--red),
+    3px 3px 0 var(--red);
 }
 .publisher__email {
   font-weight: 800;
