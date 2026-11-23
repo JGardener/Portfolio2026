@@ -303,6 +303,13 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   line-height: 1.25;
 }
 
+.front__side {
+  margin-top: 10px;
+  color: var(--ink-2);
+  font-weight: 650;
+  font-size: clamp(0.9375rem, 0.6vw + 0.6rem, 1.125rem);
+}
+
 .front__art {
   position: relative;
   background: var(--black);

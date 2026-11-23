@@ -96,6 +96,7 @@ export default function BoxTurn({ onPlayGame }: BoxTurnProps) {
             <span>James</span> <span>Gardener</span>
           </h1>
           <p className="front__sub">Frontend developer — React, TypeScript, PixiJS</p>
+          <p className="front__side">Making games on the side.</p>
         </div>
 
         <div className="front__art">
