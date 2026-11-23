@@ -20,8 +20,10 @@
   --screen:     #0b0b0c;
   --oxblood:    #5a0d0a;
 
-  /* The printed System Requirements box: dimmed on the black box */
-  --sysreq-bg:  #ebe6da;
+  /* The System Requirements box: a dark printed plate on the black box */
+  --sysreq-bg:   #1b1a17;
+  --sysreq-ink:  #f1ede3;
+  --sysreq-rule: #45423b;
 
   /* Edition (theme): dark = the black box */
   --paper:        var(--black);
@@ -75,6 +77,8 @@
   --title-fill:    var(--red);
   --title-extrude: var(--black);
   --sysreq-bg:     #ffffff;
+  --sysreq-ink:    var(--black);
+  --sysreq-rule:   #b9b4a8;
   color-scheme: light;
 }
 
@@ -796,14 +800,16 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   grid-area: req;
   align-self: start;
   background: var(--sysreq-bg);
-  color: var(--black);
-  border: 3px solid var(--black);
+  color: var(--sysreq-ink);
+  border: 3px solid var(--sysreq-edge, var(--black));
 }
+/* On the black box the plate is framed like the screenshot above it */
+:root:not([data-theme="light"]) .sysreq { --sysreq-edge: var(--tone-frame); }
 .sysreq__head {
   padding: 8px 14px;
   background: var(--sysreq-head);
   color: #ffffff;
-  border-bottom: 3px solid var(--black);
+  border-bottom: 3px solid var(--sysreq-edge, var(--black));
   font-family: var(--font-display);
   text-transform: uppercase;
   font-size: 0.9375rem;
@@ -815,7 +821,7 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px
   grid-template-columns: 7rem minmax(0, 1fr);
   gap: 12px;
   padding: 8px 0;
-  border-top: 1px solid #b9b4a8;
+  border-top: 1px solid var(--sysreq-rule);
 }
 .sysreq__row:first-child { border-top: 0; }
 .sysreq__row dt {
