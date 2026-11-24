@@ -7,65 +7,75 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 npm run dev        # start Vite dev server with HMR
 npm run build      # tsc type-check then Vite production build
-npm run lint       # ESLint across all files
+npm run lint       # ESLint across all files (packages/*/dist is ignored)
 npm run typecheck  # tsc -b --noEmit across the project references
 npm test           # Vitest run (jsdom); npm run test:watch for watch mode
 npm run preview    # serve the production build locally
 ```
 
-Tests are Vitest + Testing Library in jsdom, colocated as `*.test.ts(x)` under `src/` (setup in `src/test/`). PixiJS thumbnails are mocked in component tests — jsdom has no WebGL. Use `mockMatchMedia` from `src/test/matchMedia.ts` to exercise the reduced-motion path. CI (`.github/workflows/ci.yml`) runs typecheck, lint, test and build on Node 22.
+Tests are Vitest + Testing Library in jsdom, colocated as `*.test.ts(x)` under `src/` (setup in `src/test/`). PixiJS is mocked in component tests, since jsdom has no WebGL. CI (`.github/workflows/ci.yml`) runs typecheck, lint, test and build on Node 22. Append `?edition=light` or `?edition=dark` to the URL to force a theme (handy for screenshots).
+
+## Design source of truth
+
+- `PRODUCT.md`: audience, positioning, the evidence on hand and what must never be claimed. Read it before writing any copy.
+- `DESIGN.md` and `.impeccable/design.json`: the visual system (tokens, type, components).
+- `.impeccable/surfaces/src-app-tsx.md`: the direction contract for the page.
+
+The site is a **1990s big-box PC game**. The box front shows Asteroid Blaster as live cover art; every project is a back-of-box panel with a live "screenshot", feature bullets and a System Requirements table that is its stack. Keep new work inside that world. Avoid: glows, glassmorphism, gradient text, eyebrow labels above headings, section numbers, loaders, marquees, count-up stats and custom cursors. Those are what the redesign removed.
 
 ## Stack
 
 - **React 19** + **TypeScript** (~6.0), bundled with **Vite 8**
-- **Tailwind CSS v4** (imported via `@import "tailwindcss"` in `index.css`)
-- **GSAP 3** with ScrollTrigger for all scroll-driven and timeline animations
-- **PixiJS v8** (`pixi.js`) — used inside the `asteroid-blaster` npm package rendered in the game modal
-- Fonts: Inter (body), Syne (display headings), JetBrains Mono (mono/labels) — all via `@fontsource/*`
+- **GSAP 3** with ScrollTrigger: used for the box turn and the game modal only
+- **PixiJS v8**: the live cover art, the project thumbnails, and the `asteroid-blaster` game package
+- **Tailwind CSS v4** is imported, but the design system is plain CSS custom properties in `src/index.css`
+- Fonts via `@fontsource`: **Bowlby One** (display) and **Archivo Variable** (body; the 87.5% width is the "small print" voice)
 
 ## Architecture
 
-### Data flow
+`main.tsx` → `App.tsx`. App owns two pieces of state: `theme` and `gameOpen`.
 
-`main.tsx` → `App.tsx` owns three pieces of global state: `theme` (dark/light, persisted to `localStorage` and applied as `data-theme` on `<html>`), `loaded` (controls the intro `Loader`), and `gameOpen` (controls `GameModal`). Everything else is stateless.
+- **Theme ("edition").** `index.html` sets `data-theme` on `<html>` before first paint from `localStorage.theme` or `?edition=`, and App reads it back from there. Dark is the *black box*, light the *white box*.
+- **Layout.** `Spine` (fixed red spine on the left, a top bar under 768px: nav, JG mark, theme toggle) → `BoxTurn` (box front + back cover) → `Work` (project panels) → `Credits` (Experience) → `Contact` (yellow publisher strip with a barcode). `GameModal` is lazy-loaded.
+- **Data.** Content is data-driven: `src/data/projects.ts` and `src/data/experience.ts`, typed in `src/types/index.ts`. A `Project` has `tagline`, `features[]`, `requires[]` (System Requirements rows), plus optional `status` (a pre-release sticker), `howBuilt` (the "How it was built" note for agent-directed work), `privateRepo`, `githubUrl`, `liveUrl` and `hasGame`.
 
-Static content lives in `src/data/`:
-- `projects.ts` — array of `Project` objects rendered by the `Work` section
-- `experience.ts` — array of `ExperienceEntry` objects rendered by the `Experience` section
+### The box turn (`BoxTurn.tsx`)
 
-Shared types are in `src/types/index.ts` (`Project`, `ExperienceEntry`, `Theme`).
+The signature interaction. The box front is hinged on the spine. A pinned, scrubbed ScrollTrigger rotates it open (rotateY around its left edge) to reveal the back cover underneath.
+- **Turn it over** is a button. It smooth-scrolls to the trigger's end and moves focus to the back-cover heading.
+- If the visitor sits idle at the top, a `turn--hint` class plays a CSS hinge peek twice.
+- Under `prefers-reduced-motion` there is no pin: front and back simply stack.
+
+### Project panels (`Work.tsx`)
+
+- Each panel takes a tone slot `back--t1…t4` in page order. **The slots are inked per edition in `index.css`:**
+  - black box: black, blue, oxblood, red;
+  - white box: paper, yellow, blue, red.
+  - Tone tokens (`--tone-bg`, `--tone-ink`, `--tone-ink-2`, `--tone-title`, `--tone-mark`, `--tone-frame`, `--btn-*`, `--status-*`) drive everything inside a panel. Check WCAG AA when adding or changing one.
+- Titles size to their own column with a container query, so long words never collide with the thumbnail.
+- Thumbnails are registered by `project.id` in `thumbRegistry`.
+
+### Live thumbnails (`src/components/ui/*Thumb.tsx`, `CoverArt.tsx`)
+
+Each is a small PixiJS app. Follow the existing pattern exactly:
+- a 200×120 logical canvas at `resolution: min(dpr, 2) * 2` with `autoDensity`;
+- cancelled/initialized guards around the async `app.init`;
+- an IntersectionObserver that pauses the ticker offscreen;
+- full destroy on unmount;
+- `prefersReducedMotion()` from `src/lib/gsap`, which renders one representative still and never starts the ticker.
+
+Keep them cheap: pool objects, avoid per-frame allocation and filters, and drive animation from `ticker.deltaTime` or elapsed time, never frame counts. `SixfoldThumb` is the heaviest; don't add more like it without checking phone performance.
 
 ### Animation conventions
 
-All GSAP usage must import from `src/lib/gsap.ts`, never directly from `gsap`. That module registers `ScrollTrigger` and `SplitText` once, exports named easing constants (`ease.out`, `ease.inOut`, `ease.draw`, `ease.soft`), and exports `prefersReducedMotion()`. Every component that animates checks `prefersReducedMotion()` first and `gsap.set`s the final state instead when it returns true.
-
-Every `useEffect` that creates a GSAP animation must return a cleanup that calls `.kill()` on the animation and `.kill()` on its `scrollTrigger`. The `useScrollReveal` hook (`src/hooks/useScrollReveal.ts`) handles the common fade-up pattern — use it before reaching for a raw GSAP call.
-
-SplitText reveals (hero name, contact headline) must wait on `document.fonts.ready` before splitting, and call `split.revert()` in cleanup.
-
-### Hero particle system
-
-`src/lib/pixiHero.ts` runs a PixiJS v8 `Application` with a single `ParticleContainer` (`dynamicProperties: { position, color }`) inside the hero. ~450–2400 particles (scaled by viewport area) spring toward letterform targets sampled from an offscreen 2D canvas, cycling through the words JG → REACT → TYPESCRIPT → PIXIJS → GSAP → WEBGL every 3 s, with pointer repulsion and an ambient parallax starfield behind. Tints follow the `--accent` token and re-resolve on `data-theme` mutation.
-
-`initPixiHero(host)` returns a handle: `setScatter(0..1)` (wired to a scrubbed ScrollTrigger in `Hero.tsx` so the field disperses as the hero scrolls out) and `destroy()` which must be called on unmount. The ticker pauses via IntersectionObserver when the hero is offscreen. Under `prefers-reduced-motion` the field renders statically on "JG" with no morphing or repulsion.
-
-### Shared section pieces
-
-- `SectionHeading` (`src/components/ui/SectionHeading.tsx`) — mono eyebrow + clip-path-wiped display title; use it for every section header so numbering/treatment stays consistent (01 Work, 02 About, 03 Experience, 04 Contact).
-- `Marquee` (`src/components/ui/Marquee.tsx`) — infinite skills ticker (two duplicated groups slid −50%), scroll-velocity boosts its `timeScale`. Rendered twice in `App.tsx` (`reverse` flips direction).
-- `Loader` counts 000→100 with a progress bar, then slides up; `App` passes `loaded` into `Hero` to gate the SplitText entrance.
-
-### Work section thumbnails
-
-`Work.tsx` renders each project as a `.showcase` row (alternating panel/info sides via `:nth-child(even)`, stacking on mobile) with a ghost index numeral and a scroll-scrubbed parallax on the thumb. It uses a `thumbRegistry` (a `Record<string, ComponentType>`) that maps project IDs to thumbnail components (live Pixi mini-scenes in `src/components/ui/`). When adding a new project with a custom thumbnail, add the component there and register it by `project.id` in `thumbRegistry`. Projects with `hasGame: true` render `GameThumb` instead and wire up the `onPlayGame` callback. Thumbs render at their native 200×120 and are scaled up by `--tscale` on `.showcase__thumb-inner`.
-
-### Custom cursor
-
-`LensCursor` (`src/components/layout/LensCursor.tsx`) provides a circular backdrop-filter lens that replaces the default cursor. Global CSS sets `cursor: none` on all elements; `LensCursor` is hidden on touch devices via `@media (hover: none)`. The lens expands on hover over `a` and `button` elements.
+All GSAP imports go through `src/lib/gsap.ts`, never `gsap` directly. It registers ScrollTrigger and SplitText and exports `prefersReducedMotion()`.
+- Every GSAP effect checks reduced motion first.
+- Every effect returns a cleanup that kills its timeline and ScrollTrigger.
+- The page has one authored motion moment (the turn) plus the live thumbnails. Don't add per-section entrance animations.
 
 ### Game modal
 
-`GameModal` renders the `AsteroidBlaster` component (from the `asteroid-blaster` npm package) inside a GSAP-animated portal. It receives an `onClose` callback that triggers the exit animation before unmounting.
+`GameModal` renders `AsteroidBlaster` from the `asteroid-blaster` package in a portal. It's opened from the PLAY NOW sticker and from the Asteroid Blaster panel. It returns focus to its opener on close.
 
 ### Updating asteroid-blaster
 
@@ -79,11 +89,11 @@ To update manually (e.g. if the hook didn't run):
 3. Also update the `version` field in `packages\asteroid-blaster\package.json` to match
 4. Commit and push
 
-## CSS design tokens
+## Copy rules
 
-All colours, spacing radii, shadows, and easing curves are CSS custom properties defined in `index.css` under `:root` (dark theme defaults) and overridden under `[data-theme="light"]`. Always use these tokens (`var(--bg)`, `var(--accent)`, `var(--font-mono)`, etc.) rather than hardcoded values. Tailwind is available for utility classes but the design system is token-first.
-
-Reusable CSS classes defined in `index.css`: `.section` (page section padding/max-width), `.mono-label` (uppercase mono label style), `.work-row` (project list grid), `.mono-btn`, `.link-draw`, `.cta-primary`.
+Plain, specific, human. Facts only, from `PRODUCT.md` "Evidence on Hand". For the agent-built projects (DuoEndo, Sixfold, The Giant's Keeper):
+- say plainly that James designed, directed and verified the work;
+- never imply hand-written C++/HLSL, "shipped", passing CI, or a public repo.
 
 ## Agent skills
 

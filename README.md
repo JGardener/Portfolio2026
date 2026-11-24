@@ -2,17 +2,15 @@
 
 [![CI](https://github.com/JGardener/Portfolio2026/actions/workflows/ci.yml/badge.svg)](https://github.com/JGardener/Portfolio2026/actions/workflows/ci.yml)
 
-**Live site: [jgardener-portfolio.vercel.app](https://jgardener-portfolio.vercel.app)**
-
-Personal portfolio site. React 19 + TypeScript + Vite, with GSAP animations, a canvas particle system, and a playable PixiJS arcade game embedded as a modal.
+Personal portfolio site, designed as a 1990s big-box PC game: the box front carries a live Asteroid Blaster as cover art, and every project gets a back-of-box panel with a live PixiJS "screenshot", feature bullets and a System Requirements table. React 19 + TypeScript + Vite, with GSAP for the box turn and a playable PixiJS arcade game in a modal.
 
 ## Stack
 
 - **React 19** + **TypeScript** — Vite 8, `moduleResolution: bundler`
-- **GSAP 3** + ScrollTrigger — all scroll-driven and timeline animations
-- **PixiJS v8** — live asteroid thumbnail and the full Asteroid Blaster game
+- **GSAP 3** + ScrollTrigger — the box-turn interaction and the game modal
+- **PixiJS v8** — live cover art, project thumbnails, and the full Asteroid Blaster game
 - **Tailwind CSS v4** — utility layer on top of a CSS custom-property design system
-- **Fonts** — Inter (body), Syne (display), JetBrains Mono (labels/mono)
+- **Fonts** — Bowlby One (display), Archivo Variable (body and small print)
 
 ## Local development
 
@@ -21,8 +19,6 @@ npm install
 npm run dev      # http://localhost:5173
 npm run build    # type-check + production build
 npm run lint     # ESLint
-npm run typecheck # tsc -b --noEmit
-npm test         # Vitest (jsdom)
 npm run preview  # serve the production build
 ```
 
@@ -43,11 +39,11 @@ npm run build
 
 | Section | ID |
 |---|---|
-| Hero — particle field + SVG wordmark | `#hero` |
-| Work — project list with live PixiJS thumbnails | `#work` |
-| About — skills grid | `#about` |
-| Experience — timeline | `#experience` |
-| Contact — email + social links | `#contact` |
+| Box front: live cover art, PLAY NOW, Turn it over | `#top` |
+| Back cover: intro and "In this box" contents | `#inside` |
+| Work: one back-of-box panel per project | `#work` |
+| Experience: credits page | `#experience` |
+| Contact: publisher strip | `#contact` |
 
 ## Project
 

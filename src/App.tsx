@@ -1,14 +1,10 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
-import Hero from './components/sections/Hero'
+import Spine from './components/layout/Spine'
+import BoxTurn from './components/sections/BoxTurn'
 import Work from './components/sections/Work'
-import About from './components/sections/About'
-import Experience from './components/sections/Experience'
+import Credits from './components/sections/Credits'
 import Contact from './components/sections/Contact'
-import LensCursor from './components/layout/LensCursor'
-import Navbar from './components/layout/Navbar'
-import Loader from './components/layout/Loader'
-import Marquee from './components/ui/Marquee'
 import type { Theme } from './types'
 
 const GameModal = lazy(() => import('./components/layout/GameModal'))
@@ -20,35 +16,53 @@ function ChunkErrorFallback({ onClose }: { onClose: () => void }) {
   return null
 }
 
+// index.html applies the saved edition before first paint; start from it.
+function readTheme(): Theme {
+  return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark'
+}
+
 export default function App() {
-  const [loaded, setLoaded] = useState(false)
   const [gameOpen, setGameOpen] = useState(false)
-  const [theme, setTheme] = useState<Theme>(() => {
-    return (localStorage.getItem('theme') as Theme | null) ?? 'dark'
-  })
+  const [theme, setTheme] = useState<Theme>(readTheme)
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
-    localStorage.setItem('theme', theme)
+    try {
+      localStorage.setItem('theme', theme)
+    } catch {
+      /* storage blocked: theme still applies for this visit */
+    }
   }, [theme])
 
+  // Deep links (#contact etc.): the content renders after the browser has
+  // already tried to jump, so honour the hash once on mount.
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.slice(1))
+    if (!id) return
+    const raf = requestAnimationFrame(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'instant' })
+    })
+    return () => cancelAnimationFrame(raf)
+  }, [])
+
   const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
+  const openGame = () => setGameOpen(true)
   const handleCloseGame = () => setGameOpen(false)
 
   return (
     <>
-      {!loaded && <Loader onComplete={() => setLoaded(true)} />}
-      <LensCursor />
-      <Navbar theme={theme} onThemeToggle={toggleTheme} />
-      <main>
-        <Hero loaded={loaded} />
-        <Marquee />
-        <Work onPlayGame={() => setGameOpen(true)} />
-        <About />
-        <Experience />
-        <Marquee reverse />
+      <a href="#work" className="skip-link">
+        Skip to work
+      </a>
+      <Spine theme={theme} onThemeToggle={toggleTheme} />
+      <div className="box">
+        <main>
+          <BoxTurn onPlayGame={openGame} />
+          <Work onPlayGame={openGame} />
+          <Credits />
+        </main>
         <Contact />
-      </main>
+      </div>
       {gameOpen && (
         <ErrorBoundary fallback={<ChunkErrorFallback onClose={handleCloseGame} />}>
           <Suspense fallback={null}>

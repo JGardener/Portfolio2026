@@ -47,7 +47,8 @@ export default function BloodwebThumb() {
         height: H,
         backgroundAlpha: 0,
         antialias: true,
-        resolution: Math.min(window.devicePixelRatio, 2),
+        // Rendered at 2x the device density: the box frames scale these up.
+        resolution: Math.min(window.devicePixelRatio, 2) * 2,
         autoDensity: true,
       })
 
@@ -182,14 +183,7 @@ export default function BloodwebThumb() {
     <div
       ref={containerRef}
       aria-hidden="true"
-      style={{
-        width: '200px',
-        height: '120px',
-        backgroundColor: 'var(--bg)',
-        border: '1px solid var(--line)',
-        borderRadius: 'var(--r-md)',
-        overflow: 'hidden',
-      }}
+      className="shot__canvas"
     />
   )
 }

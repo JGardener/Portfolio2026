@@ -1,0 +1,556 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-23T18:19:38.804Z",
+  "title": "Design System: James Gardener — Big Box",
+  "extensions": {
+    "colorMeta": {
+      "red": {
+        "role": "primary",
+        "displayName": "Box Red",
+        "canonical": "#d7261e",
+        "tonalRamp": [
+          "#2f0807",
+          "#5a100d",
+          "#8a1813",
+          "#b7201a",
+          "#d7261e",
+          "#e36762",
+          "#efa8a5",
+          "#f9e1e0"
+        ]
+      },
+      "red-deep": {
+        "role": "primary",
+        "displayName": "Deep Red",
+        "canonical": "#8f130e",
+        "tonalRamp": [
+          "#1f0403",
+          "#3c0806",
+          "#5c0c09",
+          "#7a100c",
+          "#8f130e",
+          "#b15a56",
+          "#d2a19f",
+          "#efdedd"
+        ]
+      },
+      "yellow": {
+        "role": "secondary",
+        "displayName": "Sticker Yellow",
+        "canonical": "#ffc400",
+        "tonalRamp": [
+          "#382b00",
+          "#6b5200",
+          "#a37d00",
+          "#d9a700",
+          "#ffc400",
+          "#ffd64d",
+          "#ffe799",
+          "#fff7db"
+        ]
+      },
+      "blue": {
+        "role": "tertiary",
+        "displayName": "Print Blue",
+        "canonical": "#2155c4",
+        "tonalRamp": [
+          "#07132b",
+          "#0e2452",
+          "#15367d",
+          "#1c48a7",
+          "#2155c4",
+          "#6488d6",
+          "#a6bbe7",
+          "#e0e7f7"
+        ]
+      },
+      "oxblood": {
+        "role": "tertiary",
+        "displayName": "Oxblood",
+        "canonical": "#5a0d0a",
+        "tonalRamp": [
+          "#140302",
+          "#260504",
+          "#3a0806",
+          "#4d0b09",
+          "#5a0d0a",
+          "#8c5654",
+          "#bd9e9d",
+          "#e8dddd"
+        ]
+      },
+      "black": {
+        "role": "neutral",
+        "displayName": "Box Black",
+        "canonical": "#111111",
+        "tonalRamp": [
+          "#040404",
+          "#070707",
+          "#0b0b0b",
+          "#0e0e0e",
+          "#111111",
+          "#585858",
+          "#a0a0a0",
+          "#dedede"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#f7f4ec",
+        "tonalRamp": [
+          "#363634",
+          "#686663",
+          "#9e9c97",
+          "#d2cfc9",
+          "#f7f4ec",
+          "#f9f7f2",
+          "#fcfbf7",
+          "#fefdfc"
+        ]
+      },
+      "print-white": {
+        "role": "neutral",
+        "displayName": "Print White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#383838",
+          "#6b6b6b",
+          "#a3a3a3",
+          "#d9d9d9",
+          "#ffffff",
+          "#ffffff",
+          "#ffffff",
+          "#ffffff"
+        ]
+      },
+      "screen": {
+        "role": "neutral",
+        "displayName": "Screen",
+        "canonical": "#0b0b0c",
+        "tonalRamp": [
+          "#020203",
+          "#050505",
+          "#070708",
+          "#09090a",
+          "#0b0b0c",
+          "#545455",
+          "#9d9d9e",
+          "#dddddd"
+        ]
+      },
+      "ink-2-black-box": {
+        "role": "neutral",
+        "displayName": "Secondary Ink (black box)",
+        "canonical": "#c9c5ba",
+        "tonalRamp": [
+          "#2c2b29",
+          "#54534e",
+          "#817e77",
+          "#aba79e",
+          "#c9c5ba",
+          "#d9d6cf",
+          "#e9e8e3",
+          "#f7f7f5"
+        ]
+      },
+      "ink-2-white-box": {
+        "role": "neutral",
+        "displayName": "Secondary Ink (white box)",
+        "canonical": "#45423b",
+        "tonalRamp": [
+          "#0f0f0d",
+          "#1d1c19",
+          "#2c2a26",
+          "#3b3832",
+          "#45423b",
+          "#7d7b76",
+          "#b5b3b1",
+          "#e5e5e4"
+        ]
+      },
+      "rule-black-box": {
+        "role": "neutral",
+        "displayName": "Rule (black box)",
+        "canonical": "#3a3833",
+        "tonalRamp": [
+          "#0d0c0b",
+          "#181815",
+          "#252421",
+          "#31302b",
+          "#3a3833",
+          "#757470",
+          "#b0afad",
+          "#e3e3e2"
+        ]
+      },
+      "rule-white-box": {
+        "role": "neutral",
+        "displayName": "Rule (white box)",
+        "canonical": "#cfcabd",
+        "tonalRamp": [
+          "#2e2c2a",
+          "#57554f",
+          "#848179",
+          "#b0aca1",
+          "#cfcabd",
+          "#dddad1",
+          "#eceae5",
+          "#f8f8f6"
+        ]
+      },
+      "sysreq-plate-black-box": {
+        "role": "neutral",
+        "displayName": "Requirements Plate (black box)",
+        "canonical": "#1b1a17",
+        "tonalRamp": [
+          "#060605",
+          "#0b0b0a",
+          "#11110f",
+          "#171614",
+          "#1b1a17",
+          "#5f5f5d",
+          "#a4a3a2",
+          "#dfdfdf"
+        ]
+      },
+      "sysreq-ink-black-box": {
+        "role": "neutral",
+        "displayName": "Requirements Ink (black box)",
+        "canonical": "#f1ede3",
+        "tonalRamp": [
+          "#353432",
+          "#65645f",
+          "#9a9891",
+          "#cdc9c1",
+          "#f1ede3",
+          "#f5f2eb",
+          "#f9f8f4",
+          "#fdfcfb"
+        ]
+      },
+      "sysreq-rule-black-box": {
+        "role": "neutral",
+        "displayName": "Requirements Row Rule (black box)",
+        "canonical": "#45423b",
+        "tonalRamp": [
+          "#0f0f0d",
+          "#1d1c19",
+          "#2c2a26",
+          "#3b3832",
+          "#45423b",
+          "#7d7b76",
+          "#b5b3b1",
+          "#e5e5e4"
+        ]
+      },
+      "sysreq-rule-white-box": {
+        "role": "neutral",
+        "displayName": "Requirements Row Rule (white box)",
+        "canonical": "#b9b4a8",
+        "tonalRamp": [
+          "#292825",
+          "#4e4c47",
+          "#76736c",
+          "#9d998f",
+          "#b9b4a8",
+          "#cecbc2",
+          "#e3e1dc",
+          "#f5f5f3"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Box Lettering",
+        "purpose": "The box-front name only; six-step printed extrusion."
+      },
+      "headline": {
+        "displayName": "Panel Title",
+        "purpose": "Project and section titles; container-query sized to their column; four-step extrusion."
+      },
+      "title": {
+        "displayName": "Box Title",
+        "purpose": "Credit roles, contents entries, small Bowlby heads."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Project taglines and back-cover copy."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Features and descriptions, tabular numerals."
+      },
+      "label": {
+        "displayName": "Small Print",
+        "purpose": "Archivo at 87.5% width, bold uppercase: buttons, labels, legal text."
+      }
+    },
+    "editions": {
+      "selector": "[data-theme=\"light\"] on <html>, set before first paint in index.html from ?edition= or localStorage.theme; default dark.",
+      "blackBox": {
+        "paper": "black",
+        "ink": "white",
+        "inkSecondary": "#c9c5ba",
+        "rule": "#3a3833",
+        "titleFill": "yellow",
+        "titleExtrude": "red",
+        "sysreqPlate": "#1b1a17",
+        "panelSlots": [
+          "black",
+          "blue",
+          "oxblood",
+          "red"
+        ]
+      },
+      "whiteBox": {
+        "paper": "white",
+        "ink": "black",
+        "inkSecondary": "#45423b",
+        "rule": "#cfcabd",
+        "titleFill": "red",
+        "titleExtrude": "black",
+        "sysreqPlate": "#ffffff",
+        "panelSlots": [
+          "white (paper)",
+          "yellow",
+          "blue",
+          "red"
+        ]
+      },
+      "toneTokens": [
+        "--tone-bg",
+        "--tone-ink",
+        "--tone-ink-2",
+        "--tone-title",
+        "--tone-mark",
+        "--tone-frame",
+        "--tone-extrude",
+        "--btn-bg",
+        "--btn-fg",
+        "--status-bg",
+        "--status-fg",
+        "--sysreq-head"
+      ]
+    },
+    "shadows": [
+      {
+        "name": "lift",
+        "value": "0 10px 24px -8px rgb(0 0 0 / 0.45)",
+        "purpose": "Screenshot frame and status sticker: objects sitting on the print."
+      },
+      {
+        "name": "sticker-drop",
+        "value": "drop-shadow(0 8px 14px rgb(0 0 0 / 0.5))",
+        "purpose": "PLAY NOW burst (filter, follows the starburst outline)."
+      },
+      {
+        "name": "turn-rest",
+        "value": "0 6px 14px -6px rgb(0 0 0 / 0.55)",
+        "purpose": "Turn it over button at rest; 0 10px 18px -6px on hover, 0 3px 8px -4px on press."
+      },
+      {
+        "name": "spine-fold",
+        "value": "inset -3px 0 0 #111111",
+        "purpose": "The fold where spine meets box (inset 0 -3px 0 on phones)."
+      },
+      {
+        "name": "extrusion-cover",
+        "value": "1px 1px 0 … 6px 6px 0 var(--title-extrude)",
+        "purpose": "Printed title extrusion (text-shadow), box-front name."
+      },
+      {
+        "name": "extrusion-panel",
+        "value": "1px 1px 0 … 4px 4px 0 var(--tone-extrude)",
+        "purpose": "Printed title extrusion on panel and Credits titles (3 steps on the publisher title)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "All state transitions (150 to 220ms)."
+      },
+      {
+        "name": "ease-in-out",
+        "value": "cubic-bezier(0.65, 0, 0.35, 1)",
+        "purpose": "The arrow nudge loop and the idle hinge-peek."
+      },
+      {
+        "name": "box-turn",
+        "value": "GSAP ScrollTrigger pin, scrub 0.5, end +=90%; front rotateY 0 to 100deg (power2.in), shade 0 to 0.75, back scale 0.95 to 1",
+        "purpose": "The one authored motion moment."
+      },
+      {
+        "name": "hinge-peek",
+        "value": "box-peek 1.5s ease-in-out x2 after 2.2s idle at top (rotate y 0, 11deg, 3deg, 0)",
+        "purpose": "Hints that the front opens."
+      },
+      {
+        "name": "turn-nudge",
+        "value": "translate 0 5px, 1.8s loop (0.9s on hover)",
+        "purpose": "Turn button arrow: this box scrolls."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "no pin (front and back stack), thumbnails render one still, all transitions and animations collapse to 0.01ms, smooth scroll off",
+        "purpose": "Required path for every effect."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone-narrow",
+        "value": "639px",
+        "purpose": "Credit leaders drop; publisher strip stacks."
+      },
+      {
+        "name": "modal-sm",
+        "value": "640px",
+        "purpose": "Game modal panel 85vw x 80vh (75vw x 78vh from 1024px)."
+      },
+      {
+        "name": "spine-bar",
+        "value": "767px",
+        "purpose": "Spine becomes a 56px top bar."
+      },
+      {
+        "name": "stack",
+        "value": "959px",
+        "purpose": "Back cover and project panels go single column."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The panel call to act: play the game or open the live app. Inks follow the tone slot (yellow on black by default).",
+      "html": "<div class=\"ds-field\"><button class=\"ds-btn ds-btn-primary\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M7 4.5v15L20 12z\"/></svg> Play Asteroid Blaster</button></div>",
+      "css": ".ds-btn{--red:#d7261e;--red-deep:#8f130e;--yellow:#ffc400;--blue:#2155c4;--black:#111111;--white:#f7f4ec;--screen:#0b0b0c;--oxblood:#5a0d0a;--font-display:'Bowlby One','Arial Black',sans-serif;--font-body:'Archivo Variable',system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--sh-lift:0 10px 24px -8px rgb(0 0 0 / 0.45);display:inline-flex;align-items:center;gap:0.5em;min-height:48px;padding:0.7em 1.15em;border:3px solid currentColor;border-radius:0;cursor:pointer;text-decoration:none;font-family:var(--font-body);font-weight:800;font-stretch:87.5%;text-transform:uppercase;letter-spacing:0.05em;font-size:0.9375rem;line-height:1.1;transition:translate 150ms var(--ease-out),background-color 150ms var(--ease-out),color 150ms var(--ease-out);} .ds-btn:hover{translate:0 -2px;} .ds-btn:active{translate:0 0;} .ds-btn:focus-visible{outline:3px solid currentColor;outline-offset:3px;} .ds-field{background:#111111;padding:24px;} .ds-btn-primary{background:#ffc400;color:#111111;border-color:#ffc400;}"
+    },
+    {
+      "name": "Primary Button (red panel)",
+      "kind": "button",
+      "refersTo": "button-primary-red-panel",
+      "description": "Slot 4 re-ink: black button with white ink on the red field.",
+      "html": "<div class=\"ds-field-red\"><a href=\"#\" class=\"ds-btn ds-btn-primary-red\">Open the live app <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\"/></svg></a></div>",
+      "css": ".ds-btn{--red:#d7261e;--red-deep:#8f130e;--yellow:#ffc400;--blue:#2155c4;--black:#111111;--white:#f7f4ec;--screen:#0b0b0c;--oxblood:#5a0d0a;--font-display:'Bowlby One','Arial Black',sans-serif;--font-body:'Archivo Variable',system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--sh-lift:0 10px 24px -8px rgb(0 0 0 / 0.45);display:inline-flex;align-items:center;gap:0.5em;min-height:48px;padding:0.7em 1.15em;border:3px solid currentColor;border-radius:0;cursor:pointer;text-decoration:none;font-family:var(--font-body);font-weight:800;font-stretch:87.5%;text-transform:uppercase;letter-spacing:0.05em;font-size:0.9375rem;line-height:1.1;transition:translate 150ms var(--ease-out),background-color 150ms var(--ease-out),color 150ms var(--ease-out);} .ds-btn:hover{translate:0 -2px;} .ds-btn:active{translate:0 0;} .ds-btn:focus-visible{outline:3px solid currentColor;outline-offset:3px;} .ds-field-red{background:#d7261e;padding:24px;} .ds-btn-primary-red{background:#111111;color:#ffffff;border-color:#111111;}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary links (source on GitHub, publisher links): transparent, ink and 3px border in the field ink.",
+      "html": "<div class=\"ds-field-yellow\"><a href=\"#\" class=\"ds-btn ds-btn-outline\">Source on GitHub <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\"/></svg></a></div>",
+      "css": ".ds-btn{--red:#d7261e;--red-deep:#8f130e;--yellow:#ffc400;--blue:#2155c4;--black:#111111;--white:#f7f4ec;--screen:#0b0b0c;--oxblood:#5a0d0a;--font-display:'Bowlby One','Arial Black',sans-serif;--font-body:'Archivo Variable',system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--sh-lift:0 10px 24px -8px rgb(0 0 0 / 0.45);display:inline-flex;align-items:center;gap:0.5em;min-height:48px;padding:0.7em 1.15em;border:3px solid currentColor;border-radius:0;cursor:pointer;text-decoration:none;font-family:var(--font-body);font-weight:800;font-stretch:87.5%;text-transform:uppercase;letter-spacing:0.05em;font-size:0.9375rem;line-height:1.1;transition:translate 150ms var(--ease-out),background-color 150ms var(--ease-out),color 150ms var(--ease-out);} .ds-btn:hover{translate:0 -2px;} .ds-btn:active{translate:0 0;} .ds-btn:focus-visible{outline:3px solid currentColor;outline-offset:3px;} .ds-field-yellow{background:#ffc400;color:#111111;padding:24px;} .ds-btn-outline{background:transparent;color:inherit;} .ds-btn-outline:hover{color:#8f130e;}"
+    },
+    {
+      "name": "Turn It Over",
+      "kind": "button",
+      "refersTo": "button-turn",
+      "description": "The one call to act on the box front, in the red foot strip; scrolls through the turn and focuses the back cover.",
+      "html": "<div class=\"ds-foot\"><button class=\"ds-turn\"><span class=\"ds-turn-label\">Turn it over</span><span class=\"ds-turn-hint\">or scroll</span><svg class=\"ds-turn-arrow\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12l7 7 7-7\"/></svg></button></div>",
+      "css": ".ds-foot{--red:#d7261e;--red-deep:#8f130e;--yellow:#ffc400;--blue:#2155c4;--black:#111111;--white:#f7f4ec;--screen:#0b0b0c;--oxblood:#5a0d0a;--font-display:'Bowlby One','Arial Black',sans-serif;--font-body:'Archivo Variable',system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--sh-lift:0 10px 24px -8px rgb(0 0 0 / 0.45);background:var(--red);padding:16px 24px;} .ds-turn{display:inline-flex;align-items:center;gap:0.7em;min-height:52px;padding:0.55em 0.75em 0.55em 1.2em;border:3px solid #111111;background:#ffc400;color:#111111;cursor:pointer;box-shadow:0 6px 14px -6px rgb(0 0 0 / 0.55);transition:translate 160ms var(--ease-out),box-shadow 160ms var(--ease-out),background-color 160ms var(--ease-out);} .ds-turn-label{font-family:var(--font-display);font-size:1.0625rem;line-height:1;text-transform:uppercase;letter-spacing:0.02em;} .ds-turn-hint{font-family:var(--font-body);font-weight:700;font-stretch:87.5%;font-size:0.8125rem;text-transform:uppercase;letter-spacing:0.06em;color:#4a3a00;} .ds-turn-arrow{width:36px;height:36px;padding:7px;background:#111111;color:#ffc400;border-radius:50%;} .ds-turn:hover{background:#ffd23d;translate:0 -2px;box-shadow:0 10px 18px -6px rgb(0 0 0 / 0.55);} .ds-turn:active{translate:0 1px;box-shadow:0 3px 8px -4px rgb(0 0 0 / 0.55);} .ds-turn:focus-visible{outline:3px solid #f7f4ec;outline-offset:3px;}"
+    },
+    {
+      "name": "Spine",
+      "kind": "nav",
+      "refersTo": "spine",
+      "description": "The fixed red spine: JG mark, vertical print links, edition toggle. A 56px top bar under 768px.",
+      "html": "<nav class=\"ds-spine\"><a href=\"#\" class=\"ds-spine-mark\">JG</a><ul class=\"ds-spine-links\"><li><a href=\"#\" class=\"ds-spine-link\">Work</a></li><li><a href=\"#\" class=\"ds-spine-link\">Experience</a></li><li><a href=\"#\" class=\"ds-spine-link\">Contact</a></li></ul><button class=\"ds-spine-theme\" aria-label=\"Switch to the white box\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4\"/></svg></button></nav>",
+      "css": ".ds-spine{--red:#d7261e;--red-deep:#8f130e;--yellow:#ffc400;--blue:#2155c4;--black:#111111;--white:#f7f4ec;--screen:#0b0b0c;--oxblood:#5a0d0a;--font-display:'Bowlby One','Arial Black',sans-serif;--font-body:'Archivo Variable',system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--sh-lift:0 10px 24px -8px rgb(0 0 0 / 0.45);width:88px;height:520px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:20px 0;background:var(--red);color:var(--white);box-shadow:inset -3px 0 0 var(--black);} .ds-spine-mark{font-family:var(--font-display);font-size:1.75rem;line-height:1;color:var(--yellow);text-decoration:none;padding:6px;} .ds-spine-links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:8px;} .ds-spine-link{display:block;writing-mode:vertical-rl;transform:rotate(180deg);padding:16px 12px;font-family:var(--font-body);font-weight:800;font-stretch:87.5%;text-transform:uppercase;letter-spacing:0.1em;font-size:0.9375rem;color:inherit;text-decoration:none;transition:color 150ms var(--ease-out);} .ds-spine-link:hover{color:var(--yellow);} .ds-spine-link:focus-visible,.ds-spine-mark:focus-visible,.ds-spine-theme:focus-visible{outline:3px solid currentColor;outline-offset:3px;} .ds-spine-theme{display:grid;place-items:center;width:48px;height:48px;color:var(--white);background:transparent;border:2px solid currentColor;border-radius:50%;cursor:pointer;transition:color 150ms var(--ease-out),background-color 150ms var(--ease-out);} .ds-spine-theme:hover{color:var(--black);background:var(--yellow);border-color:var(--yellow);}"
+    },
+    {
+      "name": "PLAY NOW Sticker",
+      "kind": "custom",
+      "refersTo": "sticker-play",
+      "description": "The 18-point sale-sticker burst on the cover art; opens the game.",
+      "html": "<div class=\"ds-art\"><button class=\"ds-sticker\"><svg class=\"ds-sticker-burst\" viewBox=\"0 0 100 100\" aria-hidden=\"true\"><polygon points=\"50.00,0.00 57.12,9.62 67.10,3.02 70.50,14.49 82.14,11.70 81.41,23.65 93.30,25.00 88.53,35.98 99.24,41.32 91.00,50.00 99.24,58.68 88.53,64.02 93.30,75.00 81.41,76.35 82.14,88.30 70.50,85.51 67.10,96.98 57.12,90.38 50.00,100.00 42.88,90.38 32.90,96.98 29.50,85.51 17.86,88.30 18.59,76.35 6.70,75.00 11.47,64.02 0.76,58.68 9.00,50.00 0.76,41.32 11.47,35.98 6.70,25.00 18.59,23.65 17.86,11.70 29.50,14.49 32.90,3.02 42.88,9.62\"/></svg><span class=\"ds-sticker-text\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M7 4.5v15L20 12z\"/></svg><span class=\"ds-sticker-big\">Play now</span><span class=\"ds-sticker-small\">Asteroid Blaster, in your browser</span></span></button></div>",
+      "css": ".ds-art{--red:#d7261e;--red-deep:#8f130e;--yellow:#ffc400;--blue:#2155c4;--black:#111111;--white:#f7f4ec;--screen:#0b0b0c;--oxblood:#5a0d0a;--font-display:'Bowlby One','Arial Black',sans-serif;--font-body:'Archivo Variable',system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--sh-lift:0 10px 24px -8px rgb(0 0 0 / 0.45);background:var(--screen);padding:32px;display:grid;place-items:center;} .ds-sticker{position:relative;display:grid;place-items:center;width:12rem;aspect-ratio:1;padding:0;border:0;background:none;color:var(--red);cursor:pointer;rotate:-10deg;transition:rotate 220ms var(--ease-out),scale 220ms var(--ease-out);} .ds-sticker:hover{rotate:-4deg;scale:1.05;} .ds-sticker:active{scale:0.97;} .ds-sticker:focus-visible{outline:4px solid var(--white);outline-offset:2px;} .ds-sticker-burst{position:absolute;inset:0;width:100%;height:100%;fill:var(--yellow);stroke:var(--black);stroke-width:1.6;filter:drop-shadow(0 8px 14px rgb(0 0 0 / 0.5));} .ds-sticker-text{position:relative;display:grid;justify-items:center;gap:2px;width:70%;text-align:center;} .ds-sticker-big{font-family:var(--font-display);font-size:1.7rem;line-height:0.95;text-transform:uppercase;} .ds-sticker-small{color:var(--black);font-family:var(--font-body);font-weight:700;font-stretch:87.5%;font-size:0.75rem;line-height:1.2;}"
+    },
+    {
+      "name": "Back-of-Box Panel",
+      "kind": "card",
+      "refersTo": "screenshot-frame",
+      "description": "A project panel in tone slot 1 of the black box: extruded title, status sticker on a die-cut screenshot, diamond bullets.",
+      "html": "<article class=\"ds-back\"><h3 class=\"ds-back-title\">VISIO</h3><figure class=\"ds-back-shot\"><figcaption class=\"ds-status\">MVP in review</figcaption><div class=\"ds-shot\"></div></figure><ul class=\"ds-features\"><li>Live code-drawn screenshot in a die-cut frame.</li><li>Plain feature bullets, set as diamonds.</li></ul></article>",
+      "css": ".ds-back{--red:#d7261e;--red-deep:#8f130e;--yellow:#ffc400;--blue:#2155c4;--black:#111111;--white:#f7f4ec;--screen:#0b0b0c;--oxblood:#5a0d0a;--font-display:'Bowlby One','Arial Black',sans-serif;--font-body:'Archivo Variable',system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--sh-lift:0 10px 24px -8px rgb(0 0 0 / 0.45);background:var(--black);color:var(--white);border-top:3px solid var(--black);padding:32px;display:grid;gap:24px;max-width:520px;} .ds-back-title{margin:0;font-family:var(--font-display);font-weight:400;font-size:3rem;line-height:0.95;text-transform:uppercase;color:var(--yellow);text-shadow:1px 1px 0 var(--red),2px 2px 0 var(--red),3px 3px 0 var(--red),4px 4px 0 var(--red);} .ds-back-shot{position:relative;margin:0;} .ds-status{position:absolute;top:-14px;left:-10px;z-index:1;padding:0.35em 0.8em;background:var(--yellow);color:var(--black);font-family:var(--font-display);font-size:0.875rem;line-height:1.2;text-transform:uppercase;letter-spacing:0.02em;rotate:-4deg;box-shadow:var(--sh-lift);} .ds-shot{aspect-ratio:5/3;background:var(--screen);border:5px solid var(--white);border-radius:14px;box-shadow:var(--sh-lift);} .ds-features{list-style:none;margin:0;padding:0;display:grid;gap:14px;font-family:var(--font-body);font-size:1.0625rem;} .ds-features li{position:relative;padding-left:1.6em;line-height:1.5;} .ds-features li::before{content:'';position:absolute;left:0;top:0.5em;width:0.62em;height:0.62em;background:var(--yellow);rotate:45deg;}"
+    },
+    {
+      "name": "System Requirements",
+      "kind": "card",
+      "refersTo": "sysreq-plate-black-box",
+      "description": "The project stack as a printed requirements box: dark plate on the black box (white plate with black frame on the white box).",
+      "html": "<aside class=\"ds-sysreq\"><p class=\"ds-sysreq-head\">System requirements</p><dl class=\"ds-sysreq-list\"><div class=\"ds-sysreq-row\"><dt>Requires</dt><dd>React, TypeScript, PixiJS v8</dd></div><div class=\"ds-sysreq-row\"><dt>State</dt><dd>Zustand</dd></div></dl></aside>",
+      "css": ".ds-sysreq{--red:#d7261e;--red-deep:#8f130e;--yellow:#ffc400;--blue:#2155c4;--black:#111111;--white:#f7f4ec;--screen:#0b0b0c;--oxblood:#5a0d0a;--font-display:'Bowlby One','Arial Black',sans-serif;--font-body:'Archivo Variable',system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--sh-lift:0 10px 24px -8px rgb(0 0 0 / 0.45);max-width:420px;background:#1b1a17;color:#f1ede3;border:3px solid var(--white);font-family:var(--font-body);} .ds-sysreq-head{margin:0;padding:8px 14px;background:var(--red);color:#ffffff;border-bottom:3px solid var(--white);font-family:var(--font-display);text-transform:uppercase;font-size:0.9375rem;letter-spacing:0.02em;} .ds-sysreq-list{margin:0;padding:4px 14px 8px;} .ds-sysreq-row{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:12px;padding:8px 0;border-top:1px solid #45423b;} .ds-sysreq-row:first-child{border-top:0;} .ds-sysreq-row dt{font-weight:800;font-stretch:87.5%;text-transform:uppercase;letter-spacing:0.05em;font-size:0.75rem;padding-top:0.2em;} .ds-sysreq-row dd{margin:0;font-size:0.9375rem;line-height:1.4;}"
+    },
+    {
+      "name": "Credit Line",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Experience entry: Bowlby role, dotted leader, company, print-voice period.",
+      "html": "<div class=\"ds-credit\"><div class=\"ds-credit-line\"><span class=\"ds-credit-role\">Frontend Developer</span><span class=\"ds-credit-leader\"></span><span class=\"ds-credit-company\">Incentive Games</span></div><p class=\"ds-credit-period\">3+ years</p></div>",
+      "css": ".ds-credit{--red:#d7261e;--red-deep:#8f130e;--yellow:#ffc400;--blue:#2155c4;--black:#111111;--white:#f7f4ec;--screen:#0b0b0c;--oxblood:#5a0d0a;--font-display:'Bowlby One','Arial Black',sans-serif;--font-body:'Archivo Variable',system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--sh-lift:0 10px 24px -8px rgb(0 0 0 / 0.45);background:var(--black);color:var(--white);padding:24px;font-family:var(--font-body);display:grid;gap:10px;} .ds-credit-line{display:flex;align-items:baseline;flex-wrap:wrap;} .ds-credit-role{font-family:var(--font-display);font-size:1.5rem;line-height:1.15;text-transform:uppercase;} .ds-credit-leader{flex:1 1 3rem;min-width:3rem;margin:0 14px;border-bottom:3px dotted #c9c5ba;translate:0 -0.3em;} .ds-credit-company{font-weight:800;font-size:1.1875rem;} .ds-credit-period{margin:0;font-weight:700;font-stretch:87.5%;text-transform:uppercase;letter-spacing:0.06em;font-size:0.8125rem;color:#c9c5ba;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Big Box on the Shelf",
+    "overview": "The site is a printed 1990s PC game box, not a web page dressed as one. Saturated print inks own whole regions edge to edge; nothing floats on a neutral canvas. You hold it by a red spine, you see a box front with live cover art and a sale sticker, you turn it over, and every project is a back-of-box panel: a framed screenshot, plain diamond-bulleted features, and a System Requirements box that is the project's stack. A yellow publisher strip with a barcode closes the box.\n\nThe system ships in two editions that share one set of fixed inks. The **black box** (dark theme, the default) keeps its fields dark: black, blue, oxblood, red. The **white box** (light theme) prints on paper, yellow, blue and red. The theme never changes an ink; it changes which ink each slot prints with. Density is loud and confident at the display level and plain, readable small print underneath: heavy box lettering with a printed extrusion over honest, factual copy.\n\nThe world explicitly replaced a near-black, single-glowing-accent dev portfolio (Syne and Inter, card grid, hero blurb). Everything that made that look (glow, glass, gradient, eyebrow labels, section numbers, loaders, marquees, count-ups, custom cursors) is off the table.",
+    "keyCharacteristics": [
+      "Fixed print inks; editions re-ink slots, never the inks themselves.",
+      "Bowlby One box lettering with a stepped, hard offset extrusion; Archivo condensed to 87.5% as the small-print voice.",
+      "Square printed edges and thick 3px black rules; the only rounded corner is the die-cut screenshot.",
+      "One authored motion moment (the box turn) plus live PixiJS thumbnails; no section entrances.",
+      "WCAG AA in both editions, checked per tone slot."
+    ],
+    "rules": [
+      {
+        "name": "The Fixed Ink Rule",
+        "body": "The eight print inks never change with the theme. An edition only reassigns which ink a slot prints with, through `--paper`, `--ink`, `--title-fill`, `--title-extrude`, `--sysreq-*` and the panel tone tokens.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tone Slot Rule",
+        "body": "Project panels cycle four slots in page order. Black box: black, blue, oxblood, red. White box: paper, yellow, blue, red. Everything inside a panel (background, ink, secondary ink, title fill, mark, frame, extrusion, primary button, status sticker, System Requirements header) is driven by that slot's `--tone-*`, `--btn-*`, `--status-*` and `--tone-extrude` tokens, never by a hard-coded colour. A new slot or a changed slot is re-checked for WCAG AA.",
+        "section": "colors"
+      },
+      {
+        "name": "The Large-Yellow Rule",
+        "body": "Yellow on red or on blue (about 3.8:1 and 4.3:1) is for large display text only: titles, the spine mark, the sticker. Body text, labels and buttons on red or blue print in white or black.",
+        "section": "colors"
+      },
+      {
+        "name": "The Printed Extrusion Rule",
+        "body": "Box titles carry a stepped hard offset in the edition's extrusion ink: 6 steps of 1px on the cover, 4 on panel and Credits titles, 3 on the publisher title. The extrusion is native to this world; it is the box-art title treatment, not a decorative shadow, and it belongs to Bowlby One display text only.",
+        "section": "typography"
+      },
+      {
+        "name": "The Small Print Rule",
+        "body": "The 87.5% width is the small-print voice. Use it for labels, buttons and legal text, never for running paragraphs.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sits-On-The-Print Rule",
+        "body": "A soft drop shadow is allowed only on an object stuck onto the box (sticker, screenshot, the turn button). Fields, panels and plates are flat.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** print whole regions in one ink and separate them with a 3px black rule.",
+      "**Do** drive every colour inside a project panel from its tone slot tokens, and re-check WCAG AA in both editions when touching a slot.",
+      "**Do** keep yellow on red or blue to large display text; body, labels and buttons there print in white or black.",
+      "**Do** give Bowlby One titles the printed extrusion in the edition's extrusion ink.",
+      "**Do** keep motion to the box turn and the live thumbnails, and give every effect a reduced-motion path (no pin, still thumbnails, collapsed transitions).",
+      "**Do** keep thumbnails as live code-drawn PixiJS \"screenshots\" in the die-cut frame."
+    ],
+    "donts": [
+      "**Don't** use glows, glassmorphism or gradients (including gradient text).",
+      "**Don't** add eyebrow labels above headings or section numbers.",
+      "**Don't** add loaders, marquees, count-up stats or custom cursors.",
+      "**Don't** add per-section entrance animations.",
+      "**Don't** round anything but the die-cut screenshot and the two circular controls.",
+      "**Don't** change a print ink per edition; re-ink a slot instead."
+    ]
+  }
+}
