@@ -8,10 +8,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 npm run dev        # start Vite dev server with HMR
 npm run build      # tsc type-check then Vite production build
 npm run lint       # ESLint across all files (packages/*/dist is ignored)
+npm run typecheck  # tsc -b --noEmit across the project references
+npm test           # Vitest run (jsdom); npm run test:watch for watch mode
 npm run preview    # serve the production build locally
 ```
 
-There is no test runner configured. Append `?edition=light` or `?edition=dark` to the URL to force a theme (handy for screenshots).
+Tests are Vitest + Testing Library in jsdom, colocated as `*.test.ts(x)` under `src/` (setup in `src/test/`). PixiJS is mocked in component tests, since jsdom has no WebGL. CI (`.github/workflows/ci.yml`) runs typecheck, lint, test and build on Node 22. Append `?edition=light` or `?edition=dark` to the URL to force a theme (handy for screenshots).
 
 ## Design source of truth
 

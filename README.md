@@ -1,5 +1,7 @@
 # Portfolio 2026 — James Gardener
 
+[![CI](https://github.com/JGardener/Portfolio2026/actions/workflows/ci.yml/badge.svg)](https://github.com/JGardener/Portfolio2026/actions/workflows/ci.yml)
+
 Personal portfolio site, designed as a 1990s big-box PC game: the box front carries a live Asteroid Blaster as cover art, and every project gets a back-of-box panel with a live PixiJS "screenshot", feature bullets and a System Requirements table. React 19 + TypeScript + Vite, with GSAP for the box turn and a playable PixiJS arcade game in a modal.
 
 ## Stack
