@@ -119,7 +119,7 @@ function ensureFont() {
   if (fontInstalled || PIXI.Cache.has(`${FONT}-bitmap`)) { fontInstalled = true; return }
   PIXI.BitmapFont.install({
     name: FONT,
-    style: { fontFamily: 'Arial, Helvetica, sans-serif', fontSize: 28, fontWeight: '900', fill: 0xffffff, stroke: { color: 0x0b0b0c, width: 6 } },
+    style: { fontFamily: '"Archivo Variable", system-ui, sans-serif', fontSize: 28, fontWeight: '900', fill: 0xffffff, stroke: { color: 0x0b0b0c, width: 6 } },
     chars: [['0', '9']],
     resolution: 2,
   })

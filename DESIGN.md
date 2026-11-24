@@ -19,6 +19,8 @@ colors:
   sysreq-ink-black-box: "#f1ede3"
   sysreq-rule-black-box: "#45423b"
   sysreq-rule-white-box: "#b9b4a8"
+  yellow-hover: "#ffd23d"
+  hint-ink-on-yellow: "#4a3a00"
 typography:
   display:
     fontFamily: "'Bowlby One', 'Arial Black', sans-serif"
@@ -53,6 +55,68 @@ typography:
     fontWeight: 700
     lineHeight: 1.3
     letterSpacing: "0.06em"
+    fontVariation: "'wdth' 87.5"
+  section-title:
+    fontFamily: "'Bowlby One', 'Arial Black', sans-serif"
+    fontSize: "clamp(2.25rem, 5vw, 4rem)"
+    fontWeight: 400
+    lineHeight: 0.95
+  section-title-back:
+    fontFamily: "'Bowlby One', 'Arial Black', sans-serif"
+    fontSize: "clamp(2rem, 4.2vw, 3.75rem)"
+    fontWeight: 400
+    lineHeight: 0.95
+  section-title-contents:
+    fontFamily: "'Bowlby One', 'Arial Black', sans-serif"
+    fontSize: "clamp(1.875rem, 2.8vw, 2.5rem)"
+    fontWeight: 400
+    lineHeight: 1
+  section-title-publisher:
+    fontFamily: "'Bowlby One', 'Arial Black', sans-serif"
+    fontSize: "clamp(1.75rem, 3vw, 2.5rem)"
+    fontWeight: 400
+    lineHeight: 1
+  publisher-email:
+    fontFamily: "'Archivo Variable', system-ui, sans-serif"
+    fontSize: "clamp(1.25rem, 3.4vw, 2.75rem)"
+    fontWeight: 800
+    lineHeight: 1.1
+  contents-name:
+    fontFamily: "'Bowlby One', 'Arial Black', sans-serif"
+    fontSize: "clamp(1.25rem, 1.6vw, 1.625rem)"
+    fontWeight: 400
+    lineHeight: 1.1
+  sticker-big:
+    fontFamily: "'Bowlby One', 'Arial Black', sans-serif"
+    fontSize: "clamp(1.35rem, 1.9vw, 1.85rem)"
+    fontWeight: 400
+    lineHeight: 0.95
+  company:
+    fontFamily: "'Archivo Variable', system-ui, sans-serif"
+    fontSize: "1.1875rem"
+    fontWeight: 800
+    lineHeight: 1.3
+  body-sm:
+    fontFamily: "'Archivo Variable', system-ui, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 400
+    lineHeight: 1.5
+  small:
+    fontFamily: "'Archivo Variable', system-ui, sans-serif"
+    fontSize: "0.9375rem"
+    fontWeight: 400
+    lineHeight: 1.4
+  small-tight:
+    fontFamily: "'Archivo Variable', system-ui, sans-serif"
+    fontSize: "0.875rem"
+    fontWeight: 700
+    lineHeight: 1.3
+  micro:
+    fontFamily: "'Archivo Variable', system-ui, sans-serif"
+    fontSize: "0.75rem"
+    fontWeight: 700
+    lineHeight: 1.3
+    letterSpacing: "0.08em"
     fontVariation: "'wdth' 87.5"
 rounded:
   none: "0px"
@@ -159,6 +223,8 @@ A flat, saturated four-ink print set (red, yellow, blue, black) on warm paper, w
 ### Neutral
 - **Box Black** (#111111): the black box's paper, every structural rule and border, the fold line on the spine, and the extrusion ink on light fields.
 - **Paper** (#f7f4ec): the white box's paper and the black box's main ink. Warm, never pure white.
+- **Yellow Hover** (#ffd23d): the "Turn it over" button's hover fill. A lift of Sticker Yellow, never a field.
+- **Hint Ink** (#4a3a00): the "or scroll" hint on the yellow turn button; a dark yellow-brown that reads as secondary print on yellow at AA.
 - **Print White** (#ffffff): ink on blue, oxblood and red fields, the white box's System Requirements plate, the barcode label.
 - **Screen** (#0b0b0c): behind every live screenshot and the cover art.
 - **Secondary ink** (#c9c5ba on the black box, #45423b on the white box): taglines' supporting text, credit periods and tools, the dotted credit leaders.
@@ -187,6 +253,9 @@ A flat, saturated four-ink print set (red, yellow, blue, black) on warm paper, w
 - **Title** (400, clamp(1.25rem, 2vw, 1.75rem), 1.15): credit roles, contents entries, the System Requirements and "How it was built" heads at about 0.9375rem.
 - **Lead** (650, clamp(1.125rem, 1.1vw + 0.8rem, 1.375rem), 1.35): project taglines (max 34ch) and the back-cover copy at weight 400 (max 54ch).
 - **Body** (400, 1.0625rem, 1.55): features and descriptions, 56 to 66ch, tabular numerals.
+- **Section titles** (Bowlby One 400): Credits clamp(2.25rem, 5vw, 4rem); back cover clamp(2rem, 4.2vw, 3.75rem); contents clamp(1.875rem, 2.8vw, 2.5rem); publisher clamp(1.75rem, 3vw, 2.5rem). Contents entries clamp(1.25rem, 1.6vw, 1.625rem); the sticker's big line clamp(1.35rem, 1.9vw, 1.85rem).
+- **Publisher email** (Archivo 800, clamp(1.25rem, 3.4vw, 2.75rem)): the one large Archivo line, so the address reads as type, not a link list.
+- **Small steps** (Archivo): 1.1875rem for credit companies, 1rem for the box-front inside list, 0.9375rem for small print (contents lines, System Requirements values, credit tools, buttons, spine links), 0.875rem for status stickers, 0.75rem for micro labels (System Requirements keys, the sticker's small line).
 - **Label** (700 to 800, 0.75 to 0.9375rem, 0.04 to 0.1em tracking, uppercase, 87.5% width): buttons, spine links, credit periods, System Requirements keys, the front sub-band, the publisher small print.
 
 ### Named Rules
